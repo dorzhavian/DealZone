@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Categories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Buyer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Seller.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product.">
+      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +39,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2ibDTUF9IMWyNqFVPjE2u90Z7rK" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,7 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/JavaProject - backup 1/JavaProject - backup 1",
+    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/JavaProject - Backup 2/JavaProject - backup 2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,11 +79,33 @@
       <updated>1719750391192</updated>
       <workItem from="1719750392119" duration="29000" />
       <workItem from="1719750465186" duration="14000" />
-      <workItem from="1720082308976" duration="507000" />
+      <workItem from="1720082308976" duration="845000" />
     </task>
+    <task id="LOCAL‎-00001" summary="Update README.md">
+      <option name="closed" value="true" />
+      <created>1720082903343</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL‎-00001" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720082903343</updated>
+    </task>
+    <task id="LOCAL‎-00002" summary="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product.">
+      <option name="closed" value="true" />
+      <created>1720082943792</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720082943792</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update README.md" />
+    <MESSAGE value="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product." />
   </component>
 </project>

@@ -1,21 +1,26 @@
 import java.util.Arrays;
 
-public class Buyer {
+public class Buyer extends User {
 
     private static final int SIZE_INCREASE = 2;
-    private final String userName;
-    private final String password;
     private final String address;
     private Cart currentCart;
     private Cart[] historyCart;
     private int historyCartsNum;
 
     public Buyer(String userName, String password, String address) {
-        this.userName = userName;
-        this.password = password;
+        super(userName, password);
         this.address = address;
         currentCart = new Cart();
         historyCart = new Cart[0];
+    }
+
+    public Cart[] getHistoryCart() {
+        return historyCart;
+    }
+
+    public void setCurrentCart(Cart currentCart) {
+        this.currentCart = currentCart;
     }
 
     public String getUserName() {
@@ -72,6 +77,5 @@ public class Buyer {
         return sb.toString();
     }
 }
-
 
 

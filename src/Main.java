@@ -1,6 +1,7 @@
 // DOR_ZHAVIAN-211337845_ALON_ETOS-207431487_DANIEL_SULTAN-323883751
 // LECTURER - PINI SHLOMI
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,13 +17,20 @@ public class Main {
 
     private static void menu(Manager manager) {
         int choice;
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println("\n------------------------------------------------------------------------");
         System.out.println(" ------------HELLO AND WELCOME TO OUR BUYER - SELLER PROGRAM-----------");
         System.out.println(" ------------(In anytime press -1 for return to main menu)-------------");
         System.out.println("------------------------------------------------------------------------");
         do {
             printMenu();
-            choice = sc.nextInt();
+            try {
+                choice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: you entered invalid input, please enter number!");
+                sc.nextLine();
+                choice = -1;
+                continue;
+            }
             sc.nextLine();
             switch (choice) {
                 case 1:
@@ -50,6 +58,10 @@ public class Main {
                     manager.printByCategory();
                     break;
                 case 9:
+                    case9();
+                    break;
+                default:
+                    System.out.println("Please enter number in range (1-9)");
                     break;
             }
         } while (choice != 0);
@@ -57,7 +69,7 @@ public class Main {
     }
 
     private static void printMenu() {
-        System.out.println("Menu : ");
+        System.out.println("\nMenu : ");
         System.out.println("0) Exit");
         System.out.println("1) Add seller");
         System.out.println("2) Add buyer");
@@ -67,6 +79,7 @@ public class Main {
         System.out.println("6) Buyer's details");
         System.out.println("7) Seller's details");
         System.out.println("8) Product's by category");
+        System.out.println("9) Replace current cart with cart from history");
         System.out.println("Please enter your choice: ");
     }
 
@@ -172,6 +185,19 @@ public class Main {
         manager.pay(buyerIndex);
     }
 
+    public static void case9 () {
+        manager.printBuyersInfo();
+        int buyerIndex = chooseBuyer();
+        if (buyerIndex == -1) return;
+        manager.getBuyers()[buyerIndex].toString();
+        System.out.println("Please choose cart number from history carts:");
+        System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
+        int historyCartIndex = sc.nextInt();
+        sc.nextLine();
+        if (historyCartIndex < 0) return;
+        manager.replaceCarts(historyCartIndex - 1, buyerIndex);
+    }
+
     public static int chooseSeller () {
         System.out.println("Seller's list: ");
         for (int i = 0; i < manager.getNumberOfSellers(); i++) {
@@ -196,6 +222,4 @@ public class Main {
         return choiceBuyer - 1;
     }
 }
-
-
 

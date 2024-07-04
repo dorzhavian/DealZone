@@ -1,17 +1,13 @@
 
 import java.util.Arrays;
 
-public class Seller {
-
+public class Seller extends User {
     private static final int SIZE_INCREARSE = 2;
-    private String userName;
-    private String password;
     private Product[] products;
     private int numOfProducts; //contains the num of products in the array
 
     public Seller(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+        super(userName, password);
         products = new Product[0];
         numOfProducts = 0;
     }

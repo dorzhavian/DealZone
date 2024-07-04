@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Manager {
+public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
     private Seller[] sellers;
     private int numberOfSellers;
@@ -34,7 +34,7 @@ public class Manager {
         Seller seller = new Seller(username, password);
         if (sellers.length == numberOfSellers) {
             if (sellers.length == 0) {
-                sellers = Arrays.copyOf(sellers,1);
+                sellers = Arrays.copyOf(sellers, 1);
             }
             sellers = Arrays.copyOf(sellers, sellers.length * SIZE_INCREASE);
         }
@@ -46,7 +46,7 @@ public class Manager {
         Buyer buyer = new Buyer(username, password, address);
         if (buyers.length == numberOfBuyers) {
             if (buyers.length == 0) {
-                buyers = Arrays.copyOf(buyers,1);
+                buyers = Arrays.copyOf(buyers, 1);
             }
             buyers = Arrays.copyOf(buyers, buyers.length * SIZE_INCREASE);
         }
@@ -56,10 +56,10 @@ public class Manager {
 
     public boolean isExist(String username, String type) {
         if (type.equals("seller")) {
-            if (numberOfSellers == 0){
+            if (numberOfSellers == 0) {
                 return true;
             }
-            for (int i = 0; i < numberOfSellers ; i++) {
+            for (int i = 0; i < numberOfSellers; i++) {
                 if (sellers[i].getUserName().equalsIgnoreCase(username)) {
                     System.out.println("Username already exist, please enter different username: ");
                     return false;
@@ -67,10 +67,10 @@ public class Manager {
             }
             return true;
         } else if (type.equals("buyer")) {
-            if (numberOfBuyers == 0){
+            if (numberOfBuyers == 0) {
                 return true;
             }
-            for (int i = 0; i < numberOfBuyers ; i++) {
+            for (int i = 0; i < numberOfBuyers; i++) {
                 if (buyers[i].getUserName().equalsIgnoreCase(username)) {
                     System.out.println("Username already exist, please enter different username: ");
                     return false;
@@ -144,5 +144,10 @@ public class Manager {
                 break;
         }
     }
+
+    public void replaceCarts(int historyCartIndex, int buyerIndex) {
+        buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
+    }
 }
+
 
