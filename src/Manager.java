@@ -6,10 +6,12 @@ public class Manager {
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
+    private Categories categoriesArrays;
 
     public Manager() {
         buyers = new Buyer[0];
         sellers = new Seller[0];
+        categoriesArrays = new Categories();
     }
 
     public Seller[] getSellers() {
@@ -101,19 +103,46 @@ public class Manager {
         }
     }
 
-    public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex) {
-        Product p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
-        buyers[buyerIndex].getCurrentCart().addProductToCart(p1);
+    public void printByCategory() {
+        if (numberOfSellers == 0) {
+            System.out.println("Haven't sellers yet. return to main menu");
+            return;
+        }
+        System.out.println(categoriesArrays.toString());
     }
 
-    public void addProductSeller(int sellerIndex, String productName, double productPrice) {
-        Product p1 = new Product(productName, productPrice);
+    public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage) {
+        Product p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
+        buyers[buyerIndex].getCurrentCart().addProductToCart(p1, specialPackage);
+    }
+
+    public void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackadgePrice) {
+        Product p1 = new Product(productName, productPrice, c, specialPackadgePrice);
         sellers[sellerIndex].addProduct(p1);
+        addToCategoryArray(p1);
     }
 
     public void pay(int buyerIndex) {
         buyers[buyerIndex].payAndMakeHistoryCart();
     }
-}
 
+    public void addToCategoryArray(Product p) {
+        switch (p.getCategory()) {
+            case ELECTRONIC:
+                categoriesArrays.addElectronic(p);
+                break;
+            case CHILDREN:
+                categoriesArrays.addChild(p);
+                break;
+            case CLOTHES:
+                categoriesArrays.addClothes(p);
+                break;
+            case OFFICE:
+                categoriesArrays.addOffice(p);
+                break;
+            default:
+                break;
+        }
+    }
+}
 

@@ -46,6 +46,11 @@ public class Main {
                 case 7:
                     manager.printSellersInfo();
                     break;
+                case 8:
+                    manager.printByCategory();
+                    break;
+                case 9:
+                    break;
             }
         } while (choice != 0);
         System.out.println("Thanks for using our system. GoodBye!");
@@ -61,6 +66,7 @@ public class Main {
         System.out.println("5) Payment for buyer");
         System.out.println("6) Buyer's details");
         System.out.println("7) Seller's details");
+        System.out.println("8) Product's by category");
         System.out.println("Please enter your choice: ");
     }
 
@@ -108,7 +114,18 @@ public class Main {
         System.out.println("Enter product price: (Enter -1 to return main menu)");
         double productPrice = sc.nextDouble();
         if (productPrice < 0) return ;
-        manager.addProductSeller(sellerIndex, productName, productPrice);
+        Category[] allCategories = Category.values();
+        for (Category category : allCategories) {
+            System.out.println(category.ordinal() + 1 + ") " + category.name());
+        }
+        System.out.println("Choose category: (Enter -1 to return main menu)");
+        int categoryIndex = sc.nextInt();
+        sc.nextLine();
+        if (categoryIndex < 0) return ;
+        System.out.println("Enter price for special package: (Enter -1 to return main menu)");
+        double specialPackagePrice = sc.nextDouble();
+        sc.nextLine();
+        manager.addProductSeller(sellerIndex, productName, productPrice, allCategories[categoryIndex - 1], specialPackagePrice);
     }
 
     public static void case4 () {
@@ -129,7 +146,12 @@ public class Main {
         int productIndex = sc.nextInt() - 1;
         sc.nextLine();
         if (productIndex < 0) return;
-        manager.addProductBuyer(buyerIndex,sellerIndex,productIndex);
+        System.out.println("Would you like a special package?");
+        System.out.println("The price will be - " + manager.getSellers()[sellerIndex].getProducts()[productIndex].getSpecialPackadgePrice());
+        System.out.println("Enter YES or NO. (Enter -1 to return main menu)");
+        String choice = sc.nextLine();
+        boolean specialPackage = choice.equalsIgnoreCase("yes");
+        manager.addProductBuyer(buyerIndex,sellerIndex,productIndex, specialPackage);
     }
 
     public static void case5 () {
@@ -174,4 +196,6 @@ public class Main {
         return choiceBuyer - 1;
     }
 }
+
+
 
