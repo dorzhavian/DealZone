@@ -23,10 +23,6 @@ public class Buyer extends User {
         this.currentCart = currentCart;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     public Cart getCurrentCart() {
         return currentCart;
     }

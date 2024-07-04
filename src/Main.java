@@ -90,7 +90,7 @@ public class Main {
         do {
             username = sc.nextLine();
             if (username.equals("-1")) return ;
-        } while (!manager.isExist(username, "seller"));
+        } while (manager.isExists(username, "seller"));
         System.out.println("Enter password: (Enter -1 to return main menu)");
         password = sc.nextLine();
         if (password.equals("-1")) return;
@@ -104,7 +104,7 @@ public class Main {
         do {
             username = sc.nextLine();
             if (username.equals("-1")) return ;
-        } while (!manager.isExist(username, "buyer"));
+        } while (manager.isExists(username, "buyer"));
         System.out.println("Enter password: (Enter -1 to return main menu)");
         password = sc.nextLine();
         if (password.equals("-1")) return ;

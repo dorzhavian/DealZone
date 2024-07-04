@@ -54,32 +54,21 @@ public class Manager implements Manageable {
         System.out.println("Buyer added successfully.");
     }
 
-    public boolean isExist(String username, String type) {
+    public boolean isExists(String username, String type) {
         if (type.equals("seller")) {
-            if (numberOfSellers == 0) {
+            if (User.isExist(sellers, username, numberOfSellers)) {
+                System.out.println("Seller already exists. Please enter a different name.");
                 return true;
             }
-            for (int i = 0; i < numberOfSellers; i++) {
-                if (sellers[i].getUserName().equalsIgnoreCase(username)) {
-                    System.out.println("Username already exist, please enter different username: ");
-                    return false;
-                }
-            }
-            return true;
         } else if (type.equals("buyer")) {
-            if (numberOfBuyers == 0) {
+            if (User.isExist(buyers, username, numberOfBuyers)) {
+                System.out.println("Buyer already exists. Please enter a different name.");
                 return true;
             }
-            for (int i = 0; i < numberOfBuyers; i++) {
-                if (buyers[i].getUserName().equalsIgnoreCase(username)) {
-                    System.out.println("Username already exist, please enter different username: ");
-                    return false;
-                }
-            }
-            return true;
         }
         return false;
     }
+
 
     public void printSellersInfo() {
         if (numberOfSellers == 0) {

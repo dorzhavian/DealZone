@@ -16,10 +16,6 @@ public class Seller extends User {
         return numOfProducts;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     public Product[] getProducts() {
         return products;
     }

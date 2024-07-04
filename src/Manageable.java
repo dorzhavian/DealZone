@@ -3,7 +3,7 @@ public interface Manageable {
 
     void addBuyer(String username, String password, String address);
 
-    boolean isExist(String username, String type);
+    boolean isExists(String username, String type);
 
     void printSellersInfo();
 
