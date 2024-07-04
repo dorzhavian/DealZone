@@ -1,18 +1,18 @@
 public class Product {
-    private String productName;
-    private double productPrice;
-    private double specialPackadgePrice;
+    private final String productName;
+    private final double productPrice;
+    private final double specialPackagePrice;
     private static int idGenerator;
-    private int id;
-    private Category category;
+    private final int id;
+    private final Category category;
     private String specialPackageBuyerChoice;
 
-    public Product(String productName, double productPrice, Category category, double specialPackadgePrice) {
+    public Product(String productName, double productPrice, Category category, double specialPackagePrice) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.id = ++idGenerator;
         this.category = category;
-        this.specialPackadgePrice = specialPackadgePrice;
+        this.specialPackagePrice = specialPackagePrice;
         this.specialPackageBuyerChoice = " (WITHOUT) ";
     }
 
@@ -21,7 +21,7 @@ public class Product {
         this.productPrice = other.productPrice;
         this.id = other.id;
         this.category = other.category;
-        this.specialPackadgePrice = other.specialPackadgePrice;
+        this.specialPackagePrice = other.specialPackagePrice;
         this.specialPackageBuyerChoice = other.specialPackageBuyerChoice;
     }
 
@@ -33,18 +33,13 @@ public class Product {
         return specialPackageBuyerChoice;
     }
 
-    public double getSpecialPackadgePrice() {
-        return specialPackadgePrice;
+    public double getSpecialPackagePrice() {
+        return specialPackagePrice;
     }
 
     public Category getCategory() {
         return category;
     }
-
-    public String getProductName() {
-        return productName;
-    }
-
 
     public double getProductPrice() {
         return productPrice;
@@ -57,8 +52,8 @@ public class Product {
                 .append(", Product price: ").append(productPrice)
                 .append(", Product id: ").append(id)
                 .append(", Product category: ").append(category);
-        if (specialPackadgePrice != 0) {
-            sb.append(", Product special package: ").append(specialPackadgePrice);
+        if (specialPackagePrice != 0) {
+            sb.append(", Product special package: ").append(specialPackagePrice);
         }
         return sb.toString();
     }

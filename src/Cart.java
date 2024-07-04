@@ -41,7 +41,7 @@ public class Cart {
         products[numOfProducts++] = p1;
         totalPrice += p1.getProductPrice();
         if (specialPackage) {
-            totalPrice += p1.getSpecialPackadgePrice();
+            totalPrice += p1.getSpecialPackagePrice();
             p1.setSpecialPackageBuyerChoice(" (WITH) ");
             System.out.println("Product added successfully.");
         }

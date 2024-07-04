@@ -18,68 +18,20 @@ public class Categories {
         clothes = new Product[0];
     }
 
-    public Product[] getElectronics() {
-        return electronics;
-    }
-
-    public void setElectronics(Product[] electronics) {
-        this.electronics = electronics;
-    }
-
-    public Product[] getChildren() {
-        return children;
-    }
-
-    public void setChildren(Product[] children) {
-        this.children = children;
-    }
-
-    public Product[] getOffice() {
-        return office;
-    }
-
-    public void setOffice(Product[] office) {
-        this.office = office;
-    }
-
-    public Product[] getClothes() {
-        return clothes;
-    }
-
-    public void setClothes(Product[] clothes) {
-        this.clothes = clothes;
-    }
-
     public int getNumElectronics() {
         return numElectronics;
-    }
-
-    public void setNumElectronics(int numElectronics) {
-        this.numElectronics = numElectronics;
     }
 
     public int getNumChildren() {
         return numChildren;
     }
 
-    public void setNumChildren(int numChildren) {
-        this.numChildren = numChildren;
-    }
-
     public int getNumOffice() {
         return numOffice;
     }
 
-    public void setNumOffice(int numOffice) {
-        this.numOffice = numOffice;
-    }
-
     public int getNumClothes() {
         return numClothes;
-    }
-
-    public void setNumClothes(int numClothes) {
-        this.numClothes = numClothes;
     }
 
     public void addElectronic(Product product) {

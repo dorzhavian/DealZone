@@ -160,7 +160,7 @@ public class Main {
         sc.nextLine();
         if (productIndex < 0) return;
         System.out.println("Would you like a special package?");
-        System.out.println("The price will be - " + manager.getSellers()[sellerIndex].getProducts()[productIndex].getSpecialPackadgePrice());
+        System.out.println("The price will be - " + manager.getSellers()[sellerIndex].getProducts()[productIndex].getSpecialPackagePrice());
         System.out.println("Enter YES or NO. (Enter -1 to return main menu)");
         String choice = sc.nextLine();
         boolean specialPackage = choice.equalsIgnoreCase("yes");
