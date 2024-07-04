@@ -13,7 +13,7 @@ public class Product {
         this.id = ++idGenerator;
         this.category = category;
         this.specialPackadgePrice = specialPackadgePrice;
-        this.specialPackageBuyerChoice = " (NO) ";
+        this.specialPackageBuyerChoice = " (WITHOUT) ";
     }
 
     public Product(Product other) {

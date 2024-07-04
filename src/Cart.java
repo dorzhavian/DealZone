@@ -42,7 +42,7 @@ public class Cart {
         totalPrice += p1.getProductPrice();
         if (specialPackage) {
             totalPrice += p1.getSpecialPackadgePrice();
-            p1.setSpecialPackageBuyerChoice(" (YES) ");
+            p1.setSpecialPackageBuyerChoice(" (WITH) ");
             System.out.println("Product added successfully.");
         }
     }

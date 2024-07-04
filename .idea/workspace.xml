@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product.">
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,24 +17,25 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "dorzhavian"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dorzhavian&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/dorzhavian/Buy-Sell.git",
-    "accountId": "102f21ab-586f-4a40-83b4-d76fe703298f"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/dorzhavian/Buy-Sell.git&quot;,
+    &quot;accountId&quot;: &quot;102f21ab-586f-4a40-83b4-d76fe703298f&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -51,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/JavaProject - Backup 2/JavaProject - backup 2",
+    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/Class exercises/Class9",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -79,7 +80,9 @@
       <updated>1719750391192</updated>
       <workItem from="1719750392119" duration="29000" />
       <workItem from="1719750465186" duration="14000" />
-      <workItem from="1720082308976" duration="845000" />
+      <workItem from="1720082308976" duration="1141000" />
+      <workItem from="1720083506545" duration="95000" />
+      <workItem from="1720083683591" duration="29000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -97,7 +100,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720082943792</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎-00003" summary="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input.">
+      <option name="closed" value="true" />
+      <created>1720083449706</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720083449706</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,6 +117,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product." />
+    <MESSAGE value="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input." />
+    <option name="LAST_COMMIT_MESSAGE" value="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input." />
   </component>
 </project>
