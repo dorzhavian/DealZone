@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Add isNumeric method in manager - check if string contains only digits">
-      <change afterPath="$PROJECT_DIR$/src/CompareBuyersByName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CompareSellersByProductsNumber.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Add compare classes (by name for buyers, by number of product for sellers) without realization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompareBuyersByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompareBuyersByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompareSellersByProductsNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompareSellersByProductsNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +57,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/Class exercises/Class9",
+    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/Class exercises/PhoneBook",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,7 +89,7 @@
       <workItem from="1720083506545" duration="95000" />
       <workItem from="1720083683591" duration="29000" />
       <workItem from="1720084669681" duration="516000" />
-      <workItem from="1720130662924" duration="8358000" />
+      <workItem from="1720130662924" duration="9373000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -147,7 +147,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720137563616</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL‎-00008" summary="Add compare classes (by name for buyers, by number of product for sellers) without realization">
+      <option name="closed" value="true" />
+      <created>1720139107089</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720139107089</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +169,7 @@
     <MESSAGE value="Fix interface methods signature, remove useless getters&amp;setters," />
     <MESSAGE value="isExist method moved to User as static" />
     <MESSAGE value="Add isNumeric method in manager - check if string contains only digits" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add isNumeric method in manager - check if string contains only digits" />
+    <MESSAGE value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
   </component>
 </project>

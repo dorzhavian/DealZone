@@ -32,7 +32,7 @@ public class Main {
                 continue;
             }
             sc.nextLine();
-            switch (choice) {
+            switch (choice) {            /// MAKE EXCEPTION FOR ENTER NUMBER NOT IN RANGE!
                 case 1:
                     case1();
                     break;
@@ -59,9 +59,6 @@ public class Main {
                     break;
                 case 9:
                     case9();
-                    break;
-                default:
-                    System.out.println("Please enter number in range (1-9)");
                     break;
             }
         } while (choice != 0);

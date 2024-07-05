@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
@@ -7,11 +8,15 @@ public class Manager implements Manageable {
     private Buyer[] buyers;
     private int numberOfBuyers;
     private Categories categoriesArrays;
+    private Comparator <Seller> comparatorSeller;
+    private Comparator <Buyer> comparatorBuyer;
 
     public Manager() {
         buyers = new Buyer[0];
         sellers = new Seller[0];
         categoriesArrays = new Categories();
+        comparatorSeller = new CompareSellersByProductsNumber();
+        comparatorBuyer = new CompareBuyersByName();
     }
 
     public Seller[] getSellers() {
@@ -75,7 +80,7 @@ public class Manager implements Manageable {
             System.out.println("Haven't sellers yet. return to main menu");
             return;
         }
-        // Arrays.sort(sellers, new CompareSellersByProductsNumber());
+        Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
             System.out.println(i + 1 + ") " + sellers[i].getUserName() + ":");
             System.out.println(sellers[i].toString());
@@ -87,7 +92,7 @@ public class Manager implements Manageable {
             System.out.println("Haven't buyers yet. return to main menu");
             return;
         }
-        // Arrays.sort(buyers, new CompareBuyersByName());
+        Arrays.sort(buyers, 0, numberOfBuyers, comparatorBuyer);
         for (int i = 0; i < numberOfBuyers; i++) {
             System.out.print(i + 1 + ") ");
             System.out.println(buyers[i].toString());
