@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.InputMismatchException;
 
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
@@ -76,6 +75,7 @@ public class Manager implements Manageable {
             System.out.println("Haven't sellers yet. return to main menu");
             return;
         }
+        // Arrays.sort(sellers, new CompareSellersByProductsNumber());
         for (int i = 0; i < numberOfSellers; i++) {
             System.out.println(i + 1 + ") " + sellers[i].getUserName() + ":");
             System.out.println(sellers[i].toString());
@@ -87,6 +87,7 @@ public class Manager implements Manageable {
             System.out.println("Haven't buyers yet. return to main menu");
             return;
         }
+        // Arrays.sort(buyers, new CompareBuyersByName());
         for (int i = 0; i < numberOfBuyers; i++) {
             System.out.print(i + 1 + ") ");
             System.out.println(buyers[i].toString());
