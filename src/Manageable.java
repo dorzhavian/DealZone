@@ -1,9 +1,7 @@
 public interface Manageable {
-    void addSeller(String username, String password);
+    void addSeller(String username, String password) throws AlreadyExistException;
 
-    void addBuyer(String username, String password, String address);
-
-    boolean isExists(String username, String type);
+    void addBuyer(String username, String password, String address) throws AlreadyExistException;
 
     void printSellersInfo();
 

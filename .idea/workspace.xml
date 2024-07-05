@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Add compare classes (by name for buyers, by number of product for sellers) without realization">
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Realization of sorting options when printing seller/buyer working">
+      <change afterPath="$PROJECT_DIR$/src/AlreadyExistException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompareBuyersByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompareBuyersByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompareSellersByProductsNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompareSellersByProductsNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manageable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +27,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="6aabd101898310957d4e332dd0f521347f82e2c9" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -57,7 +65,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/Class exercises/PhoneBook",
+    "last_opened_file_path": "C:/Users/dorzh/OneDrive/Desktop/Java OOP/Class exercises/ParkingLot",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,6 +75,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Sort" />
+      <recent name="BuyAndSellManagement" />
+      <recent name="Model" />
+      <recent name="BuyAndSell" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -89,7 +105,13 @@
       <workItem from="1720083506545" duration="95000" />
       <workItem from="1720083683591" duration="29000" />
       <workItem from="1720084669681" duration="516000" />
-      <workItem from="1720130662924" duration="9373000" />
+      <workItem from="1720130662924" duration="9943000" />
+      <workItem from="1720194941811" duration="4664000" />
+      <workItem from="1720199778531" duration="17000" />
+      <workItem from="1720202970482" duration="101000" />
+      <workItem from="1720203091984" duration="51000" />
+      <workItem from="1720203157389" duration="120000" />
+      <workItem from="1720206561278" duration="3757000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -155,11 +177,30 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720139107089</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="Realization of sorting options when printing seller/buyer working">
+      <option name="closed" value="true" />
+      <created>1720140588940</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720140588940</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update README.md" />
@@ -170,6 +211,7 @@
     <MESSAGE value="isExist method moved to User as static" />
     <MESSAGE value="Add isNumeric method in manager - check if string contains only digits" />
     <MESSAGE value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
+    <MESSAGE value="Realization of sorting options when printing seller/buyer working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Realization of sorting options when printing seller/buyer working" />
   </component>
 </project>

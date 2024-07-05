@@ -59,22 +59,6 @@ public class Manager implements Manageable {
         System.out.println("Buyer added successfully.");
     }
 
-    public boolean isExists(String username, String type) {
-        if (type.equals("seller")) {
-            if (User.isExist(sellers, username, numberOfSellers)) {
-                System.out.println("Seller already exists. Please enter a different name.");
-                return true;
-            }
-        } else if (type.equals("buyer")) {
-            if (User.isExist(buyers, username, numberOfBuyers)) {
-                System.out.println("Buyer already exists. Please enter a different name.");
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     public void printSellersInfo() {
         if (numberOfSellers == 0) {
             System.out.println("Haven't sellers yet. return to main menu");

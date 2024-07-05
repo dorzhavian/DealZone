@@ -1,9 +1,6 @@
-import java.util.Arrays;
-
 public abstract class User {
     protected String userName;
     protected String password;
-    private static final int SIZE_INCREASE = 2;
 
     public User(String userName, String password) {
         this.userName = userName;
@@ -14,10 +11,9 @@ public abstract class User {
         return userName;
     }
 
-    public static boolean isExist(User[] users, String inputUserName, int numberOfUsers) {
+    public static void isExist(User[] users, String inputUserName, int numberOfUsers) throws AlreadyExistException {
         for (int i = 0; i < numberOfUsers; i++) {
-            if (users[i].getUserName().equalsIgnoreCase(inputUserName)) return true;
+            if (users[i].getUserName().equalsIgnoreCase(inputUserName)) throw new AlreadyExistException();
         }
-        return false;
     }
 }
