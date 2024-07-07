@@ -1,3 +1,5 @@
+import Exceptions.EmptyException;
+
 import java.util.Arrays;
 
 public class Buyer extends User {

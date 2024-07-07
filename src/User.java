@@ -1,3 +1,7 @@
+import Exceptions.AlreadyExistException;
+import Exceptions.EmptyException;
+import Exceptions.OnlyNumbersUserNameException;
+
 public abstract class User {
     protected String userName;
     protected String password;

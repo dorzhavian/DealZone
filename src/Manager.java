@@ -1,3 +1,6 @@
+import Exceptions.EmptyUsersArrayException;
+import Exceptions.IndexOutOfRangeException;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -23,7 +26,8 @@ public class Manager implements Manageable {
         return sellers;
     }
 
-    public int getNumberOfSellers() {
+    public int getNumberOfSellers() throws EmptyUsersArrayException {
+        if (numberOfSellers == 0) throw new EmptyUsersArrayException("Sellers");
         return numberOfSellers;
     }
 
@@ -31,7 +35,8 @@ public class Manager implements Manageable {
         return buyers;
     }
 
-    public int getNumberOfBuyers() {
+    public int getNumberOfBuyers() throws EmptyUsersArrayException {
+        if (numberOfBuyers == 0) throw new EmptyUsersArrayException("Buyers");
         return numberOfBuyers;
     }
 
@@ -61,6 +66,54 @@ public class Manager implements Manageable {
         try {
             Buyer.isValidAddress(address);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean isEmptySellers() {
+        try {
+            getNumberOfSellers();
+        } catch (EmptyUsersArrayException e) {
+            System.out.println(e.getMessage());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEmptyBuyers() {
+        try {
+            getNumberOfBuyers();
+        } catch (EmptyUsersArrayException e) {
+            System.out.println(e.getMessage());
+            return true;
+        }
+        return false;
+    }
+
+    public void isInRangeSellers(int index) throws IndexOutOfRangeException {
+        if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
+    }
+
+    public void isInRangeBuyers(int index) throws IndexOutOfRangeException {
+        if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
+    }
+    
+    public boolean chooseValidSeller(int index) {
+        try {
+            isInRangeSellers(index);
+        } catch (IndexOutOfRangeException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean chooseValidBuyer(int index) {
+        try {
+            isInRangeBuyers(index);
+        } catch (IndexOutOfRangeException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -104,10 +157,6 @@ public class Manager implements Manageable {
     }
 
     public void printBuyersInfo() {
-        if (numberOfBuyers == 0) {
-            System.out.println("Haven't buyers yet. return to main menu");
-            return;
-        }
         Arrays.sort(buyers, 0, numberOfBuyers, comparatorBuyer);
         for (int i = 0; i < numberOfBuyers; i++) {
             System.out.print(i + 1 + ") ");
@@ -123,13 +172,40 @@ public class Manager implements Manageable {
         System.out.println(categoriesArrays.toString());
     }
 
+    public void printSellersNames() {
+        try {
+            getNumberOfSellers();
+            System.out.println("Seller's list:");
+            System.out.println("--------------");
+            for (int i = 0; i < numberOfSellers; i++) {
+                System.out.println(i+1 + ")" + sellers[i].getUserName());
+            } 
+        } catch (EmptyUsersArrayException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void printBuyersNames() {
+        try {
+            getNumberOfBuyers();
+            System.out.println("Buyer's list:");
+            System.out.println("--------------");
+            for (int i = 0; i < numberOfBuyers; i++) {
+                System.out.println(i+1 + ") " + buyers[i].getUserName());
+            }
+        } catch (EmptyUsersArrayException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage) {
         Product p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
         buyers[buyerIndex].getCurrentCart().addProductToCart(p1, specialPackage);
     }
 
-    public void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackadgePrice) {
-        Product p1 = new Product(productName, productPrice, c, specialPackadgePrice);
+    public void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice) {
+        Product p1 = new Product(productName, productPrice, c, specialPackagePrice);
         sellers[sellerIndex].addProduct(p1);
         addToCategoryArray(p1);
     }

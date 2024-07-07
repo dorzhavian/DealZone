@@ -107,10 +107,7 @@ public class Main {
     }
 
     public static void case3 () {
-        if (manager.getNumberOfSellers() == 0) {
-            System.out.println("Haven't sellers yet.");
-            return;
-        }
+        if (manager.isEmptySellers()) return;
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
         System.out.println("Enter product name to add: (Enter -1 to return main menu)");
@@ -134,10 +131,7 @@ public class Main {
     }
 
     public static void case4 () {
-        if (manager.getNumberOfBuyers() == 0) {
-            System.out.println("Haven't buyers yet. return to main menu.");
-            return;
-        }
+        if (manager.isEmptyBuyers() || manager.isEmptySellers() ) return;
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
         int sellerIndex = chooseSeller();
@@ -160,10 +154,7 @@ public class Main {
     }
 
     public static void case5 () {
-        if (manager.getNumberOfBuyers() == 0) {
-            System.out.println("Haven't buyers yet. return to main menu.");
-            return;
-        }
+        if (manager.isEmptyBuyers()) return;
         System.out.println("Please choose buyer from list to process checkout: (Enter -1 to return main menu)");
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
@@ -178,6 +169,7 @@ public class Main {
     }
 
     public static void case9 () {
+        if (manager.isEmptyBuyers()) return;
         manager.printBuyersInfo();
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
@@ -191,27 +183,27 @@ public class Main {
     }
 
     public static int chooseSeller () {
-        System.out.println("Seller's list: ");
-        for (int i = 0; i < manager.getNumberOfSellers(); i++) {
-            System.out.println(i+1 + ")" + manager.getSellers()[i].getUserName());
-        }
-        System.out.println("Please choose seller from list by number: 1-" + manager.getNumberOfSellers() + " (Enter -1 to return main menu)");
-        int choiceSeller = sc.nextInt();
-        sc.nextLine();
-        if (choiceSeller == -1) return -1;    // return to main menu
-        return choiceSeller - 1;
+        int sellerIndex;
+        do {
+            manager.printSellersNames();
+            System.out.println("Please choose seller from the list above: (Enter -1 to return main menu)");
+            sellerIndex = sc.nextInt();
+            sc.nextLine();
+            if (sellerIndex == -1) return -1;
+        } while (!manager.chooseValidSeller(sellerIndex)) ;
+        return sellerIndex -1;
     }
 
     public static int chooseBuyer () {
-        System.out.println("Buyer's list: ");
-        for (int i = 0; i < manager.getNumberOfBuyers(); i++) {
-            System.out.println(i+1 + ")" + manager.getBuyers()[i].getUserName());
-        }
-        System.out.println("Please choose buyer from list by number: 1-" + manager.getNumberOfBuyers() + " (Enter -1 to return main menu)");
-        int choiceBuyer = sc.nextInt();
-        sc.nextLine();
-        if (choiceBuyer == -1) return -1;    // return to main menu
-        return choiceBuyer - 1;
+        int buyerIndex;
+        do {
+            manager.printBuyersNames();
+            System.out.println("Please choose buyer from the list above: (Enter -1 to return main menu)");
+            buyerIndex = sc.nextInt();
+            sc.nextLine();
+            if (buyerIndex == -1) return -1;
+        } while (!manager.chooseValidBuyer(buyerIndex));
+        return buyerIndex -1;
     }
 }
 

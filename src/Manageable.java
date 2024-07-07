@@ -1,3 +1,6 @@
+import Exceptions.AlreadyExistException;
+import Exceptions.IndexOutOfRangeException;
+
 public interface Manageable {
     void addSeller(String username, String password) throws AlreadyExistException;
 
@@ -9,6 +12,10 @@ public interface Manageable {
 
     void printByCategory();
 
+    void printSellersNames ();
+
+    void printBuyersNames ();
+
     void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage);
 
     void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackadgePrice);
@@ -19,4 +26,21 @@ public interface Manageable {
 
     void replaceCarts (int historyCartIndex, int buyerIndex);
 
-}
+    boolean validName (String name, int whichCase);
+
+    boolean validPass (String pass);
+
+    boolean isValidAddress(String address);
+
+    boolean isEmptySellers();
+
+    boolean isEmptyBuyers();
+
+    void isInRangeSellers (int index) throws IndexOutOfRangeException;
+
+    void isInRangeBuyers (int index) throws IndexOutOfRangeException;
+
+    boolean chooseValidSeller(int index);
+
+    boolean chooseValidBuyer(int index);
+    }
