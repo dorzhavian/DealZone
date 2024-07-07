@@ -34,10 +34,10 @@ public class Main {
             sc.nextLine();
             switch (choice) {            /// MAKE EXCEPTION FOR ENTER NUMBER NOT IN RANGE!
                 case 1:
-                    case1();
+                    case1and2(1);
                     break;
                 case 2:
-                    case2();
+                    case1and2(2);
                     break;
                 case 3:
                     case3();
@@ -80,47 +80,30 @@ public class Main {
         System.out.println("Please enter your choice: ");
     }
 
-    public static void case1 () {
+    public static void case1and2(int whichCase) {
         String username;
-        String password;
         System.out.println("Enter username: (Enter -1 to return main menu)");
-        while (true) {
-            try {
-                username = sc.nextLine();
-                User.isExist(manager.getSellers(), username, manager.getNumberOfSellers());
-                if (username.equals("-1")) return;
-                System.out.println("Enter password: (Enter -1 to return main menu)");
-                password = sc.nextLine();
-                if (password.equals("-1")) return;
-                manager.addSeller(username, password);
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public static void case2 () {
-        String username;
+        do {
+            username = sc.nextLine();
+            if (username.equals("-1")) return;
+        } while (!manager.validName(username, whichCase));
         String password;
-        System.out.println("Enter username: (Enter -1 to return main menu)");
-        while (true) {
-            try {
-                username = sc.nextLine();
-                User.isExist(manager.getBuyers(), username, manager.getNumberOfBuyers());
-                if (username.equals("-1")) return;
-                System.out.println("Enter password: (Enter -1 to return main menu)");
-                password = sc.nextLine();
-                if (password.equals("-1")) return;
-                System.out.println("Enter your address: (Enter -1 to return main menu)");
-                String address = sc.nextLine();
-                if (address.equals("-1")) return;
-                manager.addBuyer(username, password, address);
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        System.out.println("Enter password: (Enter -1 to return main menu)");
+        do {
+            password = sc.nextLine();
+            if (password.equals("-1")) return;
+        } while (!manager.validPass(password));
+        if (whichCase == 1) {
+            manager.addSeller(username, password);
+            return;
         }
+        String address;
+        System.out.println("Enter your address: (Enter -1 to return main menu)");
+        do {
+            address = sc.nextLine();
+            if (address.equals("-1")) return;
+        } while (!manager.isValidAddress(address));
+        manager.addBuyer(username, password, address);
     }
 
     public static void case3 () {

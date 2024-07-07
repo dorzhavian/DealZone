@@ -8,8 +8,8 @@ public class Manager implements Manageable {
     private Buyer[] buyers;
     private int numberOfBuyers;
     private Categories categoriesArrays;
-    private Comparator <Seller> comparatorSeller;
-    private Comparator <Buyer> comparatorBuyer;
+    private final Comparator<Seller> comparatorSeller;
+    private final Comparator<Buyer> comparatorBuyer;
 
     public Manager() {
         buyers = new Buyer[0];
@@ -33,6 +33,38 @@ public class Manager implements Manageable {
 
     public int getNumberOfBuyers() {
         return numberOfBuyers;
+    }
+
+    public boolean validName (String name, int whichCase) {
+        try {
+            User.isValidUserName(name);
+            if (whichCase == 1) User.isExist(sellers,name,numberOfSellers);
+            else User.isExist(buyers,name,numberOfBuyers);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validPass (String pass) {
+        try {
+            User.isValidPassword (pass);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidAddress(String address) {
+        try {
+            Buyer.isValidAddress(address);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public void addSeller(String username, String password) {
@@ -127,15 +159,6 @@ public class Manager implements Manageable {
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
-    }
-
-    public static boolean isNumeric(String string) {
-        for (char c : string.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
 
