@@ -1,10 +1,9 @@
-import Exceptions.EmptyException;
 import Exceptions.IndexOutOfRangeException;
 
 import java.util.Arrays;
 
 public class Seller extends User {
-    private static final int SIZE_INCREARSE = 2;
+    private static final int SIZE_INCREASE = 2;
     private Product[] products;
     private int numOfProducts; //contains the num of products in the array
 
@@ -28,7 +27,7 @@ public class Seller extends User {
                 products = Arrays.copyOf(products, 1);
             }
             else {
-                products = Arrays.copyOf(products, products.length * SIZE_INCREARSE);
+                products = Arrays.copyOf(products, products.length * SIZE_INCREASE);
             }
         }
         products[numOfProducts++] = p1;

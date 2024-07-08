@@ -73,9 +73,9 @@ public class Manager implements Manageable {
             Buyer.yesOrNoChoiceForBuyer(input);
         } catch (EmptyException | YesNoChoiceException e) {
             System.out.println(e.getMessage());
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean validProductName(String productNameInput) {
@@ -243,6 +243,8 @@ public class Manager implements Manageable {
             System.out.println("Haven't sellers yet. return to main menu");
             return;
         }
+        System.out.println("\nSellers info:");
+        System.out.println("--------------");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
             System.out.println(i + 1 + ") " + sellers[i].getUserName() + ":");
@@ -251,6 +253,8 @@ public class Manager implements Manageable {
     }
 
     public void printBuyersInfo() {
+        System.out.println("\nBuyers info:");
+        System.out.println("--------------");
         Arrays.sort(buyers, 0, numberOfBuyers, comparatorBuyer);
         for (int i = 0; i < numberOfBuyers; i++) {
             System.out.print(i + 1 + ") ");

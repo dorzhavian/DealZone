@@ -167,7 +167,7 @@ public class Main {
         String choice;
         do {
             choice = sc.nextLine();
-        } while (!manager.buyerYesOrNoChoice(choice));
+        } while (manager.buyerYesOrNoChoice(choice));
         boolean specialPackage = choice.equalsIgnoreCase("yes");
         manager.addProductBuyer(buyerIndex,sellerIndex,productIndex - 1, specialPackage);
     }
@@ -188,7 +188,7 @@ public class Main {
         String choice;
         do {
             choice = sc.nextLine();
-        } while (!manager.buyerYesOrNoChoice(choice));
+        } while (manager.buyerYesOrNoChoice(choice));
         if (choice.equalsIgnoreCase("yes")) manager.pay(buyerIndex);
     }
 

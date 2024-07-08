@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Yes &amp; No exception added, case 4 fixed - nextLine for inputs, check validity &amp; using exceptions.">
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/EmptyCartPayException.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Buyer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manageable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Seller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +114,7 @@
       <workItem from="1720248786790" duration="252000" />
       <workItem from="1720373607184" duration="5422000" />
       <workItem from="1720382171317" duration="5442000" />
-      <workItem from="1720441505915" duration="23883000" />
+      <workItem from="1720441505915" duration="24805000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -238,7 +236,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720464199142</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎-00016" summary="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function.">
+      <option name="closed" value="true" />
+      <created>1720470782479</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL‎-00016" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720470782479</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,14 +277,15 @@
     <MESSAGE value="Buyers &amp; Sellers inputs changed to String by using Integer.parseInt for validity - exception uses for non-digit input" />
     <MESSAGE value="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes" />
     <MESSAGE value="Yes &amp; No exception added, case 4 fixed - nextLine for inputs, check validity &amp; using exceptions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yes &amp; No exception added, case 4 fixed - nextLine for inputs, check validity &amp; using exceptions." />
+    <MESSAGE value="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Manager.java</url>
-          <line>282</line>
+          <line>286</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

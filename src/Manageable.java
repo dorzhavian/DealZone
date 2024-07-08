@@ -19,7 +19,7 @@ public interface Manageable {
 
     void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage);
 
-    void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackadgePrice);
+    void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice);
 
     void pay(int buyerIndex);
 
