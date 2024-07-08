@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added.">
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/EmptyUsersArrayException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/IndexOutOfRangeException.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added">
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/indexInputNotDigitException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlreadyExistException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/AlreadyExistException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Buyer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/EmptyException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manageable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OnlyNumbersUserNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/OnlyNumbersUserNameException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +113,8 @@
       <workItem from="1720206561278" duration="6777000" />
       <workItem from="1720248786790" duration="252000" />
       <workItem from="1720373607184" duration="5422000" />
-      <workItem from="1720382171317" duration="5215000" />
+      <workItem from="1720382171317" duration="5442000" />
+      <workItem from="1720441505915" duration="2850000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -209,7 +204,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720377105169</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL‎-00012" summary="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added">
+      <option name="closed" value="true" />
+      <created>1720387630085</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720387630085</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +241,7 @@
     <MESSAGE value="Realization of sorting options when printing seller/buyer working" />
     <MESSAGE value="Method isExist moved to class User and deleted from Manageable, exception for username that already exist" />
     <MESSAGE value="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added." />
+    <MESSAGE value="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added" />
   </component>
 </project>

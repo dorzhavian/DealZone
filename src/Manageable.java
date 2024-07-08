@@ -36,11 +36,11 @@ public interface Manageable {
 
     boolean isEmptyBuyers();
 
-    void isInRangeSellers (int index) throws IndexOutOfRangeException;
+    void isInRangeSellers (String index) throws IndexOutOfRangeException;
 
-    void isInRangeBuyers (int index) throws IndexOutOfRangeException;
+    void isInRangeBuyers (String index) throws IndexOutOfRangeException;
 
-    boolean chooseValidSeller(int index);
+    boolean chooseValidSeller(String indexInput);
 
-    boolean chooseValidBuyer(int index);
+    boolean chooseValidBuyer(String indexInput);
     }

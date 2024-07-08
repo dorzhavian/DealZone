@@ -183,27 +183,25 @@ public class Main {
     }
 
     public static int chooseSeller () {
-        int sellerIndex;
+        String sellerIndex;
         do {
             manager.printSellersNames();
             System.out.println("Please choose seller from the list above: (Enter -1 to return main menu)");
-            sellerIndex = sc.nextInt();
-            sc.nextLine();
-            if (sellerIndex == -1) return -1;
+            sellerIndex = sc.nextLine();
+            if (sellerIndex.equals("-1")) return -1;
         } while (!manager.chooseValidSeller(sellerIndex)) ;
-        return sellerIndex -1;
+        return Integer.parseInt(sellerIndex) -1;
     }
 
     public static int chooseBuyer () {
-        int buyerIndex;
+        String buyerIndex;
         do {
             manager.printBuyersNames();
             System.out.println("Please choose buyer from the list above: (Enter -1 to return main menu)");
-            buyerIndex = sc.nextInt();
-            sc.nextLine();
-            if (buyerIndex == -1) return -1;
+            buyerIndex = sc.nextLine();
+            if (buyerIndex.equals("-1")) return -1;
         } while (!manager.chooseValidBuyer(buyerIndex));
-        return buyerIndex -1;
+        return Integer.parseInt(buyerIndex) -1;
     }
 }
 

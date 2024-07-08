@@ -26,13 +26,13 @@ public class Manager implements Manageable {
         return sellers;
     }
 
+    public Buyer[] getBuyers() {
+        return buyers;
+    }
+
     public int getNumberOfSellers() throws EmptyUsersArrayException {
         if (numberOfSellers == 0) throw new EmptyUsersArrayException("Sellers");
         return numberOfSellers;
-    }
-
-    public Buyer[] getBuyers() {
-        return buyers;
     }
 
     public int getNumberOfBuyers() throws EmptyUsersArrayException {
@@ -92,29 +92,37 @@ public class Manager implements Manageable {
         return false;
     }
 
-    public void isInRangeSellers(int index) throws IndexOutOfRangeException {
+    public void isInRangeSellers(String indexInput) throws IndexOutOfRangeException {
+        int index = Integer.parseInt(indexInput);
         if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
     }
 
-    public void isInRangeBuyers(int index) throws IndexOutOfRangeException {
+    public void isInRangeBuyers(String indexInput) throws IndexOutOfRangeException {
+        int index = Integer.parseInt(indexInput);
         if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
     }
     
-    public boolean chooseValidSeller(int index) {
+    public boolean chooseValidSeller(String indexInput) {
         try {
-            isInRangeSellers(index);
+            isInRangeSellers(indexInput);
         } catch (IndexOutOfRangeException e) {
             System.out.println(e.getMessage());
+            return false;
+        } catch (NumberFormatException e) {
+            System.out.println("\nChoice must to be digit, please try again!\n");
             return false;
         }
         return true;
     }
     
-    public boolean chooseValidBuyer(int index) {
+    public boolean chooseValidBuyer(String indexInput) {
         try {
-            isInRangeBuyers(index);
+            isInRangeBuyers(indexInput);
         } catch (IndexOutOfRangeException e) {
             System.out.println(e.getMessage());
+            return false;
+        } catch (NumberFormatException e) {
+            System.out.println("\nChoice must to be digit, please try again!\n");
             return false;
         }
         return true;
