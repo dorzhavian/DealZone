@@ -1,4 +1,5 @@
 import Exceptions.AlreadyExistException;
+import Exceptions.EmptyUsersArrayException;
 import Exceptions.IndexOutOfRangeException;
 
 public interface Manageable {
@@ -30,17 +31,28 @@ public interface Manageable {
 
     boolean validPass (String pass);
 
+    int validCategory (String categoryInput);
+
     boolean isValidAddress(String address);
 
     boolean isEmptySellers();
 
     boolean isEmptyBuyers();
 
-    void isInRangeSellers (String index) throws IndexOutOfRangeException;
+    int isInRangeSellers (String index) throws IndexOutOfRangeException;
 
-    void isInRangeBuyers (String index) throws IndexOutOfRangeException;
+    int isInRangeBuyers (String index) throws IndexOutOfRangeException;
 
-    boolean chooseValidSeller(String indexInput);
+    int chooseValidSeller(String indexInput);
 
-    boolean chooseValidBuyer(String indexInput);
+    int chooseValidBuyer(String indexInput);
+
+    void isValidNumOfSellers() throws EmptyUsersArrayException;
+
+    void isValidNumOfBuyers() throws EmptyUsersArrayException;
+
+    boolean validProductName(String productNameInput);
+
+    double validPrice (String productPriceInput);
+
     }

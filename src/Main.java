@@ -107,27 +107,41 @@ public class Main {
     }
 
     public static void case3 () {
+        String input;
         if (manager.isEmptySellers()) return;
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
         System.out.println("Enter product name to add: (Enter -1 to return main menu)");
-        String productName = sc.nextLine();
-        if (productName.equals("-1")) return ;
+        String productName;
+        do {
+             productName = sc.nextLine();
+             if (productName.equals("-1")) return;
+        } while (!manager.validProductName(productName));
         System.out.println("Enter product price: (Enter -1 to return main menu)");
-        double productPrice = sc.nextDouble();
-        if (productPrice < 0) return ;
-        Category[] allCategories = Category.values();
-        for (Category category : allCategories) {
-            System.out.println(category.ordinal() + 1 + ") " + category.name());
-        }
+        double productPrice;
+        do {
+            input = sc.nextLine();
+            if (input.equals("-1")) return;
+            productPrice = manager.validPrice(input);
+        } while ( productPrice == 0);
         System.out.println("Choose category: (Enter -1 to return main menu)");
-        int categoryIndex = sc.nextInt();
-        sc.nextLine();
-        if (categoryIndex < 0) return ;
+        int categoryIndex;
+        do {
+            System.out.println("Category list:");
+            System.out.println("--------------");
+            Categories.printCategories();
+            input = sc.nextLine();
+            if (input.equals("-1")) return;
+            categoryIndex = manager.validCategory(input);
+        } while (categoryIndex == 0);
         System.out.println("Enter price for special package: (Enter -1 to return main menu)");
-        double specialPackagePrice = sc.nextDouble();
-        sc.nextLine();
-        manager.addProductSeller(sellerIndex, productName, productPrice, allCategories[categoryIndex - 1], specialPackagePrice);
+        double specialPackagePrice;
+        do {
+            input = sc.nextLine();
+            if (input.equals("-1")) return;
+            specialPackagePrice = manager.validPrice(input);
+        } while (specialPackagePrice == 0);
+        manager.addProductSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex], specialPackagePrice);
     }
 
     public static void case4 () {
@@ -183,25 +197,29 @@ public class Main {
     }
 
     public static int chooseSeller () {
-        String sellerIndex;
+        String input;
+        int sellerIndex;
         do {
             manager.printSellersNames();
             System.out.println("Please choose seller from the list above: (Enter -1 to return main menu)");
-            sellerIndex = sc.nextLine();
-            if (sellerIndex.equals("-1")) return -1;
-        } while (!manager.chooseValidSeller(sellerIndex)) ;
-        return Integer.parseInt(sellerIndex) -1;
+            input = sc.nextLine();
+            if (input.equals("-1")) return -1;
+            sellerIndex = manager.chooseValidSeller(input);
+        } while (sellerIndex == 0) ;
+        return sellerIndex -1;
     }
 
     public static int chooseBuyer () {
-        String buyerIndex;
+        String input;
+        int buyerIndex;
         do {
             manager.printBuyersNames();
             System.out.println("Please choose buyer from the list above: (Enter -1 to return main menu)");
-            buyerIndex = sc.nextLine();
-            if (buyerIndex.equals("-1")) return -1;
-        } while (!manager.chooseValidBuyer(buyerIndex));
-        return Integer.parseInt(buyerIndex) -1;
+            input = sc.nextLine();
+            if (input.equals("-1")) return -1;
+            buyerIndex = manager.chooseValidBuyer(input);
+        } while (buyerIndex == 0);
+        return buyerIndex - 1;
     }
 }
 

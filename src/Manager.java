@@ -1,5 +1,6 @@
 import Exceptions.EmptyUsersArrayException;
 import Exceptions.IndexOutOfRangeException;
+import Exceptions.NegativeOrZeroPriceException;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -30,14 +31,56 @@ public class Manager implements Manageable {
         return buyers;
     }
 
-    public int getNumberOfSellers() throws EmptyUsersArrayException {
+    public void isValidNumOfSellers() throws EmptyUsersArrayException {         /// remove method and add this exception for getSellers
         if (numberOfSellers == 0) throw new EmptyUsersArrayException("Sellers");
-        return numberOfSellers;
     }
 
-    public int getNumberOfBuyers() throws EmptyUsersArrayException {
+    public void isValidNumOfBuyers() throws EmptyUsersArrayException {          /// remove method and add this exception for getBuyers
         if (numberOfBuyers == 0) throw new EmptyUsersArrayException("Buyers");
-        return numberOfBuyers;
+    }
+
+    public boolean validProductName(String productNameInput) {
+        try {
+            Product.isValidProductName(productNameInput);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public double validPrice(String productPriceInput) {
+        double productPrice;
+        try {
+            productPrice = Product.isValidPrice(productPriceInput);
+        } catch (NullPointerException e){
+            System.out.println("Price cannot be empty, please try again!");
+            return 0;
+        } catch (NumberFormatException e) {
+            System.out.println("Price must enter as number, please try again!");
+            return 0;
+        } catch (NegativeOrZeroPriceException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        return productPrice;
+    }
+
+    public int validCategory (String categoryInput) {
+        int categoryChoice;
+        try {
+            categoryChoice = Categories.validCategoryChoice(categoryInput);
+        } catch (NullPointerException e) {
+            System.out.println("Your choice cannot be empty, please try again!");
+            return 0;
+        } catch (NumberFormatException e) {
+            System.out.println("Your choice must be digit, please try again!");
+            return 0;
+        } catch (IndexOutOfRangeException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        return categoryChoice;
     }
 
     public boolean validName (String name, int whichCase) {
@@ -74,7 +117,7 @@ public class Manager implements Manageable {
     
     public boolean isEmptySellers() {
         try {
-            getNumberOfSellers();
+            isValidNumOfSellers();
         } catch (EmptyUsersArrayException e) {
             System.out.println(e.getMessage());
             return true;
@@ -84,7 +127,7 @@ public class Manager implements Manageable {
 
     public boolean isEmptyBuyers() {
         try {
-            getNumberOfBuyers();
+            isValidNumOfBuyers();
         } catch (EmptyUsersArrayException e) {
             System.out.println(e.getMessage());
             return true;
@@ -92,40 +135,44 @@ public class Manager implements Manageable {
         return false;
     }
 
-    public void isInRangeSellers(String indexInput) throws IndexOutOfRangeException {
+    public int isInRangeSellers(String indexInput) throws IndexOutOfRangeException {
         int index = Integer.parseInt(indexInput);
         if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
+        return index;
     }
 
-    public void isInRangeBuyers(String indexInput) throws IndexOutOfRangeException {
+    public int isInRangeBuyers(String indexInput) throws IndexOutOfRangeException {
         int index = Integer.parseInt(indexInput);
         if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
+        return index;
     }
     
-    public boolean chooseValidSeller(String indexInput) {
+    public int chooseValidSeller(String indexInput) {
+        int sellerIndex;
         try {
-            isInRangeSellers(indexInput);
+            sellerIndex = isInRangeSellers(indexInput);
         } catch (IndexOutOfRangeException e) {
             System.out.println(e.getMessage());
-            return false;
+            return 0;
         } catch (NumberFormatException e) {
             System.out.println("\nChoice must to be digit, please try again!\n");
-            return false;
+            return 0;
         }
-        return true;
+        return sellerIndex;
     }
     
-    public boolean chooseValidBuyer(String indexInput) {
+    public int chooseValidBuyer(String indexInput) {
+        int buyerIndex;
         try {
-            isInRangeBuyers(indexInput);
+            buyerIndex = isInRangeBuyers(indexInput);
         } catch (IndexOutOfRangeException e) {
             System.out.println(e.getMessage());
-            return false;
+            return 0;
         } catch (NumberFormatException e) {
             System.out.println("\nChoice must to be digit, please try again!\n");
-            return false;
+            return 0;
         }
-        return true;
+        return buyerIndex;
     }
 
     public void addSeller(String username, String password) {
@@ -182,7 +229,7 @@ public class Manager implements Manageable {
 
     public void printSellersNames() {
         try {
-            getNumberOfSellers();
+            isValidNumOfSellers();
             System.out.println("Seller's list:");
             System.out.println("--------------");
             for (int i = 0; i < numberOfSellers; i++) {
@@ -195,7 +242,7 @@ public class Manager implements Manageable {
     
     public void printBuyersNames() {
         try {
-            getNumberOfBuyers();
+            isValidNumOfBuyers();
             System.out.println("Buyer's list:");
             System.out.println("--------------");
             for (int i = 0; i < numberOfBuyers; i++) {
@@ -243,6 +290,15 @@ public class Manager implements Manageable {
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
+    }
+
+    public static boolean isNumeric(String string) {
+        for (char c : string.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

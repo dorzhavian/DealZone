@@ -17,7 +17,7 @@ public abstract class User {
 
     public static void isValidUserName (String inputUserName) throws EmptyException, OnlyNumbersUserNameException {
         if (inputUserName == null || inputUserName.trim().isEmpty()) throw new EmptyException("Name");
-        if (isNumeric(inputUserName)) throw new OnlyNumbersUserNameException();
+        if (Manager.isNumeric(inputUserName)) throw new OnlyNumbersUserNameException("User");
     }
 
     public static void isValidPassword (String inputPass) throws EmptyException {
@@ -28,14 +28,5 @@ public abstract class User {
         for (int i = 0; i < numberOfUsers; i++) {
             if (users[i].getUserName().equalsIgnoreCase(inputUserName)) throw new AlreadyExistException();
         }
-    }
-
-    private static boolean isNumeric(String string) {
-        for (char c : string.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

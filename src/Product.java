@@ -1,3 +1,7 @@
+import Exceptions.EmptyException;
+import Exceptions.OnlyNumbersUserNameException;
+import Exceptions.NegativeOrZeroPriceException;
+
 public class Product {
     private final String productName;
     private final double productPrice;
@@ -42,6 +46,17 @@ public class Product {
     }
 
     public double getProductPrice() {
+        return productPrice;
+    }
+
+    public static void isValidProductName (String inputProductName) throws EmptyException, OnlyNumbersUserNameException {
+        if (inputProductName == null || inputProductName.trim().isEmpty()) throw new EmptyException("Product name");
+        if (Manager.isNumeric(inputProductName)) throw new OnlyNumbersUserNameException("Product");
+    }
+
+    public static double isValidPrice (String inputPrice) throws NegativeOrZeroPriceException {
+        double productPrice = Double.parseDouble(inputPrice);
+        if (productPrice <= 0) throw new NegativeOrZeroPriceException();
         return productPrice;
     }
 
