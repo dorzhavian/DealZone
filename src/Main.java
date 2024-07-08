@@ -124,7 +124,7 @@ public class Main {
             if (input.equals("-1")) return;
             productPrice = manager.validPrice(input);
         } while ( productPrice == 0);
-        System.out.println("Choose category: (Enter -1 to return main menu)");
+        System.out.println("Choose category: (Enter -1 to return main menu)\n");
         int categoryIndex;
         do {
             System.out.println("Category list:");
@@ -141,30 +141,33 @@ public class Main {
             if (input.equals("-1")) return;
             specialPackagePrice = manager.validPrice(input);
         } while (specialPackagePrice == 0);
-        manager.addProductSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex], specialPackagePrice);
+        manager.addProductSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice);
     }
 
     public static void case4 () {
+        String input;
         if (manager.isEmptyBuyers() || manager.isEmptySellers() ) return;
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
-        if (manager.getSellers()[sellerIndex].getNumOfProducts() == 0) {
-            System.out.println("This seller haven't products to sell yet.");
-            return;
-        }
-        System.out.println(manager.getSellers()[sellerIndex].toString()); // print the chosen seller products
+        if (!manager.haveProductToSell(sellerIndex)) return;
         System.out.println("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
-        int productIndex = sc.nextInt() - 1;
-        sc.nextLine();
-        if (productIndex < 0) return;
+        int productIndex;
+        do {
+            input = sc.nextLine();
+            if (input.equals("-1")) return;
+            productIndex = manager.validProductIndex(sellerIndex, input);
+        } while (productIndex == 0);
         System.out.println("Would you like a special package?");
-        System.out.println("The price will be - " + manager.getSellers()[sellerIndex].getProducts()[productIndex].getSpecialPackagePrice());
+        System.out.println("The price will be - " + manager.getSellers()[sellerIndex].getProducts()[productIndex - 1].getSpecialPackagePrice());
         System.out.println("Enter YES or NO. (Enter -1 to return main menu)");
-        String choice = sc.nextLine();
+        String choice;
+        do {
+            choice = sc.nextLine();
+        } while (!manager.specialPackageChoice(choice));
         boolean specialPackage = choice.equalsIgnoreCase("yes");
-        manager.addProductBuyer(buyerIndex,sellerIndex,productIndex, specialPackage);
+        manager.addProductBuyer(buyerIndex,sellerIndex,productIndex - 1, specialPackage);
     }
 
     public static void case5 () {
@@ -187,7 +190,7 @@ public class Main {
         manager.printBuyersInfo();
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        manager.getBuyers()[buyerIndex].toString();
+        System.out.println(manager.getBuyers()[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
         System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
         int historyCartIndex = sc.nextInt();

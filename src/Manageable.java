@@ -55,4 +55,8 @@ public interface Manageable {
 
     double validPrice (String productPriceInput);
 
+    boolean haveProductToSell (int indexSeller);
+
+    int validProductIndex(int sellerIndex, String productIndex);
+
     }

@@ -1,6 +1,4 @@
-import Exceptions.EmptyUsersArrayException;
-import Exceptions.IndexOutOfRangeException;
-import Exceptions.NegativeOrZeroPriceException;
+import Exceptions.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -31,12 +29,49 @@ public class Manager implements Manageable {
         return buyers;
     }
 
+    public boolean haveProductToSell (int indexSeller) {
+        if (sellers[indexSeller].getNumOfProducts() == 0) {
+            System.out.println(sellers[indexSeller].getUserName() + " haven't products to sell yet! ");
+            return false;
+        } else {
+            System.out.println(sellers[indexSeller].toString());
+            return true;
+        }
+    }
+
     public void isValidNumOfSellers() throws EmptyUsersArrayException {         /// remove method and add this exception for getSellers
         if (numberOfSellers == 0) throw new EmptyUsersArrayException("Sellers");
     }
 
     public void isValidNumOfBuyers() throws EmptyUsersArrayException {          /// remove method and add this exception for getBuyers
         if (numberOfBuyers == 0) throw new EmptyUsersArrayException("Buyers");
+    }
+
+    public int validProductIndex(int sellerIndex, String productIndexInput) {
+        int productIndex;
+        try {
+            productIndex = Seller.validProductOfSeller(productIndexInput, sellers[sellerIndex].getNumOfProducts());
+        } catch (NullPointerException e) {
+            System.out.println("Your choice cannot be empty, please try again!");
+            return 0;
+        } catch (NumberFormatException e) {
+            System.out.println("Your choice must be digit, please try again!");
+            return 0;
+        } catch (IndexOutOfRangeException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        return productIndex;
+    }
+
+    public boolean specialPackageChoice(String input) {
+        try {
+            Buyer.specialPackageChoiceForBuyer(input);
+        } catch (EmptyException | YesNoChoiceException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public boolean validProductName(String productNameInput) {

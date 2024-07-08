@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Buyers &amp; Sellers inputs changed to String by using Integer.parseInt for validity - exception uses for non-digit input">
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/NegativeOrZeroPriceException.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes">
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/YesNoChoiceException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/OnlyNumbersUserNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/OnlyNumbersUserNameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Buyer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manageable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Seller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +117,7 @@
       <workItem from="1720248786790" duration="252000" />
       <workItem from="1720373607184" duration="5422000" />
       <workItem from="1720382171317" duration="5442000" />
-      <workItem from="1720441505915" duration="9953000" />
+      <workItem from="1720441505915" duration="18738000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -224,7 +223,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720446538273</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎-00014" summary="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes">
+      <option name="closed" value="true" />
+      <created>1720455644684</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720455644684</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +262,7 @@
     <MESSAGE value="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added." />
     <MESSAGE value="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added" />
     <MESSAGE value="Buyers &amp; Sellers inputs changed to String by using Integer.parseInt for validity - exception uses for non-digit input" />
-    <option name="LAST_COMMIT_MESSAGE" value="Buyers &amp; Sellers inputs changed to String by using Integer.parseInt for validity - exception uses for non-digit input" />
+    <MESSAGE value="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes" />
   </component>
 </project>

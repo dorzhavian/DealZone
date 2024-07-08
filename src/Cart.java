@@ -43,8 +43,8 @@ public class Cart {
         if (specialPackage) {
             totalPrice += p1.getSpecialPackagePrice();
             p1.setSpecialPackageBuyerChoice(" (WITH) ");
-            System.out.println("Product added successfully.");
         }
+        System.out.println("Product added successfully to cart.");
     }
 
     @Override

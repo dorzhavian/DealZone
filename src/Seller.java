@@ -1,3 +1,5 @@
+import Exceptions.EmptyException;
+import Exceptions.IndexOutOfRangeException;
 
 import java.util.Arrays;
 
@@ -20,7 +22,7 @@ public class Seller extends User {
         return products;
     }
 
-    public void addProduct (Product p1) {     // FIX! - make like addProductToBuyer?
+    public void addProduct (Product p1) {
         if (products.length == numOfProducts) {
             if (products.length == 0) {
                 products = Arrays.copyOf(products, 1);
@@ -33,12 +35,14 @@ public class Seller extends User {
         System.out.println("Product added successfully.");
     }
 
+    public static int validProductOfSeller (String input, int thisSellerNumOfProducts) throws IndexOutOfRangeException {
+        int productIndex = Integer.parseInt(input);
+        if (productIndex <= 0 || productIndex > thisSellerNumOfProducts) throw new IndexOutOfRangeException("Product");
+        return productIndex;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (numOfProducts == 0) {
-            sb.append("No products yet for this seller.");
-            return sb.toString();
-        }
         sb.append("Seller products: \n");
         for (int i = 0; i < numOfProducts; i++) {
             sb.append(i+1).append(") ").append(products[i].toString()).append('\n');
