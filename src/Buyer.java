@@ -1,5 +1,4 @@
 import Exceptions.EmptyException;
-import Exceptions.OnlyNumbersUserNameException;
 import Exceptions.YesNoChoiceException;
 
 import java.util.Arrays;
@@ -23,7 +22,7 @@ public class Buyer extends User {
         if (inputAddress == null || inputAddress.trim().isEmpty()) throw new EmptyException("Address");
     }
 
-    public static void specialPackageChoiceForBuyer (String inputSpecialPackage) throws EmptyException, YesNoChoiceException {
+    public static void yesOrNoChoiceForBuyer(String inputSpecialPackage) throws EmptyException, YesNoChoiceException {
         if (inputSpecialPackage == null || inputSpecialPackage.trim().isEmpty()) throw new EmptyException("Choice");
         if (!(inputSpecialPackage.equalsIgnoreCase("yes") || inputSpecialPackage.equalsIgnoreCase("no"))) throw new YesNoChoiceException();
     }

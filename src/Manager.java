@@ -25,6 +25,10 @@ public class Manager implements Manageable {
         return sellers;
     }
 
+    public void isEmptyCart(int buyerIndex) throws EmptyCartPayException {
+        if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
+    }
+
     public Buyer[] getBuyers() {
         return buyers;
     }
@@ -64,9 +68,9 @@ public class Manager implements Manageable {
         return productIndex;
     }
 
-    public boolean specialPackageChoice(String input) {
+    public boolean buyerYesOrNoChoice(String input) {
         try {
-            Buyer.specialPackageChoiceForBuyer(input);
+            Buyer.yesOrNoChoiceForBuyer(input);
         } catch (EmptyException | YesNoChoiceException e) {
             System.out.println(e.getMessage());
             return false;
@@ -288,6 +292,9 @@ public class Manager implements Manageable {
         }
     }
 
+    public void printBuyerCurrentCart(int buyerIndex) {
+        System.out.println(buyers[buyerIndex].getCurrentCart().toString());
+    }
 
     public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage) {
         Product p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);

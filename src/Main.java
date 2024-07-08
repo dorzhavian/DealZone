@@ -1,6 +1,8 @@
 // DOR_ZHAVIAN-211337845_ALON_ETOS-207431487_DANIEL_SULTAN-323883751
 // LECTURER - PINI SHLOMI
 
+import Exceptions.EmptyCartPayException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -165,7 +167,7 @@ public class Main {
         String choice;
         do {
             choice = sc.nextLine();
-        } while (!manager.specialPackageChoice(choice));
+        } while (!manager.buyerYesOrNoChoice(choice));
         boolean specialPackage = choice.equalsIgnoreCase("yes");
         manager.addProductBuyer(buyerIndex,sellerIndex,productIndex - 1, specialPackage);
     }
@@ -175,14 +177,19 @@ public class Main {
         System.out.println("Please choose buyer from list to process checkout: (Enter -1 to return main menu)");
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        if (manager.getBuyers()[buyerIndex].getCurrentCart().getNumOfProducts() == 0) {
-            System.out.println("Cart is empty, cannot process to checkout.");
-            return; }
-        System.out.println(manager.getBuyers()[buyerIndex].getCurrentCart().toString());
+        try {
+            manager.isEmptyCart(buyerIndex);
+        } catch (EmptyCartPayException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        manager.printBuyerCurrentCart(buyerIndex);
         System.out.println("Are you sure you want to process checkout? Enter YES/NO");
-        String answer = sc.nextLine();
-        if (answer.equalsIgnoreCase("no")) return;
-        manager.pay(buyerIndex);
+        String choice;
+        do {
+            choice = sc.nextLine();
+        } while (!manager.buyerYesOrNoChoice(choice));
+        if (choice.equalsIgnoreCase("yes")) manager.pay(buyerIndex);
     }
 
     public static void case9 () {

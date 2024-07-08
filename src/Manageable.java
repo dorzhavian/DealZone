@@ -59,4 +59,7 @@ public interface Manageable {
 
     int validProductIndex(int sellerIndex, String productIndex);
 
+    boolean buyerYesOrNoChoice(String input);
+
+    void printBuyerCurrentCart(int buyerIndex);
     }

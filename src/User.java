@@ -17,11 +17,13 @@ public abstract class User {
 
     public static void isValidUserName (String inputUserName) throws EmptyException, OnlyNumbersUserNameException {
         if (inputUserName == null || inputUserName.trim().isEmpty()) throw new EmptyException("Name");
+        if (inputUserName.contains(" ")) throw new IllegalArgumentException("Name cannot contains space, please try again!");
         if (Manager.isNumeric(inputUserName)) throw new OnlyNumbersUserNameException("User");
     }
 
     public static void isValidPassword (String inputPass) throws EmptyException {
         if (inputPass == null || inputPass.trim().isEmpty()) throw new EmptyException("Password");
+        if (inputPass.contains(" ")) throw new IllegalArgumentException("Password cannot contains space, please try again!");
     }
 
     public static void isExist(User[] users, String inputUserName, int numberOfUsers) throws AlreadyExistException {
