@@ -1,3 +1,5 @@
+package Models;
+
 import Exceptions.EmptyException;
 import Exceptions.YesNoChoiceException;
 
@@ -68,10 +70,10 @@ public class Buyer extends User {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Buyer details:\n").append("   Name: ").append(userName).append("\n")
+        sb.append("Models.Buyer details:\n").append("   Name: ").append(userName).append("\n")
                 .append("   Address: ").append(address).append("\n\n");
         if (currentCart.getNumOfProducts() == 0) {
-            sb.append("Cart is empty\n");
+            sb.append("Models.Cart is empty\n");
         } else {
             sb.append(currentCart.toString());
         }

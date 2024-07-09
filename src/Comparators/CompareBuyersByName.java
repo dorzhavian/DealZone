@@ -1,3 +1,7 @@
+package Comparators;
+
+import Models.Buyer;
+
 import java.util.Comparator;
 
 public class CompareBuyersByName implements Comparator<Buyer> {

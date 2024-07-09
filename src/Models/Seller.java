@@ -1,3 +1,5 @@
+package Models;
+
 import Exceptions.IndexOutOfRangeException;
 
 import java.util.Arrays;
@@ -31,12 +33,12 @@ public class Seller extends User {
             }
         }
         products[numOfProducts++] = p1;
-        System.out.println("Product added successfully.");
+        System.out.println("Models.Product added successfully.");
     }
 
     public static int validProductOfSeller (String input, int thisSellerNumOfProducts) throws IndexOutOfRangeException {
         int productIndex = Integer.parseInt(input);
-        if (productIndex <= 0 || productIndex > thisSellerNumOfProducts) throw new IndexOutOfRangeException("Product");
+        if (productIndex <= 0 || productIndex > thisSellerNumOfProducts) throw new IndexOutOfRangeException("Models.Product");
         return productIndex;
     }
 
@@ -46,7 +48,7 @@ public class Seller extends User {
             sb.append("No products yet.\n");
             return sb.toString();
         }
-        sb.append("\nSeller products: \n");
+        sb.append("\nModels.Seller products: \n");
         for (int i = 0; i < numOfProducts; i++) {
             sb.append(i+1).append(") ").append(products[i].toString()).append('\n');
         }

@@ -1,6 +1,11 @@
+package Managers;
+
+import Enums.Category;
 import Exceptions.AlreadyExistException;
+import Exceptions.EmptyCartPayException;
 import Exceptions.EmptyUsersArrayException;
 import Exceptions.IndexOutOfRangeException;
+import Models.Product;
 
 public interface Manageable {
     void addSeller(String username, String password) throws AlreadyExistException;
@@ -62,4 +67,6 @@ public interface Manageable {
     boolean buyerYesOrNoChoice(String input);
 
     void printBuyerCurrentCart(int buyerIndex);
-    }
+
+    void isEmptyCart(int buyerIndex) throws EmptyCartPayException;
+}

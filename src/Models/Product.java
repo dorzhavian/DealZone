@@ -1,3 +1,5 @@
+package Models;
+
 import Exceptions.EmptyException;
 import Exceptions.OnlyNumbersUserNameException;
 import Exceptions.NegativeOrZeroPriceException;
@@ -50,8 +52,8 @@ public class Product {
     }
 
     public static void isValidProductName (String inputProductName) throws EmptyException, OnlyNumbersUserNameException {
-        if (inputProductName == null || inputProductName.trim().isEmpty()) throw new EmptyException("Product name");
-        if (Manager.isNumeric(inputProductName)) throw new OnlyNumbersUserNameException("Product");
+        if (inputProductName == null || inputProductName.trim().isEmpty()) throw new EmptyException("Models.Product name");
+        if (Manager.isNumeric(inputProductName)) throw new OnlyNumbersUserNameException("Models.Product");
     }
 
     public static double isValidPrice (String inputPrice) throws NegativeOrZeroPriceException {
@@ -63,12 +65,12 @@ public class Product {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Product name: ").append(productName)
-                .append(", Product price: ").append(productPrice)
-                .append(", Product id: ").append(id)
-                .append(", Product category: ").append(category);
+        sb.append("Models.Product name: ").append(productName)
+                .append(", Models.Product price: ").append(productPrice)
+                .append(", Models.Product id: ").append(id)
+                .append(", Models.Product category: ").append(category);
         if (specialPackagePrice != 0) {
-            sb.append(", Product special package: ").append(specialPackagePrice);
+            sb.append(", Models.Product special package: ").append(specialPackagePrice);
         }
         return sb.toString();
     }

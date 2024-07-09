@@ -1,3 +1,5 @@
+package Models;
+
 import Exceptions.IndexOutOfRangeException;
 
 import java.util.Arrays;
@@ -79,7 +81,7 @@ public class Categories {
 
     public static int validCategoryChoice (String inputCategory) throws IndexOutOfRangeException {
         int categoryChoice = Integer.parseInt(inputCategory);
-        if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfRangeException("Category");
+        if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfRangeException("Enums.Category");
         return categoryChoice;
     }
 

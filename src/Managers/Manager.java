@@ -1,4 +1,10 @@
+package Managers;
+
+import Comparators.CompareBuyersByName;
+import Comparators.CompareSellersByProductsNumber;
+import Enums.Category;
 import Exceptions.*;
+import Models.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -25,12 +31,12 @@ public class Manager implements Manageable {
         return sellers;
     }
 
-    public void isEmptyCart(int buyerIndex) throws EmptyCartPayException {
-        if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
-    }
-
     public Buyer[] getBuyers() {
         return buyers;
+    }
+
+    public void isEmptyCart(int buyerIndex) throws EmptyCartPayException {
+        if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
     }
 
     public boolean haveProductToSell (int indexSeller) {
@@ -179,13 +185,13 @@ public class Manager implements Manageable {
 
     public int isInRangeSellers(String indexInput) throws IndexOutOfRangeException {
         int index = Integer.parseInt(indexInput);
-        if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
+        if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Models.Seller");
         return index;
     }
 
     public int isInRangeBuyers(String indexInput) throws IndexOutOfRangeException {
         int index = Integer.parseInt(indexInput);
-        if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
+        if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Models.Buyer");
         return index;
     }
     
@@ -226,7 +232,7 @@ public class Manager implements Manageable {
             sellers = Arrays.copyOf(sellers, sellers.length * SIZE_INCREASE);
         }
         sellers[numberOfSellers++] = seller;
-        System.out.println("Seller added successfully.");
+        System.out.println("Models.Seller added successfully.");
     }
 
     public void addBuyer(String username, String password, String address) {
@@ -238,7 +244,7 @@ public class Manager implements Manageable {
             buyers = Arrays.copyOf(buyers, buyers.length * SIZE_INCREASE);
         }
         buyers[numberOfBuyers++] = buyer;
-        System.out.println("Buyer added successfully.");
+        System.out.println("Models.Buyer added successfully.");
     }
 
     public void printSellersInfo() {
@@ -280,7 +286,7 @@ public class Manager implements Manageable {
     public void printSellersNames() {
         try {
             isValidNumOfSellers();
-            System.out.println("Seller's list:");
+            System.out.println("Models.Seller's list:");
             System.out.println("--------------");
             for (int i = 0; i < numberOfSellers; i++) {
                 System.out.println(i+1 + ")" + sellers[i].getUserName());
@@ -293,7 +299,7 @@ public class Manager implements Manageable {
     public void printBuyersNames() {
         try {
             isValidNumOfBuyers();
-            System.out.println("Buyer's list:");
+            System.out.println("Models.Buyer's list:");
             System.out.println("--------------");
             for (int i = 0; i < numberOfBuyers; i++) {
                 System.out.println(i+1 + ") " + buyers[i].getUserName());
@@ -318,10 +324,6 @@ public class Manager implements Manageable {
         addToCategoryArray(p1);
     }
 
-    public void pay(int buyerIndex) {
-        buyers[buyerIndex].payAndMakeHistoryCart();
-    }
-
     public void addToCategoryArray(Product p) {
         switch (p.getCategory()) {
             case ELECTRONIC:
@@ -339,6 +341,10 @@ public class Manager implements Manageable {
             default:
                 break;
         }
+    }
+
+    public void pay(int buyerIndex) {
+        buyers[buyerIndex].payAndMakeHistoryCart();
     }
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {

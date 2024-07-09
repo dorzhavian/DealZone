@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Fix menu choice input.">
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Fix toString() methods at Seller &amp; Buyer classes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manageable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Seller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +115,8 @@
       <workItem from="1720382171317" duration="5442000" />
       <workItem from="1720441505915" duration="25760000" />
       <workItem from="1720524182382" duration="643000" />
-      <workItem from="1720525303639" duration="1462000" />
+      <workItem from="1720525303639" duration="1700000" />
+      <workItem from="1720532463765" duration="629000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -261,7 +262,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720524786851</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL‎-00019" summary="Fix toString() methods at Seller &amp; Buyer classes.">
+      <option name="closed" value="true" />
+      <created>1720527002630</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL‎-00019" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720527002630</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,14 +305,15 @@
     <MESSAGE value="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function." />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Fix menu choice input." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix menu choice input." />
+    <MESSAGE value="Fix toString() methods at Seller &amp; Buyer classes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix toString() methods at Seller &amp; Buyer classes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Manager.java</url>
-          <line>292</line>
+          <line>293</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

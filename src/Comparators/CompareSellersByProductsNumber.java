@@ -1,3 +1,7 @@
+package Comparators;
+
+import Models.Seller;
+
 import java.util.Comparator;
 
 public class CompareSellersByProductsNumber implements Comparator<Seller> {

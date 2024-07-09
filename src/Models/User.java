@@ -1,3 +1,5 @@
+package Models;
+
 import Exceptions.AlreadyExistException;
 import Exceptions.EmptyException;
 import Exceptions.OnlyNumbersUserNameException;
@@ -18,7 +20,7 @@ public abstract class User {
     public static void isValidUserName (String inputUserName) throws EmptyException, OnlyNumbersUserNameException {
         if (inputUserName == null || inputUserName.trim().isEmpty()) throw new EmptyException("Name");
         if (inputUserName.contains(" ")) throw new IllegalArgumentException("Name cannot contains space, please try again!");
-        if (Manager.isNumeric(inputUserName)) throw new OnlyNumbersUserNameException("User");
+        if (Manager.isNumeric(inputUserName)) throw new OnlyNumbersUserNameException("Models.User");
     }
 
     public static void isValidPassword (String inputPass) throws EmptyException {

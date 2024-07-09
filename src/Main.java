@@ -1,6 +1,10 @@
 // DOR_ZHAVIAN-211337845_ALON_ETOS-207431487_DANIEL_SULTAN-323883751
 // LECTURER - PINI SHLOMI
+import Enums.Category;
 import Exceptions.EmptyCartPayException;
+import Managers.Manager;
+import Models.Categories;
+
 import java.util.Scanner;
 
 public class Main {
@@ -77,9 +81,9 @@ public class Main {
         System.out.println("3) Add item for seller");
         System.out.println("4) Add item for buyer");
         System.out.println("5) Payment for buyer");
-        System.out.println("6) Buyer's details");
-        System.out.println("7) Seller's details");
-        System.out.println("8) Product's by category");
+        System.out.println("6) Models.Buyer's details");
+        System.out.println("7) Models.Seller's details");
+        System.out.println("8) Models.Product's by category");
         System.out.println("9) Replace current cart with cart from history");
         System.out.println("Please enter your choice: ");
     }
@@ -131,7 +135,7 @@ public class Main {
         System.out.println("Choose category: (Enter -1 to return main menu)\n");
         int categoryIndex;
         do {
-            System.out.println("Category list:");
+            System.out.println("Enums.Category list:");
             System.out.println("--------------");
             Categories.printCategories();
             input = sc.nextLine();
