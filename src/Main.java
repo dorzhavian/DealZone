@@ -1,9 +1,6 @@
 // DOR_ZHAVIAN-211337845_ALON_ETOS-207431487_DANIEL_SULTAN-323883751
 // LECTURER - PINI SHLOMI
-
 import Exceptions.EmptyCartPayException;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {

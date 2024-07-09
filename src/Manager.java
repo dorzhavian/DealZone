@@ -56,13 +56,16 @@ public class Manager implements Manageable {
         try {
             productIndex = Seller.validProductOfSeller(productIndexInput, sellers[sellerIndex].getNumOfProducts());
         } catch (NullPointerException e) {
-            System.out.println("Your choice cannot be empty, please try again!");
+            System.out.println("Your choice cannot be empty, please try again!\n");
+            System.out.println(sellers[sellerIndex].toString());
             return 0;
         } catch (NumberFormatException e) {
-            System.out.println("Your choice must be digit, please try again!");
+            System.out.println("Your choice must be digit, please try again!\n");
+            System.out.println(sellers[sellerIndex].toString());
             return 0;
         } catch (IndexOutOfRangeException e) {
             System.out.println(e.getMessage());
+            System.out.println(sellers[sellerIndex].toString());
             return 0;
         }
         return productIndex;
@@ -253,6 +256,10 @@ public class Manager implements Manageable {
     }
 
     public void printBuyersInfo() {
+        if (numberOfBuyers == 0) {
+            System.out.println("Haven't buyers yet. return to main menu");
+            return;
+        }
         System.out.println("\nBuyers info:");
         System.out.println("--------------");
         Arrays.sort(buyers, 0, numberOfBuyers, comparatorBuyer);
