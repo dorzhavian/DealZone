@@ -18,6 +18,7 @@ public class Main {
     }
 
     private static void menu(Manager manager) {
+        String input;
         int choice;
         System.out.println("\n------------------------------------------------------------------------");
         System.out.println(" ------------HELLO AND WELCOME TO OUR BUYER - SELLER PROGRAM-----------");
@@ -26,15 +27,17 @@ public class Main {
         do {
             printMenu();
             try {
-                choice = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Error: you entered invalid input, please enter number!");
-                sc.nextLine();
+                input = sc.nextLine();
+                choice = Integer.parseInt(input);
+            } catch (Exception e) {
+                System.out.println("Invalid input, please enter a digit (in range 0-9)!");
                 choice = -1;
                 continue;
             }
-            sc.nextLine();
-            switch (choice) {            /// MAKE EXCEPTION FOR ENTER NUMBER NOT IN RANGE!
+            switch (choice) {
+                case 0:
+                    System.out.println("Thanks for using our system. GoodBye!");
+                    break;
                 case 1:
                     case1and2(1);
                     break;
@@ -62,9 +65,11 @@ public class Main {
                 case 9:
                     case9();
                     break;
+                default:
+                    System.out.println("Please enter a valid choice in range 0-9!");
+                    break;
             }
         } while (choice != 0);
-        System.out.println("Thanks for using our system. GoodBye!");
     }
 
     private static void printMenu() {
