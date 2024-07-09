@@ -67,12 +67,12 @@ public class Product {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Models.Product name: ").append(productName)
-                .append(", Models.Product price: ").append(productPrice)
-                .append(", Models.Product id: ").append(id)
-                .append(", Models.Product category: ").append(category);
+        sb.append("Product name: ").append(productName)
+                .append(", Product price: ").append(productPrice)
+                .append(", Product id: ").append(id)
+                .append(", Product category: ").append(category);
         if (specialPackagePrice != 0) {
-            sb.append(", Models.Product special package: ").append(specialPackagePrice);
+            sb.append(", Product special package: ").append(specialPackagePrice);
         }
         return sb.toString();
     }

@@ -183,15 +183,30 @@ public class Manager implements Manageable {
         return false;
     }
 
+    public int isValidCartIndex (String indexCartInput, int buyerIndex) {
+        int indexCart;
+        try {
+            indexCart = Integer.parseInt(indexCartInput);
+            if (buyers[buyerIndex].getHistoryCartsNum() < indexCart) throw new IndexOutOfRangeException("History cart");
+        } catch (NumberFormatException e) {
+            System.out.println("\nChoice must be a digit, please try again!\n");
+            return 0;
+        } catch (IndexOutOfRangeException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        return indexCart;
+    }
+
     public int isInRangeSellers(String indexInput) throws IndexOutOfRangeException {
         int index = Integer.parseInt(indexInput);
-        if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Models.Seller");
+        if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
         return index;
     }
 
     public int isInRangeBuyers(String indexInput) throws IndexOutOfRangeException {
         int index = Integer.parseInt(indexInput);
-        if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Models.Buyer");
+        if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
         return index;
     }
     
@@ -232,7 +247,7 @@ public class Manager implements Manageable {
             sellers = Arrays.copyOf(sellers, sellers.length * SIZE_INCREASE);
         }
         sellers[numberOfSellers++] = seller;
-        System.out.println("Models.Seller added successfully.");
+        System.out.println("Seller added successfully.");
     }
 
     public void addBuyer(String username, String password, String address) {
@@ -244,7 +259,7 @@ public class Manager implements Manageable {
             buyers = Arrays.copyOf(buyers, buyers.length * SIZE_INCREASE);
         }
         buyers[numberOfBuyers++] = buyer;
-        System.out.println("Models.Buyer added successfully.");
+        System.out.println("Buyer added successfully.");
     }
 
     public void printSellersInfo() {
@@ -286,7 +301,7 @@ public class Manager implements Manageable {
     public void printSellersNames() {
         try {
             isValidNumOfSellers();
-            System.out.println("Models.Seller's list:");
+            System.out.println("Seller's list:");
             System.out.println("--------------");
             for (int i = 0; i < numberOfSellers; i++) {
                 System.out.println(i+1 + ")" + sellers[i].getUserName());
@@ -299,7 +314,7 @@ public class Manager implements Manageable {
     public void printBuyersNames() {
         try {
             isValidNumOfBuyers();
-            System.out.println("Models.Buyer's list:");
+            System.out.println("Buyer's list:");
             System.out.println("--------------");
             for (int i = 0; i < numberOfBuyers; i++) {
                 System.out.println(i+1 + ") " + buyers[i].getUserName());
@@ -349,6 +364,7 @@ public class Manager implements Manageable {
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
+        System.out.println("Your current cart update successfully.");
     }
 
     public static boolean isNumeric(String string) {

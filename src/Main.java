@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
     private static Scanner sc;
     private static Manager manager;
+    private static String input;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
@@ -81,9 +82,9 @@ public class Main {
         System.out.println("3) Add item for seller");
         System.out.println("4) Add item for buyer");
         System.out.println("5) Payment for buyer");
-        System.out.println("6) Models.Buyer's details");
-        System.out.println("7) Models.Seller's details");
-        System.out.println("8) Models.Product's by category");
+        System.out.println("6) Buyer's details");
+        System.out.println("7) Seller's details");
+        System.out.println("8) Product's by category");
         System.out.println("9) Replace current cart with cart from history");
         System.out.println("Please enter your choice: ");
     }
@@ -115,7 +116,6 @@ public class Main {
     }
 
     public static void case3 () {
-        String input;
         if (manager.isEmptySellers()) return;
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
@@ -135,7 +135,7 @@ public class Main {
         System.out.println("Choose category: (Enter -1 to return main menu)\n");
         int categoryIndex;
         do {
-            System.out.println("Enums.Category list:");
+            System.out.println("Category list:");
             System.out.println("--------------");
             Categories.printCategories();
             input = sc.nextLine();
@@ -153,7 +153,6 @@ public class Main {
     }
 
     public static void case4 () {
-        String input;
         if (manager.isEmptyBuyers() || manager.isEmptySellers() ) return;
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
@@ -206,14 +205,17 @@ public class Main {
         System.out.println(manager.getBuyers()[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
         System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
-        int historyCartIndex = sc.nextInt();
-        sc.nextLine();
-        if (historyCartIndex < 0) return;
+        int historyCartIndex;
+        do {
+             input = sc.nextLine();
+             if (input.equals("-1")) return;
+             historyCartIndex = manager.isValidCartIndex(input, buyerIndex);
+        } while (historyCartIndex == 0);
         manager.replaceCarts(historyCartIndex - 1, buyerIndex);
+
     }
 
     public static int chooseSeller () {
-        String input;
         int sellerIndex;
         do {
             manager.printSellersNames();

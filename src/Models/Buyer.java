@@ -20,6 +20,10 @@ public class Buyer extends User {
         historyCart = new Cart[0];
     }
 
+    public int getHistoryCartsNum() {
+        return historyCartsNum;
+    }
+
     public static void isValidAddress(String inputAddress) throws EmptyException {
         if (inputAddress == null || inputAddress.trim().isEmpty()) throw new EmptyException("Address");
     }
@@ -70,10 +74,10 @@ public class Buyer extends User {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Models.Buyer details:\n").append("   Name: ").append(userName).append("\n")
+        sb.append("Buyer details:\n").append("   Name: ").append(userName).append("\n")
                 .append("   Address: ").append(address).append("\n\n");
         if (currentCart.getNumOfProducts() == 0) {
-            sb.append("Models.Cart is empty\n");
+            sb.append("Cart is empty\n");
         } else {
             sb.append(currentCart.toString());
         }

@@ -46,13 +46,13 @@ public class Cart {
             totalPrice += p1.getSpecialPackagePrice();
             p1.setSpecialPackageBuyerChoice(" (WITH) ");
         }
-        System.out.println("Models.Product added successfully to cart.");
+        System.out.println("Product added successfully to cart.");
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Models.Cart details: \n");
+        sb.append("Cart details: \n");
         for (int i = 0; i < numOfProducts; i++) {
             sb.append("   ").append(i + 1).append(") ").append(products[i].toString())
                     .append(products[i].getSpecialPackageBuyerChoice()).append("\n");
