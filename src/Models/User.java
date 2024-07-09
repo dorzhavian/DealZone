@@ -3,6 +3,7 @@ package Models;
 import Exceptions.AlreadyExistException;
 import Exceptions.EmptyException;
 import Exceptions.OnlyNumbersUserNameException;
+import Managers.Manager;
 
 public abstract class User {
     protected String userName;

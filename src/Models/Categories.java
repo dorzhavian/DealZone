@@ -1,7 +1,7 @@
 package Models;
 
 import Exceptions.IndexOutOfRangeException;
-
+import Enums.Category;
 import java.util.Arrays;
 
 public class Categories {

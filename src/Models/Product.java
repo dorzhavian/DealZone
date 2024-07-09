@@ -1,5 +1,7 @@
 package Models;
 
+import Enums.Category;
+import Managers.Manager;
 import Exceptions.EmptyException;
 import Exceptions.OnlyNumbersUserNameException;
 import Exceptions.NegativeOrZeroPriceException;
