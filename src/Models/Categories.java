@@ -75,7 +75,7 @@ public class Categories {
         Category[] allCategories = Category.values();
         StringBuilder sb = new StringBuilder("\nCategory list:\n--------------\n");
         for (Category category : allCategories) {
-            sb.append(category.ordinal() + 1).append(") ").append(category.name());
+            sb.append(category.ordinal() + 1).append(") ").append(category.name()).append("\n");
         }
         return sb.toString();
     }

@@ -162,7 +162,7 @@ public class Manager implements Manageable {
         StringBuilder sb = new StringBuilder("\nSellers info:\n--------------\n");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
-            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":");
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":\n");
             sb.append(sellers[i].toString());
         }
         return sb.toString();
@@ -191,7 +191,7 @@ public class Manager implements Manageable {
     public String sellersNames() {
         StringBuilder sb = new StringBuilder("Seller's:\n--------------\n");
         for (int i = 0; i < numberOfSellers; i++) {
-            sb.append(i + 1).append(") ").append(sellers[i].getUserName());
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append("\n");
         }
         return sb.toString();
     }
@@ -199,7 +199,7 @@ public class Manager implements Manageable {
     public String buyersNames() {
         StringBuilder sb = new StringBuilder("Buyer's:\n--------------\n");
         for (int i = 0; i < numberOfBuyers; i++) {
-            sb.append(i + 1).append(") ").append(buyers[i].getUserName());
+            sb.append(i + 1).append(") ").append(buyers[i].getUserName()).append("\n");
         }
         return sb.toString();
     }

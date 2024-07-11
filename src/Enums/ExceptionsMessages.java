@@ -2,8 +2,8 @@ package Enums;
 
 public enum ExceptionsMessages {
     INVALID_NUMBER_CHOICE("\nChoice must to be digit, please try again!\n"),
-    INVALID_BUYER_INDEX("\n Buyer number is NOT exist, PLEASE choose from the RANGE!\n"),
-    INVALID_SELLER_INDEX("\n Seller number is NOT exist, PLEASE choose from the RANGE!\n"),
+    INVALID_BUYER_INDEX("\nBuyer number is NOT exist, PLEASE choose from the RANGE!\n"),
+    INVALID_SELLER_INDEX("\nSeller number is NOT exist, PLEASE choose from the RANGE!\n"),
     INVALID_HISTORY_CART_INDEX("\nHistory cart number is NOT exist, PLEASE choose from the RANGE!\n"),
     INVALID_CATEGORY_INDEX("\nCategory number is NOT exist, PLEASE choose from the RANGE!\n"),
     INVALID_PRODUCT_INDEX("\n Product number is NOT exist, PLEASE choose from the RANGE!\n"),

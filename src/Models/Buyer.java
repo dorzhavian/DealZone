@@ -58,7 +58,7 @@ public class Buyer extends User {
             sb.append(currentCart.toString());
         }
         if (historyCartsNum == 0) {
-            return sb.append("No history carts.\n").toString();
+            return sb.append("No history carts.\n\n").toString();
         }
         sb.append("\nHistory carts details : \n");
         for (int i = 0; i < historyCartsNum; i++) {

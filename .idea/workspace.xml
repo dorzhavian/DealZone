@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Update validName method.">
-      <change afterPath="$PROJECT_DIR$/src/Enums/ExceptionsMessages.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Exceptions messages turn into Enum.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/AlreadyExistException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/EmptyHistoryCartException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/IndexOutOfRangeException.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manageable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Buyer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Categories.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Seller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +123,7 @@
       <workItem from="1720536819997" duration="2269000" />
       <workItem from="1720678116500" duration="4390000" />
       <workItem from="1720688030930" duration="756000" />
-      <workItem from="1720689887625" duration="15554000" />
+      <workItem from="1720689887625" duration="17415000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -331,7 +325,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720706027568</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL‎-00026" summary="Exceptions messages turn into Enum.">
+      <option name="closed" value="true" />
+      <created>1720718967045</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL‎-00026" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720718967045</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,6 +375,7 @@
     <MESSAGE value="Added methods for interface Manageable." />
     <MESSAGE value="First change of All project - according to the assignment definitions : print just at main, unnecessary exceptions deleted." />
     <MESSAGE value="Update validName method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update validName method." />
+    <MESSAGE value="Exceptions messages turn into Enum." />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions messages turn into Enum." />
   </component>
 </project>

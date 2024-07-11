@@ -31,7 +31,6 @@ public class Seller extends User {
             }
         }
         products[numOfProducts++] = p1;
-        System.out.println("Product added successfully.");
     }
 
     public String toString() {

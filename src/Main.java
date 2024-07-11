@@ -124,7 +124,7 @@ public class Main {
 
     public static void case3 () {
         if (manager.getNumberOfSellers() == 0) {
-            System.out.println("Haven't sellers yet, return to menu.");
+            System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
         int sellerIndex = chooseSeller();
@@ -146,8 +146,8 @@ public class Main {
         } while (message != null);
         double productPrice = Double.parseDouble(input);
         System.out.println("Choose category: (Enter -1 to return main menu)\n");
+        System.out.println(Categories.categoriesByNames());
         do {
-            System.out.println(Categories.categoriesByNames());
             input = sc.next();
             if (input.equals("-1")) return;
             message = manager.validCategoryIndex(input);
@@ -199,6 +199,7 @@ public class Main {
             System.out.println("This seller haven't products yet, cannot be proceed. return to Menu.");
             return;
         }
+        System.out.println(manager.getSellers()[sellerIndex].toString());
         System.out.println("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
         do {
             input = sc.next();
@@ -206,7 +207,6 @@ public class Main {
             message = manager.validProductIndex(sellerIndex, input);
             if (message != null) {
                 System.out.println(message);
-                System.out.println(manager.getSellers()[sellerIndex].toString());
             }
         } while (message != null);
         int productIndex = Integer.parseInt(input);
