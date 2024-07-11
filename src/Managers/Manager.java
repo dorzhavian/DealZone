@@ -39,6 +39,16 @@ public class Manager implements Manageable {
         if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
     }
 
+    public boolean isEmptyHistoryCart (int buyerIndex) {
+        try {
+            buyers[buyerIndex].getHistoryCartsNum();
+        } catch (EmptyHistoryCartException e) {
+            System.out.println(e.getMessage());
+            return true;
+        }
+        return false;
+    }
+
     public boolean haveProductToSell (int indexSeller) {
         if (sellers[indexSeller].getNumOfProducts() == 0) {
             System.out.println(sellers[indexSeller].getUserName() + " haven't products to sell yet! ");
@@ -191,7 +201,7 @@ public class Manager implements Manageable {
         } catch (NumberFormatException e) {
             System.out.println("\nChoice must be a digit, please try again!\n");
             return 0;
-        } catch (IndexOutOfRangeException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
         }

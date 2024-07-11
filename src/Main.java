@@ -202,6 +202,7 @@ public class Main {
         manager.printBuyersInfo();
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
+        if (manager.isEmptyHistoryCart(buyerIndex)) return;
         System.out.println(manager.getBuyers()[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
         System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
