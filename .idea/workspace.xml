@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Exception for choose invalid cart to replace &amp; method for validity input added - case 9">
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/EmptyHistoryCartException.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Exception added for non-history cart for buyer in case 9.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Buyer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +116,7 @@
       <workItem from="1720525303639" duration="1700000" />
       <workItem from="1720532463765" duration="1110000" />
       <workItem from="1720536819997" duration="2269000" />
-      <workItem from="1720678116500" duration="2998000" />
+      <workItem from="1720678116500" duration="3857000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -290,7 +286,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720539087737</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL‎-00022" summary="Exception added for non-history cart for buyer in case 9.">
+      <option name="closed" value="true" />
+      <created>1720681625047</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL‎-00022" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720681625047</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +332,8 @@
     <MESSAGE value="Fix toString() methods at Seller &amp; Buyer classes." />
     <MESSAGE value="Arrangement classes to packages by usages." />
     <MESSAGE value="Exception for choose invalid cart to replace &amp; method for validity input added - case 9" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exception for choose invalid cart to replace &amp; method for validity input added - case 9" />
+    <MESSAGE value="Exception added for non-history cart for buyer in case 9." />
+    <option name="LAST_COMMIT_MESSAGE" value="Exception added for non-history cart for buyer in case 9." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

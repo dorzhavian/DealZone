@@ -71,4 +71,6 @@ public interface Manageable {
     void isEmptyCart(int buyerIndex) throws EmptyCartPayException;
 
     int isValidCartIndex (String indexCartInput, int buyerIndex);
+
+    boolean isEmptyHistoryCart (int buyerIndex);
 }
