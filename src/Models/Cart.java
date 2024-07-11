@@ -32,7 +32,7 @@ public class Cart {
         this.numOfProducts = 0;
     }
 
-    public void addProductToCart (Product p1, boolean specialPackage) {
+    public void addProductToCart (Product p1) {
         if (numOfProducts == products.length) {
             if (numOfProducts == 0) {
                 products = Arrays.copyOf(products, 1);
@@ -42,11 +42,10 @@ public class Cart {
         }
         products[numOfProducts++] = p1;
         totalPrice += p1.getProductPrice();
-        if (specialPackage) {
+        if (p1.getSpecialPackagePrice() != 0) {
             totalPrice += p1.getSpecialPackagePrice();
             p1.setSpecialPackageBuyerChoice(" (WITH) ");
         }
-        System.out.println("Product added successfully to cart.");
     }
 
     @Override

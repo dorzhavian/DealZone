@@ -1,9 +1,6 @@
 package Models;
 
-import Exceptions.EmptyException;
 import Exceptions.EmptyHistoryCartException;
-import Exceptions.YesNoChoiceException;
-
 import java.util.Arrays;
 
 public class Buyer extends User {
@@ -24,15 +21,6 @@ public class Buyer extends User {
     public int getHistoryCartsNum() throws EmptyHistoryCartException {
         if (historyCartsNum == 0) throw new EmptyHistoryCartException();
         return historyCartsNum;
-    }
-
-    public static void isValidAddress(String inputAddress) throws EmptyException {
-        if (inputAddress == null || inputAddress.trim().isEmpty()) throw new EmptyException("Address");
-    }
-
-    public static void yesOrNoChoiceForBuyer(String inputSpecialPackage) throws EmptyException, YesNoChoiceException {
-        if (inputSpecialPackage == null || inputSpecialPackage.trim().isEmpty()) throw new EmptyException("Choice");
-        if (!(inputSpecialPackage.equalsIgnoreCase("yes") || inputSpecialPackage.equalsIgnoreCase("no"))) throw new YesNoChoiceException();
     }
 
     public Cart[] getHistoryCart() {
@@ -59,18 +47,6 @@ public class Buyer extends User {
         }
         historyCart[historyCartsNum++] = hCart;
         currentCart = new Cart();
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("""
-                 ____   _ __   ____  __ _____ _   _ _____                              \s
-                |  _ \\ / \\\\ \\ / /  \\/  | ____| \\ | |_   _|                             \s
-                | |_) / _ \\\\ V /| |\\/| |  _| |  \\| | | |                               \s
-                |  __/ ___ \\| | | |  | | |___| |\\  | | |                               \s
-                |_| /_/   \\_\\_|_|_|_ |_|_____|_|_\\_|_|_|  _____ ____  _____ _   _ _    \s
-                            / ___|| | | |/ ___/ ___/ ___|| ____/ ___||  ___| | | | |   \s
-                            \\___ \\| | | | |   \\___ \\___ \\|  _| \\___ \\| |_  | | | | |   \s
-                             ___) | |_| | |___ ___) |__) | |___ ___) |  _| | |_| | |___\s
-                            |____/ \\___/ \\____|____/____/|_____|____/|_|    \\___/|_____|""");
-        System.out.println("----------------------------------------------------------------");
     }
 
     @Override

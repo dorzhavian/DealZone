@@ -1,10 +1,6 @@
 package Models;
 
 import Enums.Category;
-import Managers.Manager;
-import Exceptions.EmptyException;
-import Exceptions.OnlyNumbersUserNameException;
-import Exceptions.NegativeOrZeroPriceException;
 
 public class Product {
     private final String productName;
@@ -53,17 +49,6 @@ public class Product {
         return productPrice;
     }
 
-    public static void isValidProductName (String inputProductName) throws EmptyException, OnlyNumbersUserNameException {
-        if (inputProductName == null || inputProductName.trim().isEmpty()) throw new EmptyException("Models.Product name");
-        if (Manager.isNumeric(inputProductName)) throw new OnlyNumbersUserNameException("Models.Product");
-    }
-
-    public static double isValidPrice (String inputPrice) throws NegativeOrZeroPriceException {
-        double productPrice = Double.parseDouble(inputPrice);
-        if (productPrice <= 0) throw new NegativeOrZeroPriceException();
-        return productPrice;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -72,7 +57,7 @@ public class Product {
                 .append(", Product id: ").append(id)
                 .append(", Product category: ").append(category);
         if (specialPackagePrice != 0) {
-            sb.append(", Product special package: ").append(specialPackagePrice);
+            sb.append(", Product have a special package, additional price is: ").append(specialPackagePrice);
         }
         return sb.toString();
     }

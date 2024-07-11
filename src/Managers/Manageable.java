@@ -1,76 +1,48 @@
 package Managers;
 
 import Enums.Category;
-import Exceptions.AlreadyExistException;
-import Exceptions.EmptyCartPayException;
-import Exceptions.EmptyUsersArrayException;
-import Exceptions.IndexOutOfRangeException;
 import Models.Product;
 
+
 public interface Manageable {
-    void addSeller(String username, String password) throws AlreadyExistException;
 
-    void addBuyer(String username, String password, String address) throws AlreadyExistException;
+    boolean isEmptyHistoryCart (int buyerIndex);
 
-    void printSellersInfo();
+    String validProductIndex(int sellerIndex, String productIndexInput);
 
-    void printBuyersInfo();
+    String validPrice(String priceInput);
 
-    void printByCategory();
-
-    void printSellersNames ();
-
-    void printBuyersNames ();
-
-    void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage);
-
-    void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice);
-
-    void pay(int buyerIndex);
-
-    void addToCategoryArray(Product p);
-
-    void replaceCarts (int historyCartIndex, int buyerIndex);
+    String validCategory (String categoryInput);
 
     boolean validName (String name, int whichCase);
 
-    boolean validPass (String pass);
-
-    int validCategory (String categoryInput);
-
-    boolean isValidAddress(String address);
-
-    boolean isEmptySellers();
-
-    boolean isEmptyBuyers();
-
-    int isInRangeSellers (String index) throws IndexOutOfRangeException;
-
-    int isInRangeBuyers (String index) throws IndexOutOfRangeException;
-
-    int chooseValidSeller(String indexInput);
-
-    int chooseValidBuyer(String indexInput);
-
-    void isValidNumOfSellers() throws EmptyUsersArrayException;
-
-    void isValidNumOfBuyers() throws EmptyUsersArrayException;
-
-    boolean validProductName(String productNameInput);
-
-    double validPrice (String productPriceInput);
-
-    boolean haveProductToSell (int indexSeller);
-
-    int validProductIndex(int sellerIndex, String productIndex);
-
-    boolean buyerYesOrNoChoice(String input);
-
-    void printBuyerCurrentCart(int buyerIndex);
-
-    void isEmptyCart(int buyerIndex) throws EmptyCartPayException;
-
     int isValidCartIndex (String indexCartInput, int buyerIndex);
 
-    boolean isEmptyHistoryCart (int buyerIndex);
-}
+    String chooseValidSeller(String indexInput);
+
+    String chooseValidBuyer(String indexInput);
+
+    void addSeller(String username, String password);
+
+    void addBuyer(String username, String password, String address);
+
+    String sellersInfo();
+
+    String buyersInfo();
+
+    String productsByCategory();
+
+    String sellersNames();
+
+    String buyersNames();
+
+    void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex);
+
+    void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice);
+
+    void addToCategoryArray(Product p);
+
+    String pay(int buyerIndex);
+
+    void replaceCarts(int historyCartIndex, int buyerIndex);
+    }

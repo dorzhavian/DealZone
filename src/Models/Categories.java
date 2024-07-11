@@ -72,16 +72,18 @@ public class Categories {
         return category;
     }
 
-    public static void printCategories () {
+    public static String categoriesByNames () {
         Category[] allCategories = Category.values();
+        StringBuilder sb = new StringBuilder("\nCategory list:\n--------------\n");
         for (Category category : allCategories) {
-            System.out.println(category.ordinal() + 1 + ") " + category.name());
+            sb.append(category.ordinal() + 1).append(") ").append(category.name());
         }
+        return sb.toString();
     }
 
     public static int validCategoryChoice (String inputCategory) throws IndexOutOfRangeException {
         int categoryChoice = Integer.parseInt(inputCategory);
-        if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfRangeException("Enums.Category");
+        if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfRangeException("Category");
         return categoryChoice;
     }
 

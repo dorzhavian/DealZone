@@ -8,6 +8,7 @@ import Models.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
@@ -15,7 +16,7 @@ public class Manager implements Manageable {
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
-    private Categories categoriesArrays;
+    private final Categories categoriesArrays;
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
 
@@ -35,8 +36,12 @@ public class Manager implements Manageable {
         return buyers;
     }
 
-    public void isEmptyCart(int buyerIndex) throws EmptyCartPayException {
-        if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
+    public int getNumberOfSellers() {
+        return numberOfSellers;
+    }
+
+    public int getNumberOfBuyers() {
+        return numberOfBuyers;
     }
 
     public boolean isEmptyHistoryCart (int buyerIndex) {
@@ -49,101 +54,46 @@ public class Manager implements Manageable {
         return false;
     }
 
-    public boolean haveProductToSell (int indexSeller) {
-        if (sellers[indexSeller].getNumOfProducts() == 0) {
-            System.out.println(sellers[indexSeller].getUserName() + " haven't products to sell yet! ");
-            return false;
-        } else {
-            System.out.println(sellers[indexSeller].toString());
-            return true;
-        }
-    }
-
-    public void isValidNumOfSellers() throws EmptyUsersArrayException {         /// remove method and add this exception for getSellers
-        if (numberOfSellers == 0) throw new EmptyUsersArrayException("Sellers");
-    }
-
-    public void isValidNumOfBuyers() throws EmptyUsersArrayException {          /// remove method and add this exception for getBuyers
-        if (numberOfBuyers == 0) throw new EmptyUsersArrayException("Buyers");
-    }
-
-    public int validProductIndex(int sellerIndex, String productIndexInput) {
-        int productIndex;
+    public String validProductIndex(int sellerIndex, String productIndexInput) {
         try {
-            productIndex = Seller.validProductOfSeller(productIndexInput, sellers[sellerIndex].getNumOfProducts());
-        } catch (NullPointerException e) {
-            System.out.println("Your choice cannot be empty, please try again!\n");
-            System.out.println(sellers[sellerIndex].toString());
-            return 0;
+            int productIndex = Integer.parseInt(productIndexInput);
+            if (productIndex <= 0 || productIndex > sellers[sellerIndex].getNumOfProducts()) throw new IndexOutOfBoundsException("\n Product number is NOT exist, PLEASE choose from the RANGE!\n");
         } catch (NumberFormatException e) {
-            System.out.println("Your choice must be digit, please try again!\n");
-            System.out.println(sellers[sellerIndex].toString());
-            return 0;
-        } catch (IndexOutOfRangeException e) {
-            System.out.println(e.getMessage());
-            System.out.println(sellers[sellerIndex].toString());
-            return 0;
+            return "Your choice must be digit, please try again!\n";
+        } catch (IndexOutOfBoundsException e) {
+            return e.getMessage();
         }
-        return productIndex;
+        return null;
     }
 
-    public boolean buyerYesOrNoChoice(String input) {
+    public String validPrice(String priceInput) {
         try {
-            Buyer.yesOrNoChoiceForBuyer(input);
-        } catch (EmptyException | YesNoChoiceException e) {
-            System.out.println(e.getMessage());
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validProductName(String productNameInput) {
-        try {
-            Product.isValidProductName(productNameInput);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return true;
-    }
-
-    public double validPrice(String productPriceInput) {
-        double productPrice;
-        try {
-            productPrice = Product.isValidPrice(productPriceInput);
+            double price = Double.parseDouble(priceInput);
+            if (price <= 0) throw new InputMismatchException("Price cannot be zero or negative, please try again!");
         } catch (NullPointerException e){
-            System.out.println("Price cannot be empty, please try again!");
-            return 0;
+            return "Price cannot be empty, please try again!";
         } catch (NumberFormatException e) {
-            System.out.println("Price must enter as number, please try again!");
-            return 0;
-        } catch (NegativeOrZeroPriceException e) {
-            System.out.println(e.getMessage());
-            return 0;
+            return "Price must enter as number, please try again!";
+        } catch (InputMismatchException e) {
+            return e.getMessage();
         }
-        return productPrice;
+        return null;
     }
 
-    public int validCategory (String categoryInput) {
-        int categoryChoice;
+    public String validCategory (String categoryInput) {
         try {
-            categoryChoice = Categories.validCategoryChoice(categoryInput);
-        } catch (NullPointerException e) {
-            System.out.println("Your choice cannot be empty, please try again!");
-            return 0;
+            int categoryChoice = Integer.parseInt(categoryInput);
+            if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfBoundsException("\nCategory number is NOT exist, PLEASE choose from the RANGE!\n");
         } catch (NumberFormatException e) {
-            System.out.println("Your choice must be digit, please try again!");
-            return 0;
-        } catch (IndexOutOfRangeException e) {
-            System.out.println(e.getMessage());
-            return 0;
+            return "Your choice must be digit, please try again!";
+        } catch (IndexOutOfBoundsException e) {
+            return e.getMessage();
         }
-        return categoryChoice;
+        return null;
     }
 
     public boolean validName (String name, int whichCase) {
         try {
-            User.isValidUserName(name);
             if (whichCase == 1) User.isExist(sellers,name,numberOfSellers);
             else User.isExist(buyers,name,numberOfBuyers);
         } catch (Exception e) {
@@ -151,46 +101,6 @@ public class Manager implements Manageable {
             return false;
         }
         return true;
-    }
-
-    public boolean validPass (String pass) {
-        try {
-            User.isValidPassword (pass);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isValidAddress(String address) {
-        try {
-            Buyer.isValidAddress(address);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean isEmptySellers() {
-        try {
-            isValidNumOfSellers();
-        } catch (EmptyUsersArrayException e) {
-            System.out.println(e.getMessage());
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isEmptyBuyers() {
-        try {
-            isValidNumOfBuyers();
-        } catch (EmptyUsersArrayException e) {
-            System.out.println(e.getMessage());
-            return true;
-        }
-        return false;
     }
 
     public int isValidCartIndex (String indexCartInput, int buyerIndex) {
@@ -207,45 +117,29 @@ public class Manager implements Manageable {
         }
         return indexCart;
     }
-
-    public int isInRangeSellers(String indexInput) throws IndexOutOfRangeException {
-        int index = Integer.parseInt(indexInput);
-        if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
-        return index;
-    }
-
-    public int isInRangeBuyers(String indexInput) throws IndexOutOfRangeException {
-        int index = Integer.parseInt(indexInput);
-        if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
-        return index;
+    
+    public String chooseValidSeller(String indexInput) {
+        try {
+            int index = Integer.parseInt(indexInput);
+            if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
+        } catch (IndexOutOfRangeException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            return "\nChoice must to be digit, please try again!\n";
+        }
+        return null;
     }
     
-    public int chooseValidSeller(String indexInput) {
-        int sellerIndex;
+    public String chooseValidBuyer(String indexInput) {
         try {
-            sellerIndex = isInRangeSellers(indexInput);
+            int index = Integer.parseInt(indexInput);
+            if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
         } catch (IndexOutOfRangeException e) {
-            System.out.println(e.getMessage());
-            return 0;
+            return e.getMessage();
         } catch (NumberFormatException e) {
-            System.out.println("\nChoice must to be digit, please try again!\n");
-            return 0;
+            return  "\nChoice must to be digit, please try again!\n";
         }
-        return sellerIndex;
-    }
-    
-    public int chooseValidBuyer(String indexInput) {
-        int buyerIndex;
-        try {
-            buyerIndex = isInRangeBuyers(indexInput);
-        } catch (IndexOutOfRangeException e) {
-            System.out.println(e.getMessage());
-            return 0;
-        } catch (NumberFormatException e) {
-            System.out.println("\nChoice must to be digit, please try again!\n");
-            return 0;
-        }
-        return buyerIndex;
+        return null;
     }
 
     public void addSeller(String username, String password) {
@@ -272,75 +166,58 @@ public class Manager implements Manageable {
         System.out.println("Buyer added successfully.");
     }
 
-    public void printSellersInfo() {
+    public String sellersInfo() {
         if (numberOfSellers == 0) {
-            System.out.println("Haven't sellers yet. return to main menu");
-            return;
+            return "Haven't sellers yet, cannot be proceed. return to Menu.";
         }
-        System.out.println("\nSellers info:");
-        System.out.println("--------------");
+        StringBuilder sb = new StringBuilder("\nSellers info:\n--------------\n");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
-            System.out.println(i + 1 + ") " + sellers[i].getUserName() + ":");
-            System.out.println(sellers[i].toString());
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":");
+            sb.append(sellers[i].toString());
         }
+        return sb.toString();
     }
 
-    public void printBuyersInfo() {
+    public String buyersInfo() {
         if (numberOfBuyers == 0) {
-            System.out.println("Haven't buyers yet. return to main menu");
-            return;
+            return "Haven't buyers yet, cannot be proceed. return to Menu.";
         }
-        System.out.println("\nBuyers info:");
-        System.out.println("--------------");
+        StringBuilder sb = new StringBuilder("\nBuyers info:\n--------------\n");
         Arrays.sort(buyers, 0, numberOfBuyers, comparatorBuyer);
         for (int i = 0; i < numberOfBuyers; i++) {
-            System.out.print(i + 1 + ") ");
-            System.out.println(buyers[i].toString());
+            sb.append(i + 1).append(") ");
+            sb.append(buyers[i].toString());
         }
+        return sb.toString();
     }
 
-    public void printByCategory() {
+    public String productsByCategory() {
         if (numberOfSellers == 0) {
-            System.out.println("Haven't sellers yet. return to main menu");
-            return;
+            return "Haven't buyers yet, cannot be proceed. return to Menu.";
         }
-        System.out.println(categoriesArrays.toString());
+        return categoriesArrays.toString();
     }
 
-    public void printSellersNames() {
-        try {
-            isValidNumOfSellers();
-            System.out.println("Seller's list:");
-            System.out.println("--------------");
-            for (int i = 0; i < numberOfSellers; i++) {
-                System.out.println(i+1 + ")" + sellers[i].getUserName());
-            } 
-        } catch (EmptyUsersArrayException e) {
-            System.out.println(e.getMessage());
+    public String sellersNames() {
+        StringBuilder sb = new StringBuilder("Seller's:\n--------------\n");
+        for (int i = 0; i < numberOfSellers; i++) {
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName());
         }
+        return sb.toString();
     }
     
-    public void printBuyersNames() {
-        try {
-            isValidNumOfBuyers();
-            System.out.println("Buyer's list:");
-            System.out.println("--------------");
-            for (int i = 0; i < numberOfBuyers; i++) {
-                System.out.println(i+1 + ") " + buyers[i].getUserName());
-            }
-        } catch (EmptyUsersArrayException e) {
-            System.out.println(e.getMessage());
+    public String buyersNames() {
+        StringBuilder sb = new StringBuilder("Buyer's:\n--------------\n");
+        for (int i = 0; i < numberOfBuyers; i++) {
+            sb.append(i + 1).append(") ").append(buyers[i].getUserName());
         }
+        return sb.toString();
     }
 
-    public void printBuyerCurrentCart(int buyerIndex) {
-        System.out.println(buyers[buyerIndex].getCurrentCart().toString());
-    }
-
-    public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean specialPackage) {
+    public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex) {
         Product p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
-        buyers[buyerIndex].getCurrentCart().addProductToCart(p1, specialPackage);
+        buyers[buyerIndex].getCurrentCart().addProductToCart(p1);
     }
 
     public void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice) {
@@ -368,22 +245,28 @@ public class Manager implements Manageable {
         }
     }
 
-    public void pay(int buyerIndex) {
+    public String pay(int buyerIndex) {
+        try {
+            if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
+        } catch (EmptyCartPayException e) {
+            return e.getMessage();
+        }
         buyers[buyerIndex].payAndMakeHistoryCart();
+        return """
+                 ____   _ __   ____  __ _____ _   _ _____                              \s
+                |  _ \\ / \\\\ \\ / /  \\/  | ____| \\ | |_   _|                             \s
+                | |_) / _ \\\\ V /| |\\/| |  _| |  \\| | | |                               \s
+                |  __/ ___ \\| | | |  | | |___| |\\  | | |                               \s
+                |_| /_/   \\_\\_|_|_|_ |_|_____|_|_\\_|_|_|  _____ ____  _____ _   _ _    \s
+                            / ___|| | | |/ ___/ ___/ ___|| ____/ ___||  ___| | | | |   \s
+                            \\___ \\| | | | |   \\___ \\___ \\|  _| \\___ \\| |_  | | | | |   \s
+                             ___) | |_| | |___ ___) |__) | |___ ___) |  _| | |_| | |___\s
+                            |____/ \\___/ \\____|____/____/|_____|____/|_|    \\___/|_____|""";
     }
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
         System.out.println("Your current cart update successfully.");
-    }
-
-    public static boolean isNumeric(String string) {
-        for (char c : string.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
 
