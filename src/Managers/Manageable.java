@@ -14,7 +14,7 @@ public interface Manageable {
 
     String validCategory (String categoryInput);
 
-    boolean validName (String name, int whichCase);
+    String validName (String name, int whichCase);
 
     int isValidCartIndex (String indexCartInput, int buyerIndex);
 

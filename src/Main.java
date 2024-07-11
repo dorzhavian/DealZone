@@ -90,12 +90,16 @@ public class Main {
     }
 
     public static void case1and2(int whichCase) {
-        String username;
         System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
-            username = sc.next();
-            if (username.equals("-1")) return;
-        } while (!manager.validName(username, whichCase));  // check if name exist 
+            input = sc.next();
+            if (input.equals("-1")) return;
+            message = manager.validName(input, whichCase);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        String username = input;
         String password;
         System.out.println("Enter password: (Enter -1 to return main menu)");
         do {

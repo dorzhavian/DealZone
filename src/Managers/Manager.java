@@ -92,15 +92,14 @@ public class Manager implements Manageable {
         return null;
     }
 
-    public boolean validName (String name, int whichCase) {
+    public String validName (String name, int whichCase) {
         try {
             if (whichCase == 1) User.isExist(sellers,name,numberOfSellers);
             else User.isExist(buyers,name,numberOfBuyers);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+        } catch (AlreadyExistException e) {
+            return e.getMessage();
         }
-        return true;
+        return null;
     }
 
     public int isValidCartIndex (String indexCartInput, int buyerIndex) {
