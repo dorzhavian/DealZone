@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Exceptions messages turn into Enum.">
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Cosmetics changes at output messages.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Buyer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Categories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Seller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +118,7 @@
       <workItem from="1720536819997" duration="2269000" />
       <workItem from="1720678116500" duration="4390000" />
       <workItem from="1720688030930" duration="756000" />
-      <workItem from="1720689887625" duration="17415000" />
+      <workItem from="1720689887625" duration="18211000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -333,7 +328,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720718967045</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL‎-00027" summary="Cosmetics changes at output messages.">
+      <option name="closed" value="true" />
+      <created>1720720348017</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL‎-00027" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720720348017</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +354,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product." />
     <MESSAGE value="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input." />
     <MESSAGE value="Special package in buyer's cart change to WITH/WITHOUT" />
     <MESSAGE value="Fix interface methods signature, remove useless getters&amp;setters," />
@@ -376,6 +378,7 @@
     <MESSAGE value="First change of All project - according to the assignment definitions : print just at main, unnecessary exceptions deleted." />
     <MESSAGE value="Update validName method." />
     <MESSAGE value="Exceptions messages turn into Enum." />
-    <option name="LAST_COMMIT_MESSAGE" value="Exceptions messages turn into Enum." />
+    <MESSAGE value="Cosmetics changes at output messages." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cosmetics changes at output messages." />
   </component>
 </project>
