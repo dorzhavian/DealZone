@@ -6,17 +6,17 @@ import Models.Product;
 
 public interface Manageable {
 
-    boolean isEmptyHistoryCart (int buyerIndex);
-
     String validProductIndex(int sellerIndex, String productIndexInput);
 
     String validPrice(String priceInput);
 
-    String validCategory (String categoryInput);
+    String validCategoryIndex(String categoryInput);
 
-    String validName (String name, int whichCase);
+    String isExistSeller (String name);
 
-    int isValidCartIndex (String indexCartInput, int buyerIndex);
+    String isExistBuyer (String name);
+
+    String isValidHistoryCartIndex(String indexCartInput, int buyerIndex);
 
     String chooseValidSeller(String indexInput);
 

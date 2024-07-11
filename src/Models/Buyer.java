@@ -1,6 +1,5 @@
 package Models;
 
-import Exceptions.EmptyHistoryCartException;
 import java.util.Arrays;
 
 public class Buyer extends User {
@@ -18,8 +17,7 @@ public class Buyer extends User {
         historyCart = new Cart[0];
     }
 
-    public int getHistoryCartsNum() throws EmptyHistoryCartException {
-        if (historyCartsNum == 0) throw new EmptyHistoryCartException();
+    public int getHistoryCartsNum() {
         return historyCartsNum;
     }
 

@@ -94,7 +94,8 @@ public class Main {
         do {
             input = sc.next();
             if (input.equals("-1")) return;
-            message = manager.validName(input, whichCase);
+            if (whichCase == 1) message = manager.isExistSeller(input);
+            else message = manager.isExistBuyer(input);
             if (message != null) {
                 System.out.println(message);
             }
@@ -108,6 +109,7 @@ public class Main {
         } while (password.isEmpty());
         if (whichCase == 1) {
             manager.addSeller(username, password);
+            System.out.println("Seller added successfully.");
             return;
         }
         String address;
@@ -117,6 +119,7 @@ public class Main {
             if (address.equals("-1")) return;
         } while (address.isEmpty());
         manager.addBuyer(username, password, address);
+        System.out.println("Buyer added successfully.");
     }
 
     public static void case3 () {
@@ -147,7 +150,7 @@ public class Main {
             System.out.println(Categories.categoriesByNames());
             input = sc.next();
             if (input.equals("-1")) return;
-            message = manager.validCategory(input);
+            message = manager.validCategoryIndex(input);
             if (message != null) {
                 System.out.println(message);
             }
@@ -230,18 +233,24 @@ public class Main {
         System.out.println(manager.buyersInfo());
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        if (manager.isEmptyHistoryCart(buyerIndex)) return;
+        if (manager.getBuyers()[buyerIndex].getHistoryCartsNum() == 0) {
+            System.out.println("\nHistory cart's are empty for this buyer, cannot proceed. return to main menu.");
+            return;
+        }
         System.out.println(manager.getBuyers()[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
         System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
-        int historyCartIndex;
         do {
              input = sc.next();
              if (input.equals("-1")) return;
-             historyCartIndex = manager.isValidCartIndex(input, buyerIndex);
-        } while (historyCartIndex == 0);
+             message = manager.isValidHistoryCartIndex(input, buyerIndex);
+             if (message != null) {
+                 System.out.println();
+             }
+        } while (message != null);
+        int historyCartIndex = Integer.parseInt(input);
         manager.replaceCarts(historyCartIndex - 1, buyerIndex);
-
+        System.out.println("Your current cart update successfully.");
     }
 
     public static int chooseSeller () {

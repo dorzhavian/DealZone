@@ -3,6 +3,7 @@ package Managers;
 import Comparators.CompareBuyersByName;
 import Comparators.CompareSellersByProductsNumber;
 import Enums.Category;
+import Enums.ExceptionsMessages;
 import Exceptions.*;
 import Models.*;
 
@@ -16,7 +17,7 @@ public class Manager implements Manageable {
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
-    private final Categories categoriesArrays;
+    private Categories categoriesArrays;
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
 
@@ -44,22 +45,12 @@ public class Manager implements Manageable {
         return numberOfBuyers;
     }
 
-    public boolean isEmptyHistoryCart (int buyerIndex) {
-        try {
-            buyers[buyerIndex].getHistoryCartsNum();
-        } catch (EmptyHistoryCartException e) {
-            System.out.println(e.getMessage());
-            return true;
-        }
-        return false;
-    }
-
     public String validProductIndex(int sellerIndex, String productIndexInput) {
         try {
             int productIndex = Integer.parseInt(productIndexInput);
-            if (productIndex <= 0 || productIndex > sellers[sellerIndex].getNumOfProducts()) throw new IndexOutOfBoundsException("\n Product number is NOT exist, PLEASE choose from the RANGE!\n");
+            if (productIndex <= 0 || productIndex > sellers[sellerIndex].getNumOfProducts()) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_PRODUCT_INDEX.getExceptionMessage());
         } catch (NumberFormatException e) {
-            return "Your choice must be digit, please try again!\n";
+            return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         }
@@ -69,62 +60,63 @@ public class Manager implements Manageable {
     public String validPrice(String priceInput) {
         try {
             double price = Double.parseDouble(priceInput);
-            if (price <= 0) throw new InputMismatchException("Price cannot be zero or negative, please try again!");
+            if (price <= 0) throw new InputMismatchException(ExceptionsMessages.INVALID_PRICE_VALUE.getExceptionMessage());
         } catch (NullPointerException e){
-            return "Price cannot be empty, please try again!";
+            return ExceptionsMessages.PRICE_EMPTY.getExceptionMessage();
         } catch (NumberFormatException e) {
-            return "Price must enter as number, please try again!";
+            return ExceptionsMessages.INVALID_PRICE_INPUT.getExceptionMessage();
         } catch (InputMismatchException e) {
             return e.getMessage();
         }
         return null;
     }
 
-    public String validCategory (String categoryInput) {
+    public String validCategoryIndex(String categoryInput) {
         try {
             int categoryChoice = Integer.parseInt(categoryInput);
-            if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfBoundsException("\nCategory number is NOT exist, PLEASE choose from the RANGE!\n");
+            if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_CATEGORY_INDEX.getExceptionMessage());
         } catch (NumberFormatException e) {
-            return "Your choice must be digit, please try again!";
+            return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         }
         return null;
     }
 
-    public String validName (String name, int whichCase) {
-        try {
-            if (whichCase == 1) User.isExist(sellers,name,numberOfSellers);
-            else User.isExist(buyers,name,numberOfBuyers);
-        } catch (AlreadyExistException e) {
-            return e.getMessage();
+    public String isExistSeller (String name) {
+        for (int i = 0; i < numberOfSellers; i++) {
+            if (sellers[i].getUserName().equalsIgnoreCase(name)) return "Seller name already EXIST, please try again!";
         }
         return null;
     }
 
-    public int isValidCartIndex (String indexCartInput, int buyerIndex) {
-        int indexCart;
-        try {
-            indexCart = Integer.parseInt(indexCartInput);
-            if (buyers[buyerIndex].getHistoryCartsNum() < indexCart) throw new IndexOutOfRangeException("History cart");
-        } catch (NumberFormatException e) {
-            System.out.println("\nChoice must be a digit, please try again!\n");
-            return 0;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return 0;
+    public String isExistBuyer (String name) {
+        for (int i = 0; i < numberOfBuyers; i++) {
+            if (buyers[i].getUserName().equalsIgnoreCase(name)) return "Buyer name already EXIST, please try again!";
         }
-        return indexCart;
+        return null;
+    }
+
+    public String isValidHistoryCartIndex(String indexCartInput, int buyerIndex) {
+        try {
+            int indexCart = Integer.parseInt(indexCartInput);
+            if (buyers[buyerIndex].getHistoryCartsNum() < indexCart) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_HISTORY_CART_INDEX.getExceptionMessage());
+        } catch (NumberFormatException e) {
+            return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return e.getMessage();
+        }
+        return null;
     }
     
     public String chooseValidSeller(String indexInput) {
         try {
             int index = Integer.parseInt(indexInput);
-            if (index > numberOfSellers || index <= 0) throw new IndexOutOfRangeException("Seller");
-        } catch (IndexOutOfRangeException e) {
+            if (index > numberOfSellers || index <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_SELLER_INDEX.getExceptionMessage());
+        } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
-            return "\nChoice must to be digit, please try again!\n";
+            return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         }
         return null;
     }
@@ -132,11 +124,11 @@ public class Manager implements Manageable {
     public String chooseValidBuyer(String indexInput) {
         try {
             int index = Integer.parseInt(indexInput);
-            if (index > numberOfBuyers || index <= 0) throw new IndexOutOfRangeException("Buyer");
-        } catch (IndexOutOfRangeException e) {
+            if (index > numberOfBuyers || index <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_BUYER_INDEX.getExceptionMessage());
+        } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
-            return  "\nChoice must to be digit, please try again!\n";
+            return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         }
         return null;
     }
@@ -150,7 +142,6 @@ public class Manager implements Manageable {
             sellers = Arrays.copyOf(sellers, sellers.length * SIZE_INCREASE);
         }
         sellers[numberOfSellers++] = seller;
-        System.out.println("Seller added successfully.");
     }
 
     public void addBuyer(String username, String password, String address) {
@@ -162,7 +153,6 @@ public class Manager implements Manageable {
             buyers = Arrays.copyOf(buyers, buyers.length * SIZE_INCREASE);
         }
         buyers[numberOfBuyers++] = buyer;
-        System.out.println("Buyer added successfully.");
     }
 
     public String sellersInfo() {
@@ -193,7 +183,7 @@ public class Manager implements Manageable {
 
     public String productsByCategory() {
         if (numberOfSellers == 0) {
-            return "Haven't buyers yet, cannot be proceed. return to Menu.";
+            return "Haven't sellers yet, cannot be proceed. return to Menu.";
         }
         return categoriesArrays.toString();
     }
@@ -265,7 +255,6 @@ public class Manager implements Manageable {
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
-        System.out.println("Your current cart update successfully.");
     }
 }
 

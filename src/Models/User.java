@@ -1,7 +1,5 @@
 package Models;
 
-import Exceptions.AlreadyExistException;
-
 public abstract class User {
     protected String userName;
     protected String password;
@@ -15,9 +13,4 @@ public abstract class User {
         return userName;
     }
 
-    public static void isExist(User[] users, String inputUserName, int numberOfUsers) throws AlreadyExistException {
-        for (int i = 0; i < numberOfUsers; i++) {
-            if (users[i].getUserName().equalsIgnoreCase(inputUserName)) throw new AlreadyExistException();
-        }
-    }
 }
