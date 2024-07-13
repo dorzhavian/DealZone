@@ -205,12 +205,22 @@ public class Manager implements Manageable {
     }
 
     public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex) {
-        Product p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
+        Product p1;
+        if (sellers[sellerIndex].getProducts()[productIndex] instanceof ProductSpecialPackage) {
+            p1 = new ProductSpecialPackage(sellers[sellerIndex].getProducts()[productIndex],((ProductSpecialPackage) sellers[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
+        } else {
+            p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
+        }
         buyers[buyerIndex].getCurrentCart().addProductToCart(p1);
     }
 
     public void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice) {
-        Product p1 = new Product(productName, productPrice, c, specialPackagePrice);
+        Product p1;
+        if (specialPackagePrice == 0) {
+            p1 = new Product(productName, productPrice, c);
+        } else {
+            p1 = new ProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+        }
         sellers[sellerIndex].addProduct(p1);
         addToCategoryArray(p1);
     }

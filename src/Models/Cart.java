@@ -42,9 +42,8 @@ public class Cart {
         }
         products[numOfProducts++] = p1;
         totalPrice += p1.getProductPrice();
-        if (p1.getSpecialPackagePrice() != 0) {
-            totalPrice += p1.getSpecialPackagePrice();
-            p1.setSpecialPackageBuyerChoice(" (WITH) ");
+        if (p1 instanceof ProductSpecialPackage) {
+            totalPrice += ((ProductSpecialPackage) p1).getSpecialPackagePrice();
         }
     }
 
@@ -53,8 +52,7 @@ public class Cart {
         StringBuilder sb = new StringBuilder();
         sb.append("Cart details: \n");
         for (int i = 0; i < numOfProducts; i++) {
-            sb.append("   ").append(i + 1).append(") ").append(products[i].toString())
-                    .append(products[i].getSpecialPackageBuyerChoice()).append("\n");
+            sb.append("   ").append(i + 1).append(") ").append(products[i].toString()).append("\n");
         }
         sb.append("------------------\n").append("total : ").append(totalPrice)
                 .append("\n------------------\n");
