@@ -1,5 +1,6 @@
 // DOR_ZHAVIAN-211337845_ALON_ETOS-207431487_DANIEL_SULTAN-323883751
 // LECTURER - PINI SHLOMI
+
 import Enums.Category;
 import Managers.Manager;
 import Models.Categories;
@@ -115,7 +116,7 @@ public class Main {
         String address;
         System.out.println("Enter your address: (Enter -1 to return main menu)");
         do {
-            address = sc.next();
+            address = sc.nextLine();
             if (address.equals("-1")) return;
         } while (address.isEmpty());
         manager.addBuyer(username, password, address);
@@ -132,7 +133,7 @@ public class Main {
         System.out.println("Enter product name to add: (Enter -1 to return main menu)");
         String productName;
         do {
-             productName = sc.next();
+             productName = sc.nextLine();
              if (productName.equals("-1")) return;
         } while (productName.isEmpty());
         System.out.println("Enter product price: (Enter -1 to return main menu)");
@@ -230,7 +231,6 @@ public class Main {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
-        System.out.println(manager.buyersInfo());
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
         if (manager.getBuyers()[buyerIndex].getHistoryCartsNum() == 0) {
@@ -245,7 +245,7 @@ public class Main {
              if (input.equals("-1")) return;
              message = manager.isValidHistoryCartIndex(input, buyerIndex);
              if (message != null) {
-                 System.out.println();
+                 System.out.println(message);
              }
         } while (message != null);
         int historyCartIndex = Integer.parseInt(input);

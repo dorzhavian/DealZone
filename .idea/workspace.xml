@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Update README.md">
-      <change afterPath="$PROJECT_DIR$/src/Models/ProductSpecialPackage.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Product with special package changed to object that extend from Product.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +124,8 @@
       <workItem from="1720720814924" duration="428000" />
       <workItem from="1720876143302" duration="1211000" />
       <workItem from="1720890416220" duration="2342000" />
+      <workItem from="1720894002494" duration="332000" />
+      <workItem from="1720944157717" duration="997000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -351,7 +351,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720721206346</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL‎-00029" summary="Product with special package changed to object that extend from Product.">
+      <option name="closed" value="true" />
+      <created>1720894120927</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL‎-00029" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720894120927</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +377,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input." />
     <MESSAGE value="Special package in buyer's cart change to WITH/WITHOUT" />
     <MESSAGE value="Fix interface methods signature, remove useless getters&amp;setters," />
     <MESSAGE value="isExist method moved to User as static" />
@@ -394,6 +401,7 @@
     <MESSAGE value="Exceptions messages turn into Enum." />
     <MESSAGE value="Cosmetics changes at output messages." />
     <MESSAGE value="Update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update README.md" />
+    <MESSAGE value="Product with special package changed to object that extend from Product." />
+    <option name="LAST_COMMIT_MESSAGE" value="Product with special package changed to object that extend from Product." />
   </component>
 </project>

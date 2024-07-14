@@ -100,7 +100,7 @@ public class Manager implements Manageable {
     public String isValidHistoryCartIndex(String indexCartInput, int buyerIndex) {
         try {
             int indexCart = Integer.parseInt(indexCartInput);
-            if (buyers[buyerIndex].getHistoryCartsNum() < indexCart) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_HISTORY_CART_INDEX.getExceptionMessage());
+            if (buyers[buyerIndex].getHistoryCartsNum() < indexCart || indexCart <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_HISTORY_CART_INDEX.getExceptionMessage());
         } catch (NumberFormatException e) {
             return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         } catch (IndexOutOfBoundsException e) {
@@ -162,8 +162,8 @@ public class Manager implements Manageable {
         StringBuilder sb = new StringBuilder("\nSellers info:\n--------------\n");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
-            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":\n");
-            sb.append(sellers[i].toString());
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":\n\b\b");
+            sb.append(sellers[i].toString()).append("\n");
         }
         return sb.toString();
     }
