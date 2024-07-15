@@ -1,6 +1,7 @@
 package Managers;
 
 import Enums.Category;
+import Models.Address;
 import Models.Product;
 
 
@@ -24,7 +25,7 @@ public interface Manageable {
 
     void addSeller(String username, String password);
 
-    void addBuyer(String username, String password, String address);
+    void addBuyer(String username, String password, Address address);
 
     String sellersInfo();
 

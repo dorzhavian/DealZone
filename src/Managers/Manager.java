@@ -144,7 +144,7 @@ public class Manager implements Manageable {
         sellers[numberOfSellers++] = seller;
     }
 
-    public void addBuyer(String username, String password, String address) {
+    public void addBuyer(String username, String password, Address address) {
         Buyer buyer = new Buyer(username, password, address);
         if (buyers.length == numberOfBuyers) {
             if (buyers.length == 0) {

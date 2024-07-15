@@ -5,12 +5,12 @@ import java.util.Arrays;
 public class Buyer extends User {
 
     private static final int SIZE_INCREASE = 2;
-    private final String address;
+    private final Address address;
     private Cart currentCart;
     private Cart[] historyCart;
     private int historyCartsNum;
 
-    public Buyer(String userName, String password, String address) {
+    public Buyer(String userName, String password, Address address) {
         super(userName, password);
         this.address = address;
         currentCart = new Cart();
@@ -51,7 +51,7 @@ public class Buyer extends User {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Buyer details:\n").append("   Name: ").append(userName).append("\n")
-                .append("   Address: ").append(address).append("\n\n");
+                .append("   Address: ").append(address.toString()).append("\n\n");
         if (currentCart.getNumOfProducts() == 0) {
             sb.append("Cart is empty\n");
         } else {

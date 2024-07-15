@@ -3,6 +3,7 @@
 
 import Enums.Category;
 import Managers.Manager;
+import Models.Address;
 import Models.Categories;
 
 import java.util.Scanner;
@@ -38,14 +39,16 @@ public class Main {
                 continue;
             }
             switch (choice) {
+                case -1:
+                    break;
                 case 0:
                     System.out.println("\nThanks for using our system. GoodBye!");
                     break;
                 case 1:
-                    case1and2(1);
+                    case1();
                     break;
                 case 2:
-                    case1and2(2);
+                    case2();
                     break;
                 case 3:
                     case3();
@@ -90,35 +93,52 @@ public class Main {
         System.out.println("Please enter your choice: ");
     }
 
-    public static void case1and2(int whichCase) {
+    public static void case1() {
         System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
             input = sc.next();
             if (input.equals("-1")) return;
-            if (whichCase == 1) message = manager.isExistSeller(input);
-            else message = manager.isExistBuyer(input);
+            message = manager.isExistSeller(input);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
         String username = input;
-        String password;
         System.out.println("Enter password: (Enter -1 to return main menu)");
+        String password = sc.next();
+        if (password.equals("-1")) return;
+        manager.addSeller(username, password);
+        System.out.println("Seller added successfully.");
+    }
+
+    public static void case2() {
+        System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
-            password = sc.next();
-            if (password.equals("-1")) return;
-        } while (password.isEmpty());
-        if (whichCase == 1) {
-            manager.addSeller(username, password);
-            System.out.println("Seller added successfully.");
-            return;
-        }
-        String address;
-        System.out.println("Enter your address: (Enter -1 to return main menu)");
-        do {
-            address = sc.nextLine();
-            if (address.equals("-1")) return;
-        } while (address.isEmpty());
+            input = sc.next();
+            if (input.equals("-1")) return;
+            message = manager.isExistBuyer(input);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        String username = input;
+        System.out.println("Enter password: (Enter -1 to return main menu)");
+        String password = sc.next();
+        if (password.equals("-1")) return;
+        System.out.println("\nEnter your full address: ");
+        System.out.println("Street: (Enter -1 to return main menu)");
+        String street = sc.next();
+        if (street.equals("-1")) return;
+        System.out.println("House number: (Enter -1 to return main menu)");
+        String houseNum = sc.next();
+        if (houseNum.equals("-1")) return;
+        System.out.println("City: (Enter -1 to return main menu)");
+        String city = sc.next();
+        if (city.equals("-1")) return;
+        System.out.println("State: (Enter -1 to return main menu)");
+        String state = sc.next();
+        if (state.equals("-1")) return;
+        Address address = new Address (street, houseNum, city, state);
         manager.addBuyer(username, password, address);
         System.out.println("Buyer added successfully.");
     }
