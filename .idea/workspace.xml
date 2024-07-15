@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Fix Exception while replace carts - negative index">
-      <change afterPath="$PROJECT_DIR$/src/Models/Address.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Buyer Address changed to Object.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manageable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Buyer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +125,7 @@
       <workItem from="1720890416220" duration="2342000" />
       <workItem from="1720894002494" duration="332000" />
       <workItem from="1720944157717" duration="1554000" />
-      <workItem from="1721055270492" duration="2154000" />
+      <workItem from="1721055270492" duration="3740000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -371,7 +367,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720945676987</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL‎-00031" summary="Buyer Address changed to Object.">
+      <option name="closed" value="true" />
+      <created>1721057909840</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL‎-00031" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1721057909840</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +393,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix interface methods signature, remove useless getters&amp;setters," />
     <MESSAGE value="isExist method moved to User as static" />
     <MESSAGE value="Add isNumeric method in manager - check if string contains only digits" />
     <MESSAGE value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
@@ -414,6 +417,7 @@
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Product with special package changed to object that extend from Product." />
     <MESSAGE value="Fix Exception while replace carts - negative index" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Exception while replace carts - negative index" />
+    <MESSAGE value="Buyer Address changed to Object." />
+    <option name="LAST_COMMIT_MESSAGE" value="Buyer Address changed to Object." />
   </component>
 </project>

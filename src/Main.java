@@ -22,7 +22,6 @@ public class Main {
     }
 
     private static void menu(Manager manager) {
-        String input;
         int choice;
         System.out.println("\n------------------------------------------------------------------------");
         System.out.println(" ------------HELLO AND WELCOME TO OUR BUYER - SELLER PROGRAM-----------");
@@ -97,6 +96,7 @@ public class Main {
         System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
             input = sc.next();
+            rebootScanner();
             if (input.equals("-1")) return;
             message = manager.isExistSeller(input);
             if (message != null) {
@@ -106,6 +106,7 @@ public class Main {
         String username = input;
         System.out.println("Enter password: (Enter -1 to return main menu)");
         String password = sc.next();
+        rebootScanner();
         if (password.equals("-1")) return;
         manager.addSeller(username, password);
         System.out.println("Seller added successfully.");
@@ -115,6 +116,7 @@ public class Main {
         System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
             input = sc.next();
+            rebootScanner();
             if (input.equals("-1")) return;
             message = manager.isExistBuyer(input);
             if (message != null) {
@@ -125,7 +127,8 @@ public class Main {
         System.out.println("Enter password: (Enter -1 to return main menu)");
         String password = sc.next();
         if (password.equals("-1")) return;
-        System.out.println("\nEnter your full address: ");
+        rebootScanner();
+        System.out.println("Enter your full address: ");
         System.out.println("Street: (Enter -1 to return main menu)");
         String street = sc.next();
         if (street.equals("-1")) return;
@@ -138,6 +141,7 @@ public class Main {
         System.out.println("State: (Enter -1 to return main menu)");
         String state = sc.next();
         if (state.equals("-1")) return;
+        rebootScanner();
         Address address = new Address (street, houseNum, city, state);
         manager.addBuyer(username, password, address);
         System.out.println("Buyer added successfully.");
@@ -151,11 +155,9 @@ public class Main {
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
         System.out.println("Enter product name to add: (Enter -1 to return main menu)");
-        String productName;
-        do {
-             productName = sc.nextLine();
-             if (productName.equals("-1")) return;
-        } while (productName.isEmpty());
+        String productName = sc.next();
+        if (productName.equals("-1")) return;
+        rebootScanner();
         System.out.println("Enter product price: (Enter -1 to return main menu)");
         do {
             input = sc.next();
@@ -166,8 +168,8 @@ public class Main {
             }
         } while (message != null);
         double productPrice = Double.parseDouble(input);
-        System.out.println("Choose category: (Enter -1 to return main menu)\n");
         System.out.println(Categories.categoriesByNames());
+        System.out.println("Choose category: (Enter -1 to return main menu)\n");
         do {
             input = sc.next();
             if (input.equals("-1")) return;
@@ -303,6 +305,10 @@ public class Main {
             }
         }
         return Integer.parseInt(input) - 1;
+    }
+
+    public static void rebootScanner() {
+        sc.nextLine();
     }
 }
 
