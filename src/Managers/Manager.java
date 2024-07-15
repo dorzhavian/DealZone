@@ -157,7 +157,7 @@ public class Manager implements Manageable {
 
     public String sellersInfo() {
         if (numberOfSellers == 0) {
-            return "Haven't sellers yet, cannot be proceed. return to Menu.";
+            return "\nHaven't sellers yet, cannot be proceed. return to Menu.";
         }
         StringBuilder sb = new StringBuilder("\nSellers info:\n--------------\n");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
@@ -170,7 +170,7 @@ public class Manager implements Manageable {
 
     public String buyersInfo() {
         if (numberOfBuyers == 0) {
-            return "Haven't buyers yet, cannot be proceed. return to Menu.";
+            return "\nHaven't buyers yet, cannot be proceed. return to Menu.";
         }
         StringBuilder sb = new StringBuilder("\nBuyers info:\n--------------\n");
         Arrays.sort(buyers, 0, numberOfBuyers, comparatorBuyer);
@@ -183,7 +183,7 @@ public class Manager implements Manageable {
 
     public String productsByCategory() {
         if (numberOfSellers == 0) {
-            return "Haven't sellers yet, cannot be proceed. return to Menu.";
+            return "\nHaven't sellers yet, cannot be proceed. return to Menu.";
         }
         return categoriesArrays.toString();
     }
