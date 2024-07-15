@@ -132,12 +132,15 @@ public class Main {
         System.out.println("Street: (Enter -1 to return main menu)");
         String street = sc.next();
         if (street.equals("-1")) return;
+        rebootScanner();
         System.out.println("House number: (Enter -1 to return main menu)");
         String houseNum = sc.next();
         if (houseNum.equals("-1")) return;
+        rebootScanner();
         System.out.println("City: (Enter -1 to return main menu)");
         String city = sc.next();
         if (city.equals("-1")) return;
+        rebootScanner();
         System.out.println("State: (Enter -1 to return main menu)");
         String state = sc.next();
         if (state.equals("-1")) return;

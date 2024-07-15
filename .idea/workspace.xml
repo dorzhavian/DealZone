@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Buyer Address changed to Object.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Method reboot scanner added." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +122,7 @@
       <workItem from="1720890416220" duration="2342000" />
       <workItem from="1720894002494" duration="332000" />
       <workItem from="1720944157717" duration="1554000" />
-      <workItem from="1721055270492" duration="3740000" />
+      <workItem from="1721055270492" duration="3994000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -375,7 +372,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1721057909840</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL‎-00032" summary="Method reboot scanner added.">
+      <option name="closed" value="true" />
+      <created>1721059283206</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL‎-00032" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1721059283206</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,7 +398,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="isExist method moved to User as static" />
     <MESSAGE value="Add isNumeric method in manager - check if string contains only digits" />
     <MESSAGE value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
     <MESSAGE value="Realization of sorting options when printing seller/buyer working" />
@@ -418,6 +422,7 @@
     <MESSAGE value="Product with special package changed to object that extend from Product." />
     <MESSAGE value="Fix Exception while replace carts - negative index" />
     <MESSAGE value="Buyer Address changed to Object." />
-    <option name="LAST_COMMIT_MESSAGE" value="Buyer Address changed to Object." />
+    <MESSAGE value="Method reboot scanner added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Method reboot scanner added." />
   </component>
 </project>
