@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="toString update">
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Cosmetic update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Categories.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Seller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +132,9 @@
       <workItem from="1721055270492" duration="3994000" />
       <workItem from="1721061656759" duration="211000" />
       <workItem from="1721066295546" duration="20000" />
-      <workItem from="1721067825631" duration="403000" />
+      <workItem from="1721067825631" duration="942000" />
+      <workItem from="1721069348114" duration="36000" />
+      <workItem from="1721157591452" duration="2519000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -394,7 +400,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1721061852636</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL‎-00034" summary="Cosmetic update">
+      <option name="closed" value="true" />
+      <created>1721068585658</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL‎-00034" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1721068585658</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,7 +426,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add compare classes (by name for buyers, by number of product for sellers) without realization" />
     <MESSAGE value="Realization of sorting options when printing seller/buyer working" />
     <MESSAGE value="Method isExist moved to class User and deleted from Manageable, exception for username that already exist" />
     <MESSAGE value="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added." />
@@ -437,6 +450,7 @@
     <MESSAGE value="Buyer Address changed to Object." />
     <MESSAGE value="Method reboot scanner added." />
     <MESSAGE value="toString update" />
-    <option name="LAST_COMMIT_MESSAGE" value="toString update" />
+    <MESSAGE value="Cosmetic update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cosmetic update" />
   </component>
 </project>

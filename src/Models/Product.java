@@ -33,11 +33,9 @@ public class Product {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Product name: ").append(productName)
-                .append(", Product price: ").append(productPrice)
-                .append(", Product id: ").append(id)
-                .append(", Product category: ").append(category);
-        return sb.toString();
+        return "Product name: " + productName +
+                ", Product price: " + productPrice +
+                ", Product id: " + id +
+                ", Product category: " + category;
     }
 }

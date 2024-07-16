@@ -17,7 +17,7 @@ public class Manager implements Manageable {
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
-    private Categories categoriesArrays;
+    private final Categories categoriesArrays;
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
 
@@ -162,7 +162,7 @@ public class Manager implements Manageable {
         StringBuilder sb = new StringBuilder("\nSellers info:\n--------------\n");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
-            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":\n\b\b");
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":");
             sb.append(sellers[i].toString()).append("\n");
         }
         return sb.toString();
@@ -183,7 +183,7 @@ public class Manager implements Manageable {
 
     public String productsByCategory() {
         if (numberOfSellers == 0) {
-            return "\nHaven't sellers yet, cannot be proceed. return to Menu.";
+            return "\nHaven't sellers yet - no products available, cannot be proceed. return to Menu.";
         }
         return categoriesArrays.toString();
     }

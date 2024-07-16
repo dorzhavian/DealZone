@@ -36,12 +36,12 @@ public class Seller extends User {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (numOfProducts == 0) {
-            sb.append("No products yet.\n");
+            sb.append("\nNo products yet.\n");
             return sb.toString();
         }
         sb.append("\nSeller products: \n");
         for (int i = 0; i < numOfProducts; i++) {
-            sb.append(i+1).append(") ").append(products[i].toString()).append('\n');
+            sb.append("   ").append(i+1).append(") ").append(products[i].toString()).append('\n');
         }
         return sb.toString();
     }

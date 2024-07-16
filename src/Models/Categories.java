@@ -89,7 +89,7 @@ public class Categories {
                 sb.append(i + 1).append(") ").append(electronics[i].toString()).append("\n");
             }
         } else {
-            sb.append("No electronics products yet\n");
+            sb.append("No electronics products yet.\n");
         }
         sb.append("\nChildren: \n");
         if (numChildren > 0) {
@@ -97,7 +97,7 @@ public class Categories {
                 sb.append(i + 1).append(") ").append(children[i].toString()).append("\n");
             }
         } else {
-            sb.append("No children products yet\n");
+            sb.append("No children products yet.\n");
         }
         sb.append("\nOffice: \n");
         if (numOffice > 0) {
@@ -105,7 +105,7 @@ public class Categories {
                 sb.append(i + 1).append(") ").append(office[i].toString()).append("\n");
             }
         } else {
-            sb.append("No office products yet\n");
+            sb.append("No office products yet.\n");
         }
         sb.append("\nClothes: \n");
         if (numClothes > 0) {
@@ -113,7 +113,7 @@ public class Categories {
                 sb.append(i + 1).append(") ").append(clothes[i].toString()).append("\n");
             }
         } else {
-            sb.append("No clothes products yet\n");
+            sb.append("No clothes products yet.\n");
         }
         return sb.toString();
     }

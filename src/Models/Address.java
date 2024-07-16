@@ -1,10 +1,10 @@
 package Models;
 
 public class Address {
-    private String street;
-    private String houseNum;
-    private String city;
-    private String state;
+    private final String street;
+    private final String houseNum;
+    private final String city;
+    private final String state;
 
     public Address(String street, String houseNum, String city, String state) {
         this.street = street;
@@ -15,8 +15,6 @@ public class Address {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(street).append(" ").append(houseNum).append(" , ").append(city).append(" , ").append(state);
-        return sb.toString();
+        return street + " " + houseNum + " , " + city + " , " + state;
     }
 }
