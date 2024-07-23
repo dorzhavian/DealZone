@@ -1,6 +1,6 @@
 # Deal Zone
 
-Buy-Sell is a Java-based e-commerce platform designed to simulate the functionality of online marketplaces. This project was developed as part of an object-oriented programming course.
+Java-based e-commerce platform designed to simulate the functionality of online marketplaces. This project was developed as part of an object-oriented programming course.
 
 ## Table of Contents
 - [Description](#description)
