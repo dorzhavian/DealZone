@@ -1,6 +1,7 @@
 # Deal Zone
 
 Java-based e-commerce platform designed to simulate the functionality of online marketplaces. This project was developed as part of an object-oriented programming course.
+Directly link to the project's repo : https://github.com/dorzhavian/DealZone.git
 
 ## Table of Contents
 - [Description](#description)
@@ -35,7 +36,7 @@ The Buy-Sell platform allows users to register as buyers or sellers, manage prod
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/dorzhavian/Buy-Sell.git
+    git clone https://github.com/dorzhavian/DealZone.git
     ```
 2. Open the project in IntelliJ IDEA or your preferred Java IDE.
 
