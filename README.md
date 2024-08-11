@@ -1,7 +1,6 @@
 # Deal Zone
 
 Java-based e-commerce platform designed to simulate the functionality of online marketplaces. This project was developed as part of an object-oriented programming course.
-Directly link to the project's repo : https://github.com/dorzhavian/DealZone.git
 
 ## Table of Contents
 - [Description](#description)
