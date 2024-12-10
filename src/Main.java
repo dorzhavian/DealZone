@@ -2,6 +2,7 @@ import Enums.Category;
 import Managers.Manager;
 import Models.Address;
 import Models.Categories;
+import Models.Factory;
 
 import java.util.Scanner;
 
@@ -10,10 +11,12 @@ public class Main {
     private static Manager manager;
     private static String input;
     private static String message;
+    private static Factory factory;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
         manager = new Manager();
+        factory = new Factory();
         menu(manager);
         sc.close();
     }
@@ -68,6 +71,8 @@ public class Main {
                 case 9:
                     case9();
                     break;
+                case 10:
+                    case10();
                 default:
                     System.out.println("\nPlease enter a valid choice in range 0-9!");
                     break;
@@ -87,6 +92,7 @@ public class Main {
         System.out.println("7) Seller's details");
         System.out.println("8) Product's by category");
         System.out.println("9) Replace current cart with cart from history");
+        System.out.println("10) Use factory for automatic shop create");
         System.out.println("Please enter your choice: ");
     }
 
@@ -276,6 +282,10 @@ public class Main {
         int historyCartIndex = Integer.parseInt(input);
         manager.replaceCarts(historyCartIndex - 1, buyerIndex);
         System.out.println("Your current cart update successfully.");
+    }
+
+    public static void case10(){
+        factory.initFactory(manager);
     }
 
     public static int chooseSeller () {
