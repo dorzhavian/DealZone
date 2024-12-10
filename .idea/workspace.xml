@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Cosmetic update">
-      <change afterPath="$PROJECT_DIR$/src/Models/Factory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Factory class added.">
+      <change beforePath="$PROJECT_DIR$/src/Models/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Factory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +131,7 @@
       <workItem from="1721069348114" duration="36000" />
       <workItem from="1721157591452" duration="2519000" />
       <workItem from="1733832437532" duration="224000" />
-      <workItem from="1733833213044" duration="5268000" />
+      <workItem from="1733833213044" duration="5490000" />
     </task>
     <task id="LOCAL‎-00001" summary="Update README.md">
       <option name="closed" value="true" />
@@ -407,7 +405,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1721068585658</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Factory class added.">
+      <option name="closed" value="true" />
+      <created>1733863992561</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1733863992561</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +431,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Realization of sorting options when printing seller/buyer working" />
     <MESSAGE value="Method isExist moved to class User and deleted from Manageable, exception for username that already exist" />
     <MESSAGE value="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added." />
     <MESSAGE value="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added" />
@@ -450,6 +455,7 @@
     <MESSAGE value="Method reboot scanner added." />
     <MESSAGE value="toString update" />
     <MESSAGE value="Cosmetic update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cosmetic update" />
+    <MESSAGE value="Factory class added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Factory class added." />
   </component>
 </project>

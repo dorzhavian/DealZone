@@ -5,7 +5,7 @@ import Managers.Manager;
 
 public class Factory {
 
-    public Manager initFactory(Manager manager) {
+    public void initFactory(Manager manager) {
         //Manager manager = new Manager();
 
         // Adding 10 sellers with real names and realistic passwords
@@ -144,6 +144,5 @@ public class Factory {
         manager.addProductBuyer(9, 4, 1);  // Buyer 9 buys Scarf from Seller 4
         manager.addProductBuyer(9, 9, 0);  // Buyer 9 buys Smart TV from Seller 9
 
-        return manager;
     }
 }
