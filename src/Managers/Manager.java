@@ -14,9 +14,11 @@ import java.util.InputMismatchException;
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
     private Seller[] sellers;
+    private User[] users;
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
+    private int numberOfUsers;
     private final Categories categoriesArrays;
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
@@ -24,6 +26,7 @@ public class Manager implements Manageable {
     public Manager() {
         buyers = new Buyer[0];
         sellers = new Seller[0];
+        users = new User[0];
         categoriesArrays = new Categories();
         comparatorSeller = new CompareSellersByProductsNumber();
         comparatorBuyer = new CompareBuyersByName();
@@ -35,6 +38,14 @@ public class Manager implements Manageable {
 
     public Buyer[] getBuyers() {
         return buyers;
+    }
+
+    public User[] getUsers(){
+        return users;
+    }
+
+    public int getNumberOfUsers(){
+        return numberOfUsers;
     }
 
     public int getNumberOfSellers() {
@@ -133,6 +144,17 @@ public class Manager implements Manageable {
         return null;
     }
 
+    public void addUser(User user){
+        if (users.length == numberOfUsers) {
+            if (users.length == 0) {
+                users = Arrays.copyOf(users, 1);
+            }
+            users = Arrays.copyOf(users, users.length * SIZE_INCREASE);
+        }
+        users[numberOfUsers++] = user;
+
+    }
+
     public void addSeller(String username, String password) {
         Seller seller = new Seller(username, password);
         if (sellers.length == numberOfSellers) {
@@ -142,6 +164,7 @@ public class Manager implements Manageable {
             sellers = Arrays.copyOf(sellers, sellers.length * SIZE_INCREASE);
         }
         sellers[numberOfSellers++] = seller;
+        addUser(seller);
     }
 
     public void addBuyer(String username, String password, Address address) {
@@ -153,6 +176,7 @@ public class Manager implements Manageable {
             buyers = Arrays.copyOf(buyers, buyers.length * SIZE_INCREASE);
         }
         buyers[numberOfBuyers++] = buyer;
+        addUser(buyer);
     }
 
     public String sellersInfo() {

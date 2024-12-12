@@ -75,6 +75,8 @@ public class Main {
                     break;
                 case 10:
                     case10();
+                case 99:
+                    case99();
                 default:
                     System.out.println("\nPlease enter a valid choice in range 0-9!");
                     break;
@@ -95,6 +97,7 @@ public class Main {
         System.out.println("8) Product's by category");
         System.out.println("9) Replace current cart with cart from history");
         System.out.println("10) Use factory for automatic shop create");
+        System.out.println("99) Print hara");
         System.out.println("Please enter your choice: ");
     }
 
@@ -290,6 +293,12 @@ public class Main {
         int sellerIndex = manager.getNumberOfSellers();
         int buyersIndex = manager.getNumberOfBuyers();
         factory.initFactory(manager, sellerIndex, buyersIndex);
+    }
+
+    public static void case99(){
+        for(int i = 0; i < manager.getNumberOfUsers(); i++){
+            System.out.println(manager.getUsers()[i].getUserName());
+        }
     }
 
     public static int chooseSeller () {

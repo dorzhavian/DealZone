@@ -3,6 +3,7 @@ package Managers;
 import Enums.Category;
 import Models.Address;
 import Models.Product;
+import Models.User;
 
 
 public interface Manageable {
@@ -22,6 +23,8 @@ public interface Manageable {
     String chooseValidSeller(String indexInput);
 
     String chooseValidBuyer(String indexInput);
+
+    void addUser(User user);
 
     void addSeller(String username, String password);
 
