@@ -24,7 +24,7 @@ public interface Manageable {
 
     String chooseValidBuyer(String indexInput);
 
-    void addUser(User user);
+    void addProductName(Product p);
 
     void addSeller(String username, String password);
 

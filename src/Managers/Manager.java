@@ -14,11 +14,11 @@ import java.util.InputMismatchException;
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
     private Seller[] sellers;
-    private User[] users;
+    private String[] allProductsNames;
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
-    private int numberOfUsers;
+    private int numberOfProducts;
     private final Categories categoriesArrays;
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
@@ -26,7 +26,7 @@ public class Manager implements Manageable {
     public Manager() {
         buyers = new Buyer[0];
         sellers = new Seller[0];
-        users = new User[0];
+        allProductsNames = new String[0];
         categoriesArrays = new Categories();
         comparatorSeller = new CompareSellersByProductsNumber();
         comparatorBuyer = new CompareBuyersByName();
@@ -40,12 +40,12 @@ public class Manager implements Manageable {
         return buyers;
     }
 
-    public User[] getUsers(){
-        return users;
+    public String[] getProductsNames(){
+        return allProductsNames;
     }
 
-    public int getNumberOfUsers(){
-        return numberOfUsers;
+    public int getNumberOfProducts(){
+        return numberOfProducts;
     }
 
     public int getNumberOfSellers() {
@@ -144,14 +144,14 @@ public class Manager implements Manageable {
         return null;
     }
 
-    public void addUser(User user){
-        if (users.length == numberOfUsers) {
-            if (users.length == 0) {
-                users = Arrays.copyOf(users, 1);
+    public void addProductName(Product p){
+        if (allProductsNames.length == numberOfProducts) {
+            if (allProductsNames.length == 0) {
+                allProductsNames = Arrays.copyOf(allProductsNames, 1);
             }
-            users = Arrays.copyOf(users, users.length * SIZE_INCREASE);
+            allProductsNames = Arrays.copyOf(allProductsNames, allProductsNames.length * SIZE_INCREASE);
         }
-        users[numberOfUsers++] = user;
+        allProductsNames[numberOfProducts++] = p.getProductName();
 
     }
 
@@ -164,7 +164,6 @@ public class Manager implements Manageable {
             sellers = Arrays.copyOf(sellers, sellers.length * SIZE_INCREASE);
         }
         sellers[numberOfSellers++] = seller;
-        addUser(seller);
     }
 
     public void addBuyer(String username, String password, Address address) {
@@ -176,7 +175,6 @@ public class Manager implements Manageable {
             buyers = Arrays.copyOf(buyers, buyers.length * SIZE_INCREASE);
         }
         buyers[numberOfBuyers++] = buyer;
-        addUser(buyer);
     }
 
     public String sellersInfo() {
@@ -247,6 +245,7 @@ public class Manager implements Manageable {
         }
         sellers[sellerIndex].addProduct(p1);
         addToCategoryArray(p1);
+        addProductName(p1);
     }
 
     public void addToCategoryArray(Product p) {

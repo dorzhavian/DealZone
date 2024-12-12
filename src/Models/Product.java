@@ -9,6 +9,10 @@ public class Product {
     protected int id;
     private final Category category;
 
+    public String getProductName() {
+        return productName;
+    }
+
     public Product(String productName, double productPrice, Category category) {
         this.productName = productName;
         this.productPrice = productPrice;
@@ -38,4 +42,5 @@ public class Product {
                 ", Product id: " + id +
                 ", Product category: " + category;
     }
+
 }

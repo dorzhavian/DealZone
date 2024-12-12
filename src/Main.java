@@ -6,7 +6,7 @@ import Models.Address;
 import Models.Categories;
 import Models.Factory;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     private static Scanner sc;
@@ -75,8 +75,16 @@ public class Main {
                     break;
                 case 10:
                     case10();
+                    break;
                 case 99:
                     case99();
+                    break;
+                case 100:
+                    case100();
+                    break;
+                case 101:
+                    case101();
+                    break;
                 default:
                     System.out.println("\nPlease enter a valid choice in range 0-9!");
                     break;
@@ -98,6 +106,8 @@ public class Main {
         System.out.println("9) Replace current cart with cart from history");
         System.out.println("10) Use factory for automatic shop create");
         System.out.println("99) Print hara");
+        System.out.println("100) Question 16");
+        System.out.println("101) Question 17: ");
         System.out.println("Please enter your choice: ");
     }
 
@@ -296,9 +306,56 @@ public class Main {
     }
 
     public static void case99(){
-        for(int i = 0; i < manager.getNumberOfUsers(); i++){
-            System.out.println(manager.getUsers()[i].getUserName());
+        for(int i = 0; i < manager.getNumberOfProducts(); i++){
+            System.out.println(manager.getProductsNames()[i]);
         }
+    }
+
+    /*
+    public static Set<String> productsToLinkedSet(){
+        Set<String> set = new LinkedHashSet<>();
+        for(int i = 0; i < manager.getNumberOfProducts(); i++){
+            String user = manager.getProductsNames()[i].toLowerCase();
+            set.add(user);
+        }
+        return set;
+    }
+    */
+    public static Map <String, Integer> productsToLinkedMap(){
+        Map<String, Integer> map = new LinkedHashMap<>();
+        for(int i = 0; i < manager.getNumberOfProducts(); i++){
+            String key = manager.getProductsNames()[i].toLowerCase();
+            if (map.containsKey(key)){
+                map.put(key,map.get(key) + 1);
+            }
+            else{
+                map.put(key, 1);
+            }
+        }
+        return map;
+    }
+
+    public static void case100(){
+        if(manager.getNumberOfProducts() != 0){
+          Map<String,Integer> map = productsToLinkedMap();
+          map.forEach((key, value) -> System.out.println(key + ".........." + value));
+        }
+        else{
+            System.out.println("There is no users");
+        }
+    }
+
+    public static void case101(){
+        if(manager.getNumberOfProducts() != 0){
+            Map<String,Integer> map = productsToLinkedMap();
+            System.out.println("Please enter a string: ");
+            input = sc.nextLine();
+            System.out.println("the number of times that " + input + " appears in the OG ARRAY is " +map.get(input) );
+        }
+        else{
+            System.out.println("There is no users");
+        }
+
     }
 
     public static int chooseSeller () {

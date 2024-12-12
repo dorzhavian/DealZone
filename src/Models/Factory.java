@@ -46,11 +46,11 @@ public class Factory {
         manager.addProductSeller(sellerIndex + 1, "Laptop", 950.00, Category.ELECTRONIC, 50.00); // Special price 50
         manager.addProductSeller(sellerIndex + 1, "Jacket", 75.00, Category.CLOTHES, 0);       // Special price 0
         manager.addProductSeller(sellerIndex + 1, "Desk Lamp", 45.00, Category.OFFICE, 5.00);  // Special price 5
-        manager.addProductSeller(sellerIndex + 1, "Puzzle", 25.00, Category.CHILDREN, 10.00);  // Special price 10
+        manager.addProductSeller(sellerIndex + 1, "tv", 25.00, Category.CHILDREN, 10.00);  // Special price 10
 
 // Seller 2 products (Same as Seller 0)
         manager.addProductSeller(sellerIndex + 2, "TV", 330.00, Category.ELECTRONIC, 18.00);  // Special price 18 (Same as Seller 0 but with different price)
-        manager.addProductSeller(sellerIndex + 2, "Jeans", 60.00, Category.CLOTHES, 0);         // Special price 0
+        manager.addProductSeller(sellerIndex + 2, "HAt", 60.00, Category.CLOTHES, 0);         // Special price 0
         manager.addProductSeller(sellerIndex + 2, "Printer", 150.00, Category.OFFICE, 0);      // Special price 0
         manager.addProductSeller(sellerIndex + 2, "Doll", 20.00, Category.CHILDREN, 8.00);    // Special price 8
 
@@ -68,18 +68,18 @@ public class Factory {
 
 // Seller 5 products
         manager.addProductSeller(sellerIndex + 5, "Smartwatch", 220.00, Category.ELECTRONIC, 30.00); // Special price 30
-        manager.addProductSeller(sellerIndex + 5, "T-shirt", 25.00, Category.CLOTHES, 5.00);        // Special price 5
+        manager.addProductSeller(sellerIndex + 5, "headphones", 25.00, Category.CLOTHES, 5.00);        // Special price 5
         manager.addProductSeller(sellerIndex + 5, "Office Organizer", 40.00, Category.OFFICE, 0);   // Special price 0
         manager.addProductSeller(sellerIndex + 5, "Board Game", 28.00, Category.CHILDREN, 10.00);   // Special price 10
 
 // Seller 6 products
         manager.addProductSeller(sellerIndex + 6, "Speakers", 180.00, Category.ELECTRONIC, 40.00);  // Special price 40
-        manager.addProductSeller(sellerIndex + 6, "Pants", 65.00, Category.CLOTHES, 0);             // Special price 0
+        manager.addProductSeller(sellerIndex + 6, "HAT", 65.00, Category.CLOTHES, 0);             // Special price 0
         manager.addProductSeller(sellerIndex + 6, "Monitor", 250.00, Category.OFFICE, 20.00);       // Special price 20
-        manager.addProductSeller(sellerIndex + 6, "Lego Set", 40.00, Category.CHILDREN, 15.00);     // Special price 15
+        manager.addProductSeller(sellerIndex + 6, "Headphones", 40.00, Category.CHILDREN, 15.00);     // Special price 15
 
 // Seller 7 products (Same as Seller 8)
-        manager.addProductSeller(sellerIndex + 7, "Game Console", 350.00, Category.ELECTRONIC, 0);  // Special price 0
+        manager.addProductSeller(sellerIndex + 7, "Camera", 350.00, Category.ELECTRONIC, 0);  // Special price 0
         manager.addProductSeller(sellerIndex + 7, "Hat", 20.00, Category.CLOTHES, 10.00);          // Special price 10
         manager.addProductSeller(sellerIndex + 7, "Filing Cabinet", 100.00, Category.OFFICE, 0);    // Special price 0
         manager.addProductSeller(sellerIndex + 7, "Toy Train", 18.00, Category.CHILDREN, 5.00);     // Special price 5
@@ -91,8 +91,8 @@ public class Factory {
         manager.addProductSeller(sellerIndex + 8, "Toy Helicopter", 35.00, Category.CHILDREN, 0);   // Special price 0
 
 // Seller 9 products (Same as Seller 4)
-        manager.addProductSeller(sellerIndex + 9, "Smart TV", 800.00, Category.ELECTRONIC, 50.00);  // Special price 50
-        manager.addProductSeller(sellerIndex + 9, "Blouse", 40.00, Category.CLOTHES, 0);            // Special price 0
+        manager.addProductSeller(sellerIndex + 9, "TV", 800.00, Category.ELECTRONIC, 50.00);  // Special price 50
+        manager.addProductSeller(sellerIndex + 9, "jeans", 40.00, Category.CLOTHES, 0);            // Special price 0
         manager.addProductSeller(sellerIndex + 9, "Ergonomic Chair", 200.00, Category.OFFICE, 30.00); // Special price 30
         manager.addProductSeller(sellerIndex + 9, "Kids' Book", 12.00, Category.CHILDREN, 0);       // Special price 0
 
