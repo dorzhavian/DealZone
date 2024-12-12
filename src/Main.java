@@ -285,7 +285,9 @@ public class Main {
     }
 
     public static void case10(){
-        factory.initFactory(manager);
+        int sellerIndex = manager.getNumberOfSellers();
+        int buyersIndex = manager.getNumberOfBuyers();
+        factory.initFactory(manager, sellerIndex, buyersIndex);
     }
 
     public static int chooseSeller () {
