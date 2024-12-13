@@ -5,6 +5,7 @@ import Managers.Manager;
 import Models.Address;
 import Models.Categories;
 import Models.Factory;
+import Models.Product;
 
 import java.util.*;
 
@@ -85,6 +86,12 @@ public class Main {
                 case 101:
                     case101();
                     break;
+                case 102:
+                    case102();
+                    break;
+                case 103:
+                    case103();
+                    break;
                 default:
                     System.out.println("\nPlease enter a valid choice in range 0-9!");
                     break;
@@ -105,9 +112,11 @@ public class Main {
         System.out.println("8) Product's by category");
         System.out.println("9) Replace current cart with cart from history");
         System.out.println("10) Use factory for automatic shop create");
-        System.out.println("99) Print hara");
+        System.out.println("99) Question 15");
         System.out.println("100) Question 16");
-        System.out.println("101) Question 17: ");
+        System.out.println("101) Question 17 ");
+        System.out.println("102) Question 18 ");
+        System.out.println("103) Question 19 ");
         System.out.println("Please enter your choice: ");
     }
 
@@ -307,24 +316,15 @@ public class Main {
 
     public static void case99(){
         for(int i = 0; i < manager.getNumberOfProducts(); i++){
-            System.out.println(manager.getProductsNames()[i]);
+            System.out.println(manager.getProducts()[i].getProductName());
         }
     }
 
-    /*
-    public static Set<String> productsToLinkedSet(){
-        Set<String> set = new LinkedHashSet<>();
-        for(int i = 0; i < manager.getNumberOfProducts(); i++){
-            String user = manager.getProductsNames()[i].toLowerCase();
-            set.add(user);
-        }
-        return set;
-    }
-    */
+
     public static Map <String, Integer> productsToLinkedMap(){
         Map<String, Integer> map = new LinkedHashMap<>();
         for(int i = 0; i < manager.getNumberOfProducts(); i++){
-            String key = manager.getProductsNames()[i].toLowerCase();
+            String key = manager.getProducts()[i].getProductName().toLowerCase();
             if (map.containsKey(key)){
                 map.put(key,map.get(key) + 1);
             }
@@ -355,7 +355,49 @@ public class Main {
         else{
             System.out.println("There is no users");
         }
+    }
 
+    public static void case102(){
+        if(manager.getNumberOfProducts() != 0) {
+            Map<String, Integer> map = productsToLinkedMap();
+            List<String> keyList = new ArrayList<>(map.keySet());
+            List<String> doubleNames = new ArrayList<>();
+            ListIterator<String> iterator = keyList.listIterator();
+            while(iterator.hasNext()){
+                String key = iterator.next();
+                doubleNames.add(key);
+                doubleNames.add(key);
+            }
+
+            ListIterator<String> doubleIterator = doubleNames.listIterator(doubleNames.size());
+            while(doubleIterator.hasPrevious()){
+                System.out.println(doubleIterator.previous());
+            }
+
+        }
+    }
+
+    public static Set<Product> productsToTree() {
+        Set<Product> treeSet = new TreeSet<>((p1, p2) -> {
+            int lengthCompare = Integer.compare(p1.getProductName().length(), p2.getProductName().length());
+            if (lengthCompare == 0) {
+                return p1.getProductName().compareToIgnoreCase(p2.getProductName());
+            }
+            return lengthCompare;
+        });
+        for(int i = 0; i < manager.getNumberOfProducts(); i++){
+            Product p = manager.getProducts()[i];
+            treeSet.add(p);
+        }
+        return treeSet;
+    }
+
+    public static void case103(){
+        Set<?> productsSet = productsToTree();
+        Iterator<?> productsIterator = productsSet.iterator();
+        while(productsIterator.hasNext()){
+            System.out.println(productsIterator.next().toString().toUpperCase());
+        }
     }
 
     public static int chooseSeller () {

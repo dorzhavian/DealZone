@@ -14,7 +14,7 @@ import java.util.InputMismatchException;
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
     private Seller[] sellers;
-    private String[] allProductsNames;
+    private Product[] allProducts;
     private int numberOfSellers;
     private Buyer[] buyers;
     private int numberOfBuyers;
@@ -26,7 +26,7 @@ public class Manager implements Manageable {
     public Manager() {
         buyers = new Buyer[0];
         sellers = new Seller[0];
-        allProductsNames = new String[0];
+        allProducts = new Product[0];
         categoriesArrays = new Categories();
         comparatorSeller = new CompareSellersByProductsNumber();
         comparatorBuyer = new CompareBuyersByName();
@@ -40,8 +40,8 @@ public class Manager implements Manageable {
         return buyers;
     }
 
-    public String[] getProductsNames(){
-        return allProductsNames;
+    public Product[] getProducts(){
+        return allProducts;
     }
 
     public int getNumberOfProducts(){
@@ -145,13 +145,13 @@ public class Manager implements Manageable {
     }
 
     public void addProductName(Product p){
-        if (allProductsNames.length == numberOfProducts) {
-            if (allProductsNames.length == 0) {
-                allProductsNames = Arrays.copyOf(allProductsNames, 1);
+        if (allProducts.length == numberOfProducts) {
+            if (allProducts.length == 0) {
+                allProducts = Arrays.copyOf(allProducts, 1);
             }
-            allProductsNames = Arrays.copyOf(allProductsNames, allProductsNames.length * SIZE_INCREASE);
+            allProducts = Arrays.copyOf(allProducts, allProducts.length * SIZE_INCREASE);
         }
-        allProductsNames[numberOfProducts++] = p.getProductName();
+        allProducts[numberOfProducts++] = p;
 
     }
 
