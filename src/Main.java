@@ -314,12 +314,12 @@ public class Main {
         factory.initFactory(manager, sellerIndex, buyersIndex);
     }
 
-    public static void case99(){
-        for(int i = 0; i < manager.getNumberOfProducts(); i++){
-            System.out.println(manager.getProducts()[i].getProductName());
-        }
+    public static void case99() {
+        if (manager.getNumberOfProducts() != 0) {
+            for (int i = 0; i < manager.getNumberOfProducts(); i++)
+                System.out.println(manager.getProducts()[i].getProductName());
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
-
 
     public static Map <String, Integer> productsToLinkedMap(){
         Map<String, Integer> map = new LinkedHashMap<>();
@@ -339,22 +339,18 @@ public class Main {
         if(manager.getNumberOfProducts() != 0){
           Map<String,Integer> map = productsToLinkedMap();
           map.forEach((key, value) -> System.out.println(key + ".........." + value));
-        }
-        else{
-            System.out.println("There is no users");
-        }
-    }
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
 
-    public static void case101(){
-        if(manager.getNumberOfProducts() != 0){
-            Map<String,Integer> map = productsToLinkedMap();
-            System.out.println("Please enter a string: ");
-            input = sc.nextLine();
-            System.out.println("the number of times that " + input + " appears in the OG ARRAY is " +map.get(input) );
-        }
-        else{
-            System.out.println("There is no users");
-        }
+}
+
+    public static void case101() {
+        if (manager.getNumberOfProducts() != 0) {
+            Map<String, Integer> map = productsToLinkedMap();
+            System.out.println("Please enter a string: (Enter -1 to return main menu)");
+            input = sc.nextLine().toLowerCase();
+            if (input.equals("-1")) return;
+            System.out.printf("the number of times that " + input + " appears in the OG ARRAY is %d\n" , map.get(input) == null ? 0 : map.get(input));
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
     public static void case102(){
@@ -368,13 +364,11 @@ public class Main {
                 doubleNames.add(key);
                 doubleNames.add(key);
             }
-
             ListIterator<String> doubleIterator = doubleNames.listIterator(doubleNames.size());
             while(doubleIterator.hasPrevious()){
                 System.out.println(doubleIterator.previous());
             }
-
-        }
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
     public static Set<Product> productsToTree() {
@@ -392,12 +386,14 @@ public class Main {
         return treeSet;
     }
 
-    public static void case103(){
-        Set<?> productsSet = productsToTree();
-        Iterator<?> productsIterator = productsSet.iterator();
-        while(productsIterator.hasNext()){
-            System.out.println(productsIterator.next().toString().toUpperCase());
-        }
+    public static void case103() {
+        if (manager.getNumberOfProducts() != 0) {
+            Set<?> productsSet = productsToTree();
+            Iterator<?> productsIterator = productsSet.iterator();
+            while (productsIterator.hasNext()) {
+                System.out.println(productsIterator.next().toString().toUpperCase());
+            }
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
     public static int chooseSeller () {
