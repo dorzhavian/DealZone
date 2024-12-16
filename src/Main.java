@@ -321,31 +321,17 @@ public class Main {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public static Map <String, Integer> productsToLinkedMap(){
-        Map<String, Integer> map = new LinkedHashMap<>();
-        for(int i = 0; i < manager.getNumberOfProducts(); i++){
-            String key = manager.getProducts()[i].getProductName().toLowerCase();
-            if (map.containsKey(key)){
-                map.put(key,map.get(key) + 1);
-            }
-            else{
-                map.put(key, 1);
-            }
-        }
-        return map;
-    }
-
     public static void case100(){
         if(manager.getNumberOfProducts() != 0){
-          Map<String,Integer> map = productsToLinkedMap();
-          map.forEach((key, value) -> System.out.println(key + ".........." + value));
+          Map<String,Integer> map = manager.productsToLinkedMap();                                     // first loop for create
+          map.forEach((key, value) -> System.out.println(key + ".........." + value));         // second loop for print
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
 
 }
 
     public static void case101() {
         if (manager.getNumberOfProducts() != 0) {
-            Map<String, Integer> map = productsToLinkedMap();
+            Map<String, Integer> map = manager.productsToLinkedMap();
             System.out.println("Please enter a string: (Enter -1 to return main menu)");
             input = sc.nextLine().toLowerCase();
             if (input.equals("-1")) return;
@@ -355,7 +341,7 @@ public class Main {
 
     public static void case102(){
         if(manager.getNumberOfProducts() != 0) {
-            Map<String, Integer> map = productsToLinkedMap();
+            Map<String, Integer> map = manager.productsToLinkedMap();
             List<String> keyList = new ArrayList<>(map.keySet());
             List<String> doubleNames = new ArrayList<>();
             ListIterator<String> iterator = keyList.listIterator();
@@ -371,24 +357,9 @@ public class Main {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public static Set<Product> productsToTree() {
-        Set<Product> treeSet = new TreeSet<>((p1, p2) -> {
-            int lengthCompare = Integer.compare(p1.getProductName().length(), p2.getProductName().length());
-            if (lengthCompare == 0) {
-                return p1.getProductName().compareToIgnoreCase(p2.getProductName());
-            }
-            return lengthCompare;
-        });
-        for(int i = 0; i < manager.getNumberOfProducts(); i++){
-            Product p = manager.getProducts()[i];
-            treeSet.add(p);
-        }
-        return treeSet;
-    }
-
     public static void case103() {
         if (manager.getNumberOfProducts() != 0) {
-            Set<?> productsSet = productsToTree();
+            Set<?> productsSet = manager.productsToTree();
             Iterator<?> productsIterator = productsSet.iterator();
             while (productsIterator.hasNext()) {
                 System.out.println(productsIterator.next().toString().toUpperCase());

@@ -7,9 +7,7 @@ import Enums.ExceptionsMessages;
 import Exceptions.*;
 import Models.*;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.InputMismatchException;
+import java.util.*;
 
 public class Manager implements Manageable {
     private final int SIZE_INCREASE = 2;
@@ -289,6 +287,35 @@ public class Manager implements Manageable {
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
     }
+
+    public Map<String, Integer> productsToLinkedMap(){                   // Object Oriented Design - Assignment 1
+        Map<String, Integer> map = new LinkedHashMap<>();
+        for(int i = 0; i < getNumberOfProducts(); i++){
+            String key = getProducts()[i].getProductName().toLowerCase();
+            if (map.containsKey(key)){
+                map.put(key,map.get(key) + 1);
+            }
+            else{
+                map.put(key, 1);
+            }
+        }
+        return map;
+    }
+
+    public Set<Product> productsToTree() {                   // Object Oriented Design - Assignment 1
+        Set<Product> treeSet = new TreeSet<>((p1, p2) -> {
+            int lengthCompare = Integer.compare(p1.getProductName().length(), p2.getProductName().length());
+            if (lengthCompare == 0) {
+                return p1.getProductName().compareToIgnoreCase(p2.getProductName());
+            }
+            return lengthCompare;
+        });
+        for(int i = 0; i < getNumberOfProducts(); i++){
+            treeSet.add(getProducts()[i]);
+        }
+        return treeSet;
+    }
+
 }
 
 

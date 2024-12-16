@@ -5,6 +5,10 @@ import Models.Address;
 import Models.Product;
 import Models.User;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
 
 public interface Manageable {
 
@@ -49,4 +53,9 @@ public interface Manageable {
     String pay(int buyerIndex);
 
     void replaceCarts(int historyCartIndex, int buyerIndex);
-    }
+
+    Map<String, Integer> productsToLinkedMap();
+
+    Set<Product> productsToTree();
+
+}
