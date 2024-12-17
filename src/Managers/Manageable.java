@@ -40,6 +40,8 @@ public interface Manageable {
 
     String productsByCategory();
 
+    void printProductsName();
+
     String sellersNames();
 
     String buyersNames();

@@ -208,6 +208,13 @@ public class Manager implements Manageable {
         return categoriesArrays.toString();
     }
 
+    public void printProductsName() {
+        if (getNumberOfProducts() != 0) {
+            for (int i = 0; i < getNumberOfProducts(); i++)
+                System.out.println(getProducts()[i].getProductName());
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+    }
+
     public String sellersNames() {
         StringBuilder sb = new StringBuilder("Seller's:\n--------------\n");
         for (int i = 0; i < numberOfSellers; i++) {

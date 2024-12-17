@@ -5,7 +5,6 @@ import Managers.Manager;
 import Models.Address;
 import Models.Categories;
 import Models.Factory;
-import Models.Product;
 
 import java.util.*;
 
@@ -315,10 +314,7 @@ public class Main {
     }
 
     public static void case99() {
-        if (manager.getNumberOfProducts() != 0) {
-            for (int i = 0; i < manager.getNumberOfProducts(); i++)
-                System.out.println(manager.getProducts()[i].getProductName());
-        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+        manager.printProductsName();
     }
 
     public static void case100(){
