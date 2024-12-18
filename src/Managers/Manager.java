@@ -323,6 +323,12 @@ public class Manager implements Manageable {
         return treeSet;
     }
 
+    public Set<String> productsNameToLinkedSet() {                  // Object Oriented Design - Assignment 1
+        Set <String> set = new LinkedHashSet<>();
+        for (int i = 0; i < getNumberOfProducts(); i++)
+            set.add(getProducts()[i].getProductName().toLowerCase());
+        return set;
+    }
 }
 
 

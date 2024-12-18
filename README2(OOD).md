@@ -34,7 +34,7 @@ This project manages products in a marketplace using various features implemente
 #### Case 102: Create and Modify Lists
 - **Input**: `102` in the menu (line 339 in `Main`).
 - **Action**:
-    - Creates a map (as in Case 100).
+    - Creates LinkedSet from products array with productsNameToLinkedSet() (line 326 in `Manager`).
     - Generates two `ArrayLists`: one from the map keys and another (`doubledNames`) with product names added twice.
     - Uses two `ListIterator` objects: one to add products and another to print the `doubledNames` list in reverse using `hasPrevious()`.
 

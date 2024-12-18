@@ -3,9 +3,7 @@ package Managers;
 import Enums.Category;
 import Models.Address;
 import Models.Product;
-import Models.User;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -59,5 +57,7 @@ public interface Manageable {
     Map<String, Integer> productsToLinkedMap();
 
     Set<Product> productsToTree();
+
+    Set<String> productsNameToLinkedSet();
 
 }

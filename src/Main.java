@@ -337,10 +337,9 @@ public class Main {
 
     public static void case102(){
         if(manager.getNumberOfProducts() != 0) {
-            Map<String, Integer> map = manager.productsToLinkedMap();
-            List<String> keyList = new ArrayList<>(map.keySet());
+            List<String> setList = new ArrayList<>(manager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
-            ListIterator<String> iterator = keyList.listIterator();
+            ListIterator<String> iterator = setList.listIterator();
             while(iterator.hasNext()){
                 String key = iterator.next();
                 doubleNames.add(key);
