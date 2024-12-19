@@ -92,7 +92,7 @@ public class Main {
                     case103();
                     break;
                 default:
-                    System.out.println("\nPlease enter a valid choice in range 0-9!");
+                    System.out.println("\nPlease enter a valid choice in range 0-10 / 99 - 103!");
                     break;
             }
         } while (choice != 0);
