@@ -13,7 +13,7 @@ This project manages products in a marketplace using various features implemente
 
 #### Case 10: Automatic Object Tester
 - **Input**: `10` in the menu (line 311 in `Main`).
-- **Action**: Initializes an automatic tester using `initFactory(Manager manager)` in the `Factory` class.
+- **Action**: Initializes an automatic tester using `initFactory(Manager managerFacade)` in the `Factory` class.
 - **Objects Created**: Buyers, Sellers, Products.
 
 #### Case 99: Print Product Names

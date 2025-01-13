@@ -1,45 +1,37 @@
 //DOR_ZHAVIAN_211337845_&_ASAF_BANANI_211961933
 
 import Enums.Category;
-import Managers.Manager;
-import Models.Address;
-import Models.Categories;
-import Models.Factory;
+import Managers.ManagerFacade;
+import Models.*;
 
 import java.util.*;
 
 public class Main {
     private static Scanner sc;
-    private static Manager manager;
+    private static ManagerFacade managerFacade;
     private static String input;
     private static String message;
     private static Factory factory;
 
+    private static UserInput uI; // TRY
+    private static Menu menu; // TRY
+
     public static void main(String[] args) {
         sc = new Scanner(System.in);
-        manager = new Manager();
+        uI = new UserInput();
+        menu = new Menu();
+        managerFacade = ManagerFacade.getInstance();
         factory = new Factory();
-        menu(manager);
+        menu(managerFacade);
         sc.close();
     }
 
-    private static void menu(Manager manager) {
+    private static void menu(ManagerFacade managerFacade) {
+        menu.start();
         int choice;
-        System.out.println("\n------------------------------------------------------------------------");
-        System.out.println(" ------------HELLO AND WELCOME TO OUR BUYER - SELLER PROGRAM-----------");
-        System.out.println(" ------------(In anytime press -1 for return to main menu)-------------");
-        System.out.println("------------------------------------------------------------------------");
         do {
-            printMenu();
-            try {
-                input = sc.next();
-                choice = Integer.parseInt(input);
-            } catch (Exception e) {
-                System.out.println("\nInvalid input, please enter a digit!");
-                choice = -1;
-                continue;
-            }
-            sc.nextLine();
+            menu.printMenu();
+            choice = uI.getInt();
             switch (choice) {
                 case -1:
                     break;
@@ -62,13 +54,13 @@ public class Main {
                     case5();
                     break;
                 case 6:
-                    System.out.println(manager.buyersInfo());
+                    System.out.println(managerFacade.buyersInfo());
                     break;
                 case 7:
-                    System.out.println(manager.sellersInfo());
+                    System.out.println(managerFacade.sellersInfo());
                     break;
                 case 8:
-                    System.out.println(manager.productsByCategory());
+                    System.out.println(managerFacade.productsByCategory());
                     break;
                 case 9:
                     case9();
@@ -98,88 +90,58 @@ public class Main {
         } while (choice != 0);
     }
 
-    private static void printMenu() {
-        System.out.println("\nMenu : ");
-        System.out.println("0) Exit");
-        System.out.println("1) Add seller");
-        System.out.println("2) Add buyer");
-        System.out.println("3) Add item for seller");
-        System.out.println("4) Add item for buyer");
-        System.out.println("5) Payment for buyer");
-        System.out.println("6) Buyer's details");
-        System.out.println("7) Seller's details");
-        System.out.println("8) Product's by category");
-        System.out.println("9) Replace current cart with cart from history");
-        System.out.println("10) Use factory for automatic shop create");
-        System.out.println("99) Question 15");
-        System.out.println("100) Question 16");
-        System.out.println("101) Question 17 ");
-        System.out.println("102) Question 18 ");
-        System.out.println("103) Question 19 ");
-        System.out.println("Please enter your choice: ");
-    }
-
     public static void case1() {
         System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
-            do input = sc.nextLine();
-            while (input.isEmpty());
+            input = uI.getString();
             if (input.equals("-1")) return;
-            message = manager.isExistSeller(input);
+            message = managerFacade.isExistSeller(input);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
         String username = input;
         System.out.println("Enter password: (Enter -1 to return main menu)");
-        do input = sc.nextLine();    // password
-        while (input.isEmpty());
+        input = uI.getString();
         if (input.equals("-1")) return;
-        manager.addSeller(username, input);
+        managerFacade.addSeller(username, input);
         System.out.println("Seller added successfully.");
     }
 
     public static void case2() {
         System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
-            do input = sc.nextLine();
-            while (input.isEmpty());
+            input = uI.getString();
             if (input.equals("-1")) return;
-            message = manager.isExistBuyer(input);
+            message = managerFacade.isExistBuyer(input);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
         String username = input;
         System.out.println("Enter password: (Enter -1 to return main menu)");
-        do input = sc.nextLine();
-        while (input.isEmpty());
-        if (input.equals("-1")) return;
-        String password = input;
+        String password = uI.getString();
+        if (password.equals("-1")) return;
         System.out.println("Enter your full address: ");
         System.out.println("Street: (Enter -1 to return main menu)");
-        do input = sc.nextLine();
-        while (input.isEmpty());
-        if (input.equals("-1")) return;
-        String street = input;
+        String street= uI.getString();
+        if (street.equals("-1")) return;
         System.out.println("House number: (Enter -1 to return main menu)");
-        String houseNum = sc.next();
+        String houseNum = uI.getString();
         if (houseNum.equals("-1")) return;
         System.out.println("City: (Enter -1 to return main menu)");
-        do input = sc.nextLine();
-        while (input.isEmpty());
+        String city = uI.getString();
         if (input.equals("-1")) return;
-        String city = input;
         System.out.println("State: (Enter -1 to return main menu)");
-        String state = sc.next();
+        String state = uI.getString();
         if (state.equals("-1")) return;
         Address address = new Address (street, houseNum, city, state);
-        manager.addBuyer(username, password, address);
+        managerFacade.addBuyer(username, password, address);
         System.out.println("Buyer added successfully.");
     }
 
     public static void case3 () {
-        if (manager.getNumberOfSellers() == 0) {
+        if (managerFacade.getNumberOfSellers() == 0) {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
@@ -194,7 +156,7 @@ public class Main {
         do {
             input = sc.next();
             if (input.equals("-1")) return;
-            message = manager.validPrice(input);
+            message = managerFacade.validPrice(input);
             if (message != null) {
                 System.out.println(message);
             }
@@ -205,7 +167,7 @@ public class Main {
         do {
             input = sc.next();
             if (input.equals("-1")) return;
-            message = manager.validCategoryIndex(input);
+            message = managerFacade.validCategoryIndex(input);
             if (message != null) {
                 System.out.println(message);
             }
@@ -221,7 +183,7 @@ public class Main {
                 do {
                     input = sc.next();
                     if (input.equals("-1")) return;
-                    message = manager.validPrice(input);
+                    message = managerFacade.validPrice(input);
                     if (message != null) {
                         System.out.println(message);
                     }
@@ -233,16 +195,16 @@ public class Main {
                 System.out.println("Please enter YES / NO only !");
             }
         } while (!input.equalsIgnoreCase("no"));
-        manager.addProductSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice);
+        managerFacade.addProductSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice);
         System.out.println("Product added successfully.");
     }
 
     public static void case4 () {
-        if (manager.getNumberOfBuyers() == 0) {
+        if (managerFacade.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
-        if (manager.getNumberOfSellers() == 0) {
+        if (managerFacade.getNumberOfSellers() == 0) {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
@@ -250,84 +212,84 @@ public class Main {
         if (buyerIndex == -1) return;
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
-        if (manager.getSellers()[sellerIndex].getNumOfProducts() == 0) {
+        if (managerFacade.getSellers()[sellerIndex].getNumOfProducts() == 0) {
             System.out.println("This seller haven't products yet, cannot be proceed. return to Menu.");
             return;
         }
-        System.out.println(manager.getSellers()[sellerIndex].toString());
+        System.out.println(managerFacade.getSellers()[sellerIndex].toString());
         System.out.println("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
         do {
             input = sc.next();
             if (input.equals("-1")) return;
-            message = manager.validProductIndex(sellerIndex, input);
+            message = managerFacade.validProductIndex(sellerIndex, input);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
         int productIndex = Integer.parseInt(input);
-        manager.addProductBuyer(buyerIndex,sellerIndex,productIndex - 1);
+        managerFacade.addProductBuyer(buyerIndex,sellerIndex,productIndex - 1);
         System.out.println("Product added successfully to cart.");
     }
 
     public static void case5 () {
-        if (manager.getNumberOfBuyers() == 0) {
+        if (managerFacade.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
         System.out.println("Please choose buyer from list to process checkout: (Enter -1 to return main menu)");
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        System.out.println(manager.pay(buyerIndex));
+        System.out.println(managerFacade.pay(buyerIndex));
     }
 
     public static void case9 () {
-        if (manager.getNumberOfBuyers() == 0) {
+        if (managerFacade.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        if (manager.getBuyers()[buyerIndex].getHistoryCartsNum() == 0) {
+        if (managerFacade.getBuyers()[buyerIndex].getHistoryCartsNum() == 0) {
             System.out.println("\nHistory cart's are empty for this buyer, cannot proceed. return to main menu.");
             return;
         }
-        System.out.println(manager.getBuyers()[buyerIndex].toString());
+        System.out.println(managerFacade.getBuyers()[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
         System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
         do {
              input = sc.next();
              if (input.equals("-1")) return;
-             message = manager.isValidHistoryCartIndex(input, buyerIndex);
+             message = managerFacade.isValidHistoryCartIndex(input, buyerIndex);
              if (message != null) {
                  System.out.println(message);
              }
         } while (message != null);
         int historyCartIndex = Integer.parseInt(input);
-        manager.replaceCarts(historyCartIndex - 1, buyerIndex);
+        managerFacade.replaceCarts(historyCartIndex - 1, buyerIndex);
         System.out.println("Your current cart update successfully.");
     }
 
     public static void case10(){
-        int sellerIndex = manager.getNumberOfSellers();
-        int buyersIndex = manager.getNumberOfBuyers();
-        factory.initFactory(manager, sellerIndex, buyersIndex);
+        int sellerIndex = managerFacade.getNumberOfSellers();
+        int buyersIndex = managerFacade.getNumberOfBuyers();
+        factory.hardcodedFactory(managerFacade, sellerIndex, buyersIndex);
     }
 
     public static void case99() {
-        manager.printProductsName();
+        managerFacade.printProductsName();
     }
 
     public static void case100(){
-        if(manager.getNumberOfProducts() != 0){
-          Map<String,Integer> map = manager.productsToLinkedMap();                                     // first loop for create
+        if(managerFacade.getNumberOfProducts() != 0){
+          Map<String,Integer> map = managerFacade.productsToLinkedMap();                                     // first loop for create
           map.forEach((key, value) -> System.out.println(key + ".........." + value));         // second loop for print
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
 
 }
 
     public static void case101() {
-        if (manager.getNumberOfProducts() != 0) {
-            Map<String, Integer> map = manager.productsToLinkedMap();
+        if (managerFacade.getNumberOfProducts() != 0) {
+            Map<String, Integer> map = managerFacade.productsToLinkedMap();
             System.out.println("Please enter a string: (Enter -1 to return main menu)");
             input = sc.nextLine().toLowerCase();
             if (input.equals("-1")) return;
@@ -336,8 +298,8 @@ public class Main {
     }
 
     public static void case102(){
-        if(manager.getNumberOfProducts() != 0) {
-            List<String> setList = new ArrayList<>(manager.productsNameToLinkedSet());
+        if(managerFacade.getNumberOfProducts() != 0) {
+            List<String> setList = new ArrayList<>(managerFacade.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
             ListIterator<String> iterator = setList.listIterator();
             while(iterator.hasNext()){
@@ -353,8 +315,8 @@ public class Main {
     }
 
     public static void case103() {
-        if (manager.getNumberOfProducts() != 0) {
-            Set<?> productsSet = manager.productsToTree();
+        if (managerFacade.getNumberOfProducts() != 0) {
+            Set<?> productsSet = managerFacade.productsToTree();
             Iterator<?> productsIterator = productsSet.iterator();
             while (productsIterator.hasNext()) {
                 System.out.println(productsIterator.next().toString().toUpperCase());
@@ -363,12 +325,12 @@ public class Main {
     }
 
     public static int chooseSeller () {
-        System.out.println(manager.sellersNames());
+        System.out.println(managerFacade.sellersNames());
         System.out.println("Please choose seller from the list above: (Enter -1 to return main menu)");
         while (true) {
             input = sc.next();
             if (input.equals("-1")) return -1;
-            message = manager.chooseValidSeller(input);
+            message = managerFacade.chooseValidSeller(input);
             if (message != null) {
                 System.out.println(message);
             } else {
@@ -379,12 +341,12 @@ public class Main {
     }
 
     public static int chooseBuyer () {
-        System.out.println(manager.buyersNames());
+        System.out.println(managerFacade.buyersNames());
         System.out.println("Please choose buyer from the list above: (Enter -1 to return main menu)");
         while (true) {
             input = sc.next();
             if (input.equals("-1")) return -1;
-            message = manager.chooseValidBuyer(input);
+            message = managerFacade.chooseValidBuyer(input);
             if (message != null) {
                 System.out.println(message);
             } else {

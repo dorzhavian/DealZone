@@ -9,7 +9,8 @@ import Models.*;
 
 import java.util.*;
 
-public class Manager implements Manageable {
+public class ManagerFacade implements Manageable {
+    private static ManagerFacade instance;
     private final int SIZE_INCREASE = 2;
     private Seller[] sellers;
     private Product[] allProducts;
@@ -21,7 +22,13 @@ public class Manager implements Manageable {
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
 
-    public Manager() {
+    public static ManagerFacade getInstance() {                          // SINGLETON !!!!!!!
+        if (instance == null)
+            instance = new ManagerFacade();
+        return instance;
+    }
+
+    private ManagerFacade() {                                          // PRIVATE CONSTRUCTOR FOR SINGLETON
         buyers = new Buyer[0];
         sellers = new Seller[0];
         allProducts = new Product[0];
