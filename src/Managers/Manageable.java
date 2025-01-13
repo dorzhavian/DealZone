@@ -10,11 +10,11 @@ import java.util.Set;
 
 public interface Manageable {
 
-    String validProductIndex(int sellerIndex, String productIndexInput);
+    String validProductIndex(int sellerIndex, int productIndexInput);
 
-    String validPrice(String priceInput);
+    String validPrice(double priceInput);
 
-    String validCategoryIndex(String categoryInput);
+    String validCategoryIndex(int categoryInput);
 
     String isExistSeller (String name);
 

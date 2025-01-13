@@ -16,12 +16,20 @@ public class Factory {
             return new Seller(username, password);
     }
 
-    public static Product createProduct (String name, float price, Category category) {
+    public static Product createProduct (String name, double price, Category category) {
             return new Product(name, price, category);
     }
 
-    public static ProductSpecialPackage createProductSpecialPackage (String name, float price, Category category, double specialPackagePrice) {
+    public static ProductSpecialPackage createProductSpecialPackage (String name, double price, Category category, double specialPackagePrice) {
             return new ProductSpecialPackage(name, price, category, specialPackagePrice);
+    }
+
+    public static Product createProductForBuyer(Product product){
+        return new Product(product);
+    }
+
+    public static ProductSpecialPackage createProductSpecialPackageForBuyer(Product product, double specialPackagePrice){
+        return new ProductSpecialPackage(product, specialPackagePrice);
     }
 
     public static Address createAddress (String street, String houseName, String city, String state) {

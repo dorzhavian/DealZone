@@ -21,6 +21,8 @@ public class ManagerFacade implements Manageable {
     private final Categories categoriesArrays;
     private final Comparator<Seller> comparatorSeller;
     private final Comparator<Buyer> comparatorBuyer;
+    private static String input;
+    private static String message;
 
     public static ManagerFacade getInstance() {                          // SINGLETON !!!!!!!
         if (instance == null)
@@ -35,6 +37,185 @@ public class ManagerFacade implements Manageable {
         categoriesArrays = new Categories();
         comparatorSeller = new CompareSellersByProductsNumber();
         comparatorBuyer = new CompareBuyersByName();
+    }
+
+    public void case1(UserInput uI) {
+        do {
+            input = uI.getUserName();
+            if (input.equals("-1")) return;
+            message = isExistSeller(input);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        String username = input;
+        input = uI.getPassword();
+        if (input.equals("-1")) return;
+        addSeller(username, input);
+        System.out.println("Seller added successfully.");
+    }
+
+    public void case2(UserInput uI) {
+        //System.out.println("Enter username: (Enter -1 to return main menu)");
+        do {
+            input = uI.getUserName();
+            if (input.equals("-1")) return;
+            message = isExistBuyer(input);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        String username = input;
+        String password = uI.getPassword();
+        if (password.equals("-1")) return;
+        System.out.println("Enter your full address: ");
+        String street= uI.getStreet();
+        if (street.equals("-1")) return;
+        String houseNum = uI.getHouseNum();
+        if (houseNum.equals("-1")) return;
+        String city = uI.getCity();
+        if (input.equals("-1")) return;
+        String state = uI.getState();
+        if (state.equals("-1")) return;
+        Address address = Factory.createAddress(street, houseNum, city, state);
+        addBuyer(username, password, address);
+        System.out.println("Buyer added successfully.");
+    }
+
+    public void case3 (UserInput uI) {
+        double productPrice = 0;
+        if (getNumberOfSellers() == 0) {
+            System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
+            return;
+        }
+        int sellerIndex = chooseSeller(uI);
+        if (sellerIndex == -1) return;
+        //System.out.println("Enter product name to add: (Enter -1 to return main menu)");
+        do input = uI.getProductName();
+        while (input.isEmpty());
+        if (input.equals("-1")) return;
+        String productName = input;
+        //System.out.println("Enter product price: (Enter -1 to return main menu)");
+        do {
+            productPrice = uI.getProductPrice();
+            if (productPrice == -1) return;
+            message = validPrice(productPrice);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        System.out.println(Categories.categoriesByNames());
+        int categoryIndex = 0;
+        //System.out.println("Choose category: (Enter -1 to return main menu)\n");
+        do {
+            categoryIndex = uI.getProductCategory();
+            if (categoryIndex == -1) return;
+            message = validCategoryIndex(categoryIndex);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        System.out.println("This product have special package? YES / NO : (Enter -1 to return main menu) ");
+        double specialPackagePrice = 0;
+        do {
+            input = uI.getString();
+            if (input.equals("-1")) return;
+            if (input.equalsIgnoreCase("yes")) {
+                //System.out.println("Enter price for special package: (Enter -1 to return main menu)");
+                do {
+                    specialPackagePrice = uI.getSpecialPackagePrice();
+                    if (input.equals("-1")) return;
+                    message = validPrice(specialPackagePrice);
+                    if (message != null) {
+                        System.out.println(message);
+                    }
+                } while (message != null);
+                break;
+            }
+            if (!input.equalsIgnoreCase("no")) {
+                System.out.println("Please enter YES / NO only !");
+            }
+        } while (!input.equalsIgnoreCase("no"));
+        addProductSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice);
+        System.out.println("Product added successfully.");
+    }
+
+
+    public void case4 (UserInput uI) {
+        if (getNumberOfBuyers() == 0) {
+            System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
+            return;
+        }
+        if (getNumberOfSellers() == 0) {
+            System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
+            return;
+        }
+        int buyerIndex = chooseBuyer(uI);
+        if (buyerIndex == -1) return;
+        int sellerIndex = chooseSeller(uI);
+        if (sellerIndex == -1) return;
+        if (getSellers()[sellerIndex].getNumOfProducts() == 0) {
+            System.out.println("This seller haven't products yet, cannot be proceed. return to Menu.");
+            return;
+        }
+        System.out.println(getSellers()[sellerIndex].toString());
+        System.out.println("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
+        int productIndex = 0;
+        do {
+            productIndex = uI.getInt();
+            if (input.equals("-1")) return;
+            message = validProductIndex(sellerIndex, productIndex);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        addProductBuyer(buyerIndex,sellerIndex,productIndex - 1);
+        System.out.println("Product added successfully to cart.");
+    }
+
+
+    public void case5 (UserInput uI) {
+        if (getNumberOfBuyers() == 0) {
+            System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
+            return;
+        }
+        System.out.println("Please choose buyer from list to process checkout: (Enter -1 to return main menu)");
+        int buyerIndex = chooseBuyer(uI);
+        if (buyerIndex == -1) return;
+        System.out.println(pay(buyerIndex));
+    }
+
+
+    public int chooseBuyer (UserInput uI) {
+        System.out.println(buyersNames());
+        System.out.println("Please choose buyer from the list above: (Enter -1 to return main menu)");
+        while (true) {
+            input = uI.getString();
+            if (input.equals("-1")) return -1;
+            message = chooseValidBuyer(input);
+            if (message != null) {
+                System.out.println(message);
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(input) - 1;
+    }
+
+    public int chooseSeller (UserInput uI) {
+        System.out.println(sellersNames());
+        System.out.println("Please choose seller from the list above: (Enter -1 to return main menu)");
+        while (true) {
+            input = uI.getString();
+            if (input.equals("-1")) return -1;
+            message = chooseValidSeller(input);
+            if (message != null) {
+                System.out.println(message);
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(input) - 1;
     }
 
     public Seller[] getSellers() {
@@ -61,10 +242,9 @@ public class ManagerFacade implements Manageable {
         return numberOfBuyers;
     }
 
-    public String validProductIndex(int sellerIndex, String productIndexInput) {
+    public String validProductIndex(int sellerIndex, int productIndexInput) {
         try {
-            int productIndex = Integer.parseInt(productIndexInput);
-            if (productIndex <= 0 || productIndex > sellers[sellerIndex].getNumOfProducts()) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_PRODUCT_INDEX.getExceptionMessage());
+            if (productIndexInput <= 0 || productIndexInput > sellers[sellerIndex].getNumOfProducts()) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_PRODUCT_INDEX.getExceptionMessage());
         } catch (NumberFormatException e) {
             return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         } catch (IndexOutOfBoundsException e) {
@@ -73,10 +253,9 @@ public class ManagerFacade implements Manageable {
         return null;
     }
 
-    public String validPrice(String priceInput) {
+    public String validPrice(double priceInput) {
         try {
-            double price = Double.parseDouble(priceInput);
-            if (price <= 0) throw new InputMismatchException(ExceptionsMessages.INVALID_PRICE_VALUE.getExceptionMessage());
+            if (priceInput <= 0) throw new InputMismatchException(ExceptionsMessages.INVALID_PRICE_VALUE.getExceptionMessage());
         } catch (NullPointerException e){
             return ExceptionsMessages.PRICE_EMPTY.getExceptionMessage();
         } catch (NumberFormatException e) {
@@ -87,10 +266,9 @@ public class ManagerFacade implements Manageable {
         return null;
     }
 
-    public String validCategoryIndex(String categoryInput) {
+    public String validCategoryIndex(int categoryInput) {
         try {
-            int categoryChoice = Integer.parseInt(categoryInput);
-            if (categoryChoice <= 0 || categoryChoice > Category.values().length) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_CATEGORY_INDEX.getExceptionMessage());
+            if (categoryInput <= 0 || categoryInput > Category.values().length) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_CATEGORY_INDEX.getExceptionMessage());
         } catch (NumberFormatException e) {
             return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         } catch (IndexOutOfBoundsException e) {
@@ -161,7 +339,7 @@ public class ManagerFacade implements Manageable {
     }
 
     public void addSeller(String username, String password) {
-        Seller seller = new Seller(username, password);
+        Seller seller = Factory.createSeller(username, password);
         if (sellers.length == numberOfSellers) {
             if (sellers.length == 0) {
                 sellers = Arrays.copyOf(sellers, 1);
@@ -241,9 +419,9 @@ public class ManagerFacade implements Manageable {
     public void addProductBuyer(int buyerIndex, int sellerIndex, int productIndex) {
         Product p1;
         if (sellers[sellerIndex].getProducts()[productIndex] instanceof ProductSpecialPackage) {
-            p1 = new ProductSpecialPackage(sellers[sellerIndex].getProducts()[productIndex],((ProductSpecialPackage) sellers[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
+            p1 = Factory.createProductSpecialPackageForBuyer(sellers[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellers[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
         } else {
-            p1 = new Product(sellers[sellerIndex].getProducts()[productIndex]);
+            p1 = Factory.createProductForBuyer(sellers[sellerIndex].getProducts()[productIndex]);
         }
         buyers[buyerIndex].getCurrentCart().addProductToCart(p1);
     }
@@ -251,9 +429,9 @@ public class ManagerFacade implements Manageable {
     public void addProductSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice) {
         Product p1;
         if (specialPackagePrice == 0) {
-            p1 = new Product(productName, productPrice, c);
+            p1 = Factory.createProduct(productName, productPrice, c);
         } else {
-            p1 = new ProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+            p1 = Factory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
         }
         sellers[sellerIndex].addProduct(p1);
         addToCategoryArray(p1);
