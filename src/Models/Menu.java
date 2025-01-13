@@ -2,6 +2,14 @@ package Models;
 
 public class Menu {
 
+    private static Menu instance;
+
+    public static Menu getInstance() {                          // SINGLETON !!!!!!!
+        if (instance == null)
+            instance = new Menu();
+        return instance;
+    }
+
     public void printMenu() {
         System.out.println("\nMenu : ");
         System.out.println("0) Exit");

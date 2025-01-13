@@ -3,12 +3,17 @@ package Managers;
 import Enums.Category;
 import Models.Address;
 import Models.Product;
+import Models.UserInput;
 
 import java.util.Map;
 import java.util.Set;
 
 
 public interface Manageable {
+
+    int chooseBuyer (UserInput uI);
+
+    int chooseSeller (UserInput uI);
 
     String validProductIndex(int sellerIndex, int productIndexInput);
 
@@ -20,7 +25,7 @@ public interface Manageable {
 
     String isExistBuyer (String name);
 
-    String isValidHistoryCartIndex(String indexCartInput, int buyerIndex);
+    String isValidHistoryCartIndex(int indexCartInput, int buyerIndex);
 
     String chooseValidSeller(String indexInput);
 

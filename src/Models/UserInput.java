@@ -1,9 +1,15 @@
 package Models;
-
 import java.util.Scanner;
 
 public class UserInput {
     private static final Scanner sc = new Scanner(System.in);
+    private static UserInput instance;
+
+    public static UserInput getInstance() {                          // SINGLETON !!!!!!!
+        if (instance == null)
+            instance = new UserInput();
+        return instance;
+    }
 
     public String getString() {
         String input;
@@ -98,6 +104,8 @@ public class UserInput {
         return getInt();
     }
 
-
-
+    public void closeScanner()
+    {
+        sc.close();
+    }
 }

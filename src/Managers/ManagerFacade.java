@@ -56,7 +56,6 @@ public class ManagerFacade implements Manageable {
     }
 
     public void case2(UserInput uI) {
-        //System.out.println("Enter username: (Enter -1 to return main menu)");
         do {
             input = uI.getUserName();
             if (input.equals("-1")) return;
@@ -83,19 +82,17 @@ public class ManagerFacade implements Manageable {
     }
 
     public void case3 (UserInput uI) {
-        double productPrice = 0;
-        if (getNumberOfSellers() == 0) {
+        double productPrice;
+        if (numberOfSellers == 0) {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
         int sellerIndex = chooseSeller(uI);
         if (sellerIndex == -1) return;
-        //System.out.println("Enter product name to add: (Enter -1 to return main menu)");
         do input = uI.getProductName();
         while (input.isEmpty());
         if (input.equals("-1")) return;
         String productName = input;
-        //System.out.println("Enter product price: (Enter -1 to return main menu)");
         do {
             productPrice = uI.getProductPrice();
             if (productPrice == -1) return;
@@ -105,8 +102,7 @@ public class ManagerFacade implements Manageable {
             }
         } while (message != null);
         System.out.println(Categories.categoriesByNames());
-        int categoryIndex = 0;
-        //System.out.println("Choose category: (Enter -1 to return main menu)\n");
+        int categoryIndex;
         do {
             categoryIndex = uI.getProductCategory();
             if (categoryIndex == -1) return;
@@ -121,7 +117,6 @@ public class ManagerFacade implements Manageable {
             input = uI.getString();
             if (input.equals("-1")) return;
             if (input.equalsIgnoreCase("yes")) {
-                //System.out.println("Enter price for special package: (Enter -1 to return main menu)");
                 do {
                     specialPackagePrice = uI.getSpecialPackagePrice();
                     if (input.equals("-1")) return;
@@ -140,13 +135,12 @@ public class ManagerFacade implements Manageable {
         System.out.println("Product added successfully.");
     }
 
-
     public void case4 (UserInput uI) {
-        if (getNumberOfBuyers() == 0) {
+        if (numberOfBuyers == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
-        if (getNumberOfSellers() == 0) {
+        if (numberOfSellers == 0) {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
@@ -154,13 +148,13 @@ public class ManagerFacade implements Manageable {
         if (buyerIndex == -1) return;
         int sellerIndex = chooseSeller(uI);
         if (sellerIndex == -1) return;
-        if (getSellers()[sellerIndex].getNumOfProducts() == 0) {
+        if (sellers[sellerIndex].getNumOfProducts() == 0) {
             System.out.println("This seller haven't products yet, cannot be proceed. return to Menu.");
             return;
         }
-        System.out.println(getSellers()[sellerIndex].toString());
+        System.out.println(sellers[sellerIndex].toString());
         System.out.println("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
-        int productIndex = 0;
+        int productIndex;
         do {
             productIndex = uI.getInt();
             if (input.equals("-1")) return;
@@ -173,9 +167,8 @@ public class ManagerFacade implements Manageable {
         System.out.println("Product added successfully to cart.");
     }
 
-
     public void case5 (UserInput uI) {
-        if (getNumberOfBuyers() == 0) {
+        if (numberOfBuyers == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
@@ -185,6 +178,147 @@ public class ManagerFacade implements Manageable {
         System.out.println(pay(buyerIndex));
     }
 
+    public void case9 (UserInput uI) {
+        int choice = 0;
+        if (numberOfBuyers == 0) {
+            System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
+            return;
+        }
+        int buyerIndex = chooseBuyer(uI);
+        if (buyerIndex == -1) return;
+        if (buyers[buyerIndex].getHistoryCartsNum() == 0) {
+            System.out.println("\nHistory cart's are empty for this buyer, cannot proceed. return to main menu.");
+            return;
+        }
+        System.out.println(buyers[buyerIndex].toString());
+        System.out.println("Please choose cart number from history carts:");
+        System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
+        do {
+            choice = uI.getInt();
+            if (choice == -1) return;
+            message = isValidHistoryCartIndex(choice, buyerIndex);
+            if (message != null) {
+                System.out.println(message);
+            }
+        } while (message != null);
+        int historyCartIndex = Integer.parseInt(input);
+        replaceCarts(historyCartIndex - 1, buyerIndex);
+        System.out.println("Your current cart update successfully.");
+    }
+
+    public void hardcoded() {
+
+        int sellerIndex = numberOfSellers;
+        int buyerIndex = numberOfBuyers;
+
+        // Adding 5 sellers with real names and realistic passwords
+        addSeller("Jack", "J@ck2024!");
+        addSeller("Dor", "DorPass@123");
+        addSeller("Tal", "Tal2024Secure");
+        addSeller("Maya", "Maya@Home2024");
+        addSeller("Avi", "AviPassword#45");
+
+// Adding 5 buyers with usernames, realistic passwords, and addresses
+        addBuyer("Jack", "J@ck2024!", Factory.createAddress("Main St", "123", "Los Angeles", "California"));
+        addBuyer("Dor", "DorPass@123", Factory.createAddress("Oak Rd", "456", "San Francisco", "California"));
+        addBuyer("Tal", "Tal2024Secure", Factory.createAddress("Pine Ave", "789", "New York", "New York"));
+        addBuyer("Maya", "Maya@Home2024", Factory.createAddress("Maple St", "101", "Chicago", "Illinois"));
+        addBuyer("Avi", "AviPassword#45", Factory.createAddress("Cedar Blvd", "202", "Houston", "Texas"));
+
+// Adding products to sellers
+
+// Seller 0 products
+        addProductSeller(sellerIndex, "TV", 325.00, Category.ELECTRONIC, 15.00);
+        addProductSeller(sellerIndex, "Shirt", 50.00, Category.CLOTHES, 0);
+
+// Seller 1 products
+        addProductSeller(sellerIndex + 1, "Laptop", 950.00, Category.ELECTRONIC, 50.00);
+        addProductSeller(sellerIndex + 1, "Jacket", 75.00, Category.CLOTHES, 0);
+        addProductSeller(sellerIndex + 1, "Desk Lamp", 45.00, Category.OFFICE, 5.00);
+
+// Seller 2 products
+        addProductSeller(sellerIndex + 2, "TV", 330.00, Category.ELECTRONIC, 18.00);
+        addProductSeller(sellerIndex + 2, "Hat", 60.00, Category.CLOTHES, 0);
+
+// Seller 3 products
+        addProductSeller(sellerIndex + 3, "Headphones", 120.00, Category.ELECTRONIC, 0);
+        addProductSeller(sellerIndex + 3, "Sweater", 80.00, Category.CLOTHES, 15.00);
+        addProductSeller(sellerIndex + 3, "desk lamP", 130.00, Category.OFFICE, 0);
+
+// Seller 4 products
+        addProductSeller(sellerIndex + 4, "Smartwatch", 220.00, Category.ELECTRONIC, 30.00);
+        addProductSeller(sellerIndex + 4, "hAt", 25.00, Category.CLOTHES, 5.00);
+        addProductSeller(sellerIndex + 4, "Office Organizer", 40.00, Category.OFFICE, 0);
+        addProductSeller(sellerIndex + 4, "Board Game", 28.00, Category.CHILDREN, 10.00);
+
+// Adding products to carts
+
+// Buyer 0
+        addProductBuyer(buyerIndex, sellerIndex, 0);  // Buyer 0 buys TV from Seller 0
+        addProductBuyer(buyerIndex, sellerIndex + 1, 1);  // Buyer 0 buys Jacket from Seller 1
+
+// Buyer 1
+        addProductBuyer(buyerIndex + 1, sellerIndex + 2, 0);  // Buyer 1 buys TV from Seller 2
+        addProductBuyer(buyerIndex + 1, sellerIndex + 3, 1);  // Buyer 1 buys Sweater from Seller 3
+
+// Buyer 2
+        addProductBuyer(buyerIndex + 2, sellerIndex + 4, 0);  // Buyer 2 buys Smartwatch from Seller 4
+        addProductBuyer(buyerIndex + 2, sellerIndex, 1);  // Buyer 2 buys Shirt from Seller 0
+
+// Buyer 3
+        addProductBuyer(buyerIndex + 3, sellerIndex + 1, 2);  // Buyer 3 buys Desk Lamp from Seller 1
+        addProductBuyer(buyerIndex + 3, sellerIndex + 4, 1);  // Buyer 3 buys Hat from Seller 4
+
+// Buyer 4
+        addProductBuyer(buyerIndex + 4, sellerIndex + 3, 0);  // Buyer 4 buys Headphones from Seller 3
+        addProductBuyer(buyerIndex + 4, sellerIndex + 2, 1);  // Buyer 4 buys Hat from Seller 2
+
+        System.out.println("Hardcoded added successfully!");
+    }
+
+    public void case100(){
+        if(numberOfProducts != 0){
+            Map<String,Integer> map = productsToLinkedMap();
+            map.forEach((key, value) -> System.out.println(key + ".........." + value));
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+    }
+
+    public void case101(UserInput uI) {
+        if (numberOfProducts != 0) {
+            Map<String, Integer> map = productsToLinkedMap();
+            System.out.println("Please enter a string: (Enter -1 to return main menu)");
+            input = uI.getString().toLowerCase();
+            if (input.equals("-1")) return;
+            System.out.printf("the number of times that " + input + " appears in the OG ARRAY is %d\n" , map.get(input) == null ? 0 : map.get(input));
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+    }
+
+    public void case102(){
+        if(numberOfProducts != 0) {
+            List<String> setList = new ArrayList<>(productsNameToLinkedSet());
+            List<String> doubleNames = new ArrayList<>();
+            ListIterator<String> iterator = setList.listIterator();
+            while(iterator.hasNext()){
+                String key = iterator.next();
+                doubleNames.add(key);
+                doubleNames.add(key);
+            }
+            ListIterator<String> doubleIterator = doubleNames.listIterator(doubleNames.size());
+            while(doubleIterator.hasPrevious()){
+                System.out.println(doubleIterator.previous());
+            }
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+    }
+
+    public void case103() {
+        if (numberOfProducts != 0) {
+            Set<?> productsSet = productsToTree();
+            Iterator<?> productsIterator = productsSet.iterator();
+            while (productsIterator.hasNext()) {
+                System.out.println(productsIterator.next().toString().toUpperCase());
+            }
+        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+    }
 
     public int chooseBuyer (UserInput uI) {
         System.out.println(buyersNames());
@@ -216,30 +350,6 @@ public class ManagerFacade implements Manageable {
             }
         }
         return Integer.parseInt(input) - 1;
-    }
-
-    public Seller[] getSellers() {
-        return sellers;
-    }
-
-    public Buyer[] getBuyers() {
-        return buyers;
-    }
-
-    public Product[] getProducts(){
-        return allProducts;
-    }
-
-    public int getNumberOfProducts(){
-        return numberOfProducts;
-    }
-
-    public int getNumberOfSellers() {
-        return numberOfSellers;
-    }
-
-    public int getNumberOfBuyers() {
-        return numberOfBuyers;
     }
 
     public String validProductIndex(int sellerIndex, int productIndexInput) {
@@ -291,10 +401,9 @@ public class ManagerFacade implements Manageable {
         return null;
     }
 
-    public String isValidHistoryCartIndex(String indexCartInput, int buyerIndex) {
+    public String isValidHistoryCartIndex(int indexCartInput, int buyerIndex) {
         try {
-            int indexCart = Integer.parseInt(indexCartInput);
-            if (buyers[buyerIndex].getHistoryCartsNum() < indexCart || indexCart <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_HISTORY_CART_INDEX.getExceptionMessage());
+            if (buyers[buyerIndex].getHistoryCartsNum() < indexCartInput || indexCartInput <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_HISTORY_CART_INDEX.getExceptionMessage());
         } catch (NumberFormatException e) {
             return ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage();
         } catch (IndexOutOfBoundsException e) {
@@ -350,7 +459,7 @@ public class ManagerFacade implements Manageable {
     }
 
     public void addBuyer(String username, String password, Address address) {
-        Buyer buyer = new Buyer(username, password, address);
+        Buyer buyer = Factory.createBuyer(username, password, address);
         if (buyers.length == numberOfBuyers) {
             if (buyers.length == 0) {
                 buyers = Arrays.copyOf(buyers, 1);
@@ -394,9 +503,9 @@ public class ManagerFacade implements Manageable {
     }
 
     public void printProductsName() {
-        if (getNumberOfProducts() != 0) {
-            for (int i = 0; i < getNumberOfProducts(); i++)
-                System.out.println(getProducts()[i].getProductName());
+        if (numberOfProducts != 0) {
+            for (int i = 0; i < numberOfProducts; i++)
+                System.out.println(allProducts[i].getProductName());
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
@@ -482,8 +591,8 @@ public class ManagerFacade implements Manageable {
 
     public Map<String, Integer> productsToLinkedMap(){                   // Object Oriented Design - Assignment 1
         Map<String, Integer> map = new LinkedHashMap<>();
-        for(int i = 0; i < getNumberOfProducts(); i++){
-            String key = getProducts()[i].getProductName().toLowerCase();
+        for(int i = 0; i < numberOfProducts; i++){
+            String key = allProducts[i].getProductName().toLowerCase();
             if (map.containsKey(key)){
                 map.put(key,map.get(key) + 1);
             }
@@ -502,16 +611,16 @@ public class ManagerFacade implements Manageable {
             }
             return lengthCompare;
         });
-        for(int i = 0; i < getNumberOfProducts(); i++){
-            treeSet.add(getProducts()[i]);
+        for(int i = 0; i < numberOfProducts; i++){
+            treeSet.add(allProducts[i]);
         }
         return treeSet;
     }
 
     public Set<String> productsNameToLinkedSet() {                  // Object Oriented Design - Assignment 1
         Set <String> set = new LinkedHashSet<>();
-        for (int i = 0; i < getNumberOfProducts(); i++)
-            set.add(getProducts()[i].getProductName().toLowerCase());
+        for (int i = 0; i < numberOfProducts; i++)
+            set.add(allProducts[i].getProductName().toLowerCase());
         return set;
     }
 }
