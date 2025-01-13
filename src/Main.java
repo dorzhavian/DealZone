@@ -6,14 +6,14 @@ import Models.*;
 public class Main {
 
     public static void main(String[] args) {
-        UserInput uI = UserInput.getInstance();
+        InputHandler uI = UserInput.getInstance();           // SINGLETON NECESSARY????????
         Menu menu = Menu.getInstance();
         ManagerFacade managerFacade = ManagerFacade.getInstance();
         int choice;
         menu.start();
         do {
             menu.printMenu();
-            choice = uI.getInt();
+            choice = uI.getInt("Please enter your choice: ");
             switch (choice) {
                 case -1:
                     break;
@@ -70,7 +70,7 @@ public class Main {
                     break;
             }
         } while (choice != 0);
-        uI.closeScanner();
+        uI.close();
     }
 }
 

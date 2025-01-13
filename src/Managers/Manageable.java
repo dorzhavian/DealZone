@@ -3,7 +3,7 @@ package Managers;
 import Enums.Category;
 import Models.Address;
 import Models.Product;
-import Models.UserInput;
+import Models.InputHandler;
 
 import java.util.Map;
 import java.util.Set;
@@ -11,9 +11,9 @@ import java.util.Set;
 
 public interface Manageable {
 
-    int chooseBuyer (UserInput uI);
+    int chooseBuyer (InputHandler uI);
 
-    int chooseSeller (UserInput uI);
+    int chooseSeller (InputHandler uI);
 
     String validProductIndex(int sellerIndex, int productIndexInput);
 

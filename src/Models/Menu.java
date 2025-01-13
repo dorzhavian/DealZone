@@ -28,7 +28,6 @@ public class Menu {
         System.out.println("101) Question 17 ");
         System.out.println("102) Question 18 ");
         System.out.println("103) Question 19 ");
-        System.out.println("Please enter your choice: ");
     }
 
     public void start() {

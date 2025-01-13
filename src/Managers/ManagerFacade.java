@@ -39,9 +39,9 @@ public class ManagerFacade implements Manageable {
         comparatorBuyer = new CompareBuyersByName();
     }
 
-    public void case1(UserInput uI) {
+    public void case1(InputHandler uI) {
         do {
-            input = uI.getUserName();
+            input = uI.getString("Enter username: (Enter -1 to return main menu)");
             if (input.equals("-1")) return;
             message = isExistSeller(input);
             if (message != null) {
@@ -49,15 +49,15 @@ public class ManagerFacade implements Manageable {
             }
         } while (message != null);
         String username = input;
-        input = uI.getPassword();
+        input = uI.getString("Enter password: (Enter -1 to return main menu)");
         if (input.equals("-1")) return;
         addSeller(username, input);
         System.out.println("Seller added successfully.");
     }
 
-    public void case2(UserInput uI) {
+    public void case2(InputHandler uI) {
         do {
-            input = uI.getUserName();
+            input = uI.getString("Enter username: (Enter -1 to return main menu)");
             if (input.equals("-1")) return;
             message = isExistBuyer(input);
             if (message != null) {
@@ -65,23 +65,23 @@ public class ManagerFacade implements Manageable {
             }
         } while (message != null);
         String username = input;
-        String password = uI.getPassword();
+        String password = uI.getString("Enter password: (Enter -1 to return main menu)");
         if (password.equals("-1")) return;
         System.out.println("Enter your full address: ");
-        String street= uI.getStreet();
+        String street= uI.getString("Street: (Enter -1 to return main menu)");
         if (street.equals("-1")) return;
-        String houseNum = uI.getHouseNum();
+        String houseNum = uI.getString("House number: (Enter -1 to return main menu)");
         if (houseNum.equals("-1")) return;
-        String city = uI.getCity();
+        String city = uI.getString("City: (Enter -1 to return main menu)");
         if (input.equals("-1")) return;
-        String state = uI.getState();
+        String state = uI.getString("State: (Enter -1 to return main menu)");
         if (state.equals("-1")) return;
         Address address = Factory.createAddress(street, houseNum, city, state);
         addBuyer(username, password, address);
         System.out.println("Buyer added successfully.");
     }
 
-    public void case3 (UserInput uI) {
+    public void case3 (InputHandler uI) {
         double productPrice;
         if (numberOfSellers == 0) {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
@@ -89,12 +89,12 @@ public class ManagerFacade implements Manageable {
         }
         int sellerIndex = chooseSeller(uI);
         if (sellerIndex == -1) return;
-        do input = uI.getProductName();
+        do input = uI.getString("Enter product name to add: (Enter -1 to return main menu)");
         while (input.isEmpty());
         if (input.equals("-1")) return;
         String productName = input;
         do {
-            productPrice = uI.getProductPrice();
+            productPrice = uI.getDouble("Enter product price: (Enter -1 to return main menu)");
             if (productPrice == -1) return;
             message = validPrice(productPrice);
             if (message != null) {
@@ -104,21 +104,20 @@ public class ManagerFacade implements Manageable {
         System.out.println(Categories.categoriesByNames());
         int categoryIndex;
         do {
-            categoryIndex = uI.getProductCategory();
+            categoryIndex = uI.getInt("Choose category: (Enter -1 to return main menu)\n");
             if (categoryIndex == -1) return;
             message = validCategoryIndex(categoryIndex);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
-        System.out.println("This product have special package? YES / NO : (Enter -1 to return main menu) ");
         double specialPackagePrice = 0;
         do {
-            input = uI.getString();
+            input = uI.getString("This product have special package? YES / NO : (Enter -1 to return main menu) ");
             if (input.equals("-1")) return;
             if (input.equalsIgnoreCase("yes")) {
                 do {
-                    specialPackagePrice = uI.getSpecialPackagePrice();
+                    specialPackagePrice = uI.getDouble("Enter price for special package: (Enter -1 to return main menu)");
                     if (input.equals("-1")) return;
                     message = validPrice(specialPackagePrice);
                     if (message != null) {
@@ -135,7 +134,7 @@ public class ManagerFacade implements Manageable {
         System.out.println("Product added successfully.");
     }
 
-    public void case4 (UserInput uI) {
+    public void case4 (InputHandler uI) {
         if (numberOfBuyers == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
@@ -153,10 +152,9 @@ public class ManagerFacade implements Manageable {
             return;
         }
         System.out.println(sellers[sellerIndex].toString());
-        System.out.println("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
         int productIndex;
         do {
-            productIndex = uI.getInt();
+            productIndex = uI.getInt("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
             if (input.equals("-1")) return;
             message = validProductIndex(sellerIndex, productIndex);
             if (message != null) {
@@ -167,7 +165,7 @@ public class ManagerFacade implements Manageable {
         System.out.println("Product added successfully to cart.");
     }
 
-    public void case5 (UserInput uI) {
+    public void case5 (InputHandler uI) {
         if (numberOfBuyers == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
@@ -178,7 +176,7 @@ public class ManagerFacade implements Manageable {
         System.out.println(pay(buyerIndex));
     }
 
-    public void case9 (UserInput uI) {
+    public void case9 (InputHandler uI) {
         int choice = 0;
         if (numberOfBuyers == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
@@ -192,9 +190,8 @@ public class ManagerFacade implements Manageable {
         }
         System.out.println(buyers[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
-        System.out.println("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
         do {
-            choice = uI.getInt();
+            choice = uI.getInt("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
             if (choice == -1) return;
             message = isValidHistoryCartIndex(choice, buyerIndex);
             if (message != null) {
@@ -283,11 +280,10 @@ public class ManagerFacade implements Manageable {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public void case101(UserInput uI) {
+    public void case101(InputHandler uI) {
         if (numberOfProducts != 0) {
             Map<String, Integer> map = productsToLinkedMap();
-            System.out.println("Please enter a string: (Enter -1 to return main menu)");
-            input = uI.getString().toLowerCase();
+            input = uI.getString("Please enter a string: (Enter -1 to return main menu)").toLowerCase();
             if (input.equals("-1")) return;
             System.out.printf("the number of times that " + input + " appears in the OG ARRAY is %d\n" , map.get(input) == null ? 0 : map.get(input));
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
@@ -320,11 +316,10 @@ public class ManagerFacade implements Manageable {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public int chooseBuyer (UserInput uI) {
+    public int chooseBuyer (InputHandler uI) {
         System.out.println(buyersNames());
-        System.out.println("Please choose buyer from the list above: (Enter -1 to return main menu)");
         while (true) {
-            input = uI.getString();
+            input = uI.getString("Please choose buyer from the list above: (Enter -1 to return main menu)");
             if (input.equals("-1")) return -1;
             message = chooseValidBuyer(input);
             if (message != null) {
@@ -336,11 +331,10 @@ public class ManagerFacade implements Manageable {
         return Integer.parseInt(input) - 1;
     }
 
-    public int chooseSeller (UserInput uI) {
+    public int chooseSeller (InputHandler uI) {
         System.out.println(sellersNames());
-        System.out.println("Please choose seller from the list above: (Enter -1 to return main menu)");
         while (true) {
-            input = uI.getString();
+            input = uI.getString("Please choose seller from the list above: (Enter -1 to return main menu)");
             if (input.equals("-1")) return -1;
             message = chooseValidSeller(input);
             if (message != null) {

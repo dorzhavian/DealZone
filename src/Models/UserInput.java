@@ -1,7 +1,7 @@
 package Models;
 import java.util.Scanner;
 
-public class UserInput {
+public class UserInput implements InputHandler {
     private static final Scanner sc = new Scanner(System.in);
     private static UserInput instance;
 
@@ -11,16 +11,18 @@ public class UserInput {
         return instance;
     }
 
-    public String getString() {
+    public String getString(String message) {
         String input;
+        System.out.println(message);
         do input = sc.nextLine();
         while (input.isEmpty());
         return input;
     }
 
-    public int getInt() {
+    public int getInt(String message) {
         int choice = 0;
         boolean error = true;
+        System.out.println(message);
         do {
             try {
                 error = true;
@@ -34,9 +36,10 @@ public class UserInput {
         return choice;
     }
 
-    public double getDouble(){
+    public double getDouble(String message){
         double choice = 0;
         boolean error;
+        System.out.println(message);
         do {
             try {
                 error = true;
@@ -50,61 +53,7 @@ public class UserInput {
         return choice;
     }
 
-
-    public String getUserName(){
-        System.out.println("Enter username: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-    public String getPassword(){
-        System.out.println("Enter password: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-
-    public String getStreet(){
-        System.out.println("Street: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-    public String getHouseNum(){
-        System.out.println("House number: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-    public String getCity(){
-        System.out.println("City: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-
-    public String getState(){
-        System.out.println("State: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-    public String getProductName(){
-        System.out.println("Enter product name to add: (Enter -1 to return main menu)");
-        return getString();
-    }
-
-
-    public double getProductPrice(){
-        System.out.println("Enter product price: (Enter -1 to return main menu)");
-        return getDouble();
-    }
-
-    public double getSpecialPackagePrice(){
-        System.out.println("Enter price for special package: (Enter -1 to return main menu)");
-        return getDouble();
-    }
-
-    public int getProductCategory(){
-        System.out.println("Choose category: (Enter -1 to return main menu)\n");
-        return getInt();
-    }
-
-    public void closeScanner()
+    public void close()
     {
         sc.close();
     }
