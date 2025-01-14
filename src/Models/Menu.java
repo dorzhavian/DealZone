@@ -2,15 +2,7 @@ package Models;
 
 public class Menu {
 
-    private static Menu instance;
-
-    public static Menu getInstance() {                          // SINGLETON !!!!!!!
-        if (instance == null)
-            instance = new Menu();
-        return instance;
-    }
-
-    public void printMenu() {
+    public static void printMenu() {
         System.out.println("\nMenu : ");
         System.out.println("0) Exit");
         System.out.println("1) Add seller");
@@ -30,7 +22,7 @@ public class Menu {
         System.out.println("103) Question 19 ");
     }
 
-    public void start() {
+    public static void start() {
         System.out.println("\n------------------------------------------------------------------------");
         System.out.println(" ------------HELLO AND WELCOME TO OUR BUYER - SELLER PROGRAM-----------");
         System.out.println(" ------------(In anytime press -1 for return to main menu)-------------");

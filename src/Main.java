@@ -7,12 +7,11 @@ public class Main {
 
     public static void main(String[] args) {
         InputHandler uI = UserInput.getInstance();           // SINGLETON NECESSARY????????
-        Menu menu = Menu.getInstance();
         ManagerFacade managerFacade = ManagerFacade.getInstance();
         int choice;
-        menu.start();
+        Menu.start();
         do {
-            menu.printMenu();
+            Menu.printMenu();
             choice = uI.getInt("Please enter your choice: ");
             switch (choice) {
                 case -1:
