@@ -35,13 +35,13 @@ public class Main {
                     managerFacade.case5(uI);
                     break;
                 case 6:
-                    System.out.println(managerFacade.buyersInfo());
+                    managerFacade.case6();
                     break;
                 case 7:
-                    System.out.println(managerFacade.sellersInfo());
+                    managerFacade.case7();
                     break;
                 case 8:
-                    System.out.println(managerFacade.productsByCategory());
+                    managerFacade.case8();
                     break;
                 case 9:
                     managerFacade.case9(uI);
@@ -50,7 +50,7 @@ public class Main {
                     managerFacade.hardcoded();
                     break;
                 case 99:
-                    managerFacade.printProductsName();
+                    managerFacade.case99();
                     break;
                 case 100:
                     managerFacade.case100();
