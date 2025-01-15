@@ -8,7 +8,7 @@ import Models.ProductSpecialPackage;
 
 import java.util.*;
 
-public class ProductManager {
+public class ProductManager implements IProductManager {
 
     private Product[] allProducts;
     private int numberOfProducts;
@@ -24,10 +24,6 @@ public class ProductManager {
     public ProductManager() {
         categoriesArrays = new Categories();
         allProducts = new Product[0];
-    }
-
-    public Product[] getAllProducts() {
-        return allProducts;
     }
 
     public Categories getCategoriesArrays() {

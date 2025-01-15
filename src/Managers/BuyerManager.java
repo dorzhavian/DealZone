@@ -8,7 +8,7 @@ import Models.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class BuyerManager {
+public class BuyerManager implements IBuyerManager {
     private Buyer[] buyers;
     private int numberOfBuyers;
     private final Comparator<Buyer> comparatorBuyer;

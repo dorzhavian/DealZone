@@ -7,7 +7,7 @@ import Models.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class SellerManager {
+public class SellerManager implements ISellerManager{
     private Seller[] sellers;
     private int numberOfSellers;
     private final Comparator<Seller> comparatorSeller;
