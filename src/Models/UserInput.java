@@ -1,17 +1,10 @@
 package Models;
 import java.util.Scanner;
 
-public class UserInput implements InputHandler {
+public class UserInput {
     private static final Scanner sc = new Scanner(System.in);
-    private static UserInput instance;
 
-    public static UserInput getInstance() {                          // SINGLETON !!!!!!!
-        if (instance == null)
-            instance = new UserInput();
-        return instance;
-    }
-
-    public String getString(String message) {
+    public static String getString(String message) {
         String input;
         System.out.println(message);
         do input = sc.nextLine();
@@ -19,7 +12,7 @@ public class UserInput implements InputHandler {
         return input;
     }
 
-    public int getInt(String message) {
+    public static int getInt(String message) {
         int choice = 0;
         boolean error = true;
         System.out.println(message);
@@ -36,7 +29,7 @@ public class UserInput implements InputHandler {
         return choice;
     }
 
-    public double getDouble(String message){
+    public static double getDouble(String message){
         double choice = 0;
         boolean error;
         System.out.println(message);
@@ -53,7 +46,7 @@ public class UserInput implements InputHandler {
         return choice;
     }
 
-    public void close()
+    public static void close()
     {
         sc.close();
     }

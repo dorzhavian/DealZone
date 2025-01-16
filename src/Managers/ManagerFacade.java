@@ -1,6 +1,8 @@
 package Managers;
 import Enums.Category;
 import Enums.ExceptionsMessages;
+import Factories.ProductFactory;
+import Factories.UserFactory;
 import Models.*;
 
 import java.util.*;
@@ -14,7 +16,7 @@ public class ManagerFacade {
     private static String input;
     private static String message;
 
-    public static ManagerFacade getInstance() {                          // SINGLETON !!!!!!!
+    public static ManagerFacade getInstance() {       // SINGLETON !!!!!!!
         if (instance == null)
             instance = new ManagerFacade();
         return instance;
@@ -26,9 +28,9 @@ public class ManagerFacade {
         productManager = ProductManager.getInstance();
     }
 
-    public void case1(InputHandler uI) {
+    public void case1() {
         do {
-            input = uI.getString("Enter username: (Enter -1 to return main menu)");
+            input = UserInput.getString("Enter username: (Enter -1 to return main menu)");
             if (input.equals("-1")) return;
             message = sellerManager.isExistSeller(input);
             if (message != null) {
@@ -36,15 +38,15 @@ public class ManagerFacade {
             }
         } while (message != null);
         String username = input;
-        input = uI.getString("Enter password: (Enter -1 to return main menu)");
+        input = UserInput.getString("Enter password: (Enter -1 to return main menu)");
         if (input.equals("-1")) return;
-        sellerManager.addSeller(Factory.createSeller(username, input));
+        sellerManager.addSeller(UserFactory.createSeller(username, input));
         System.out.println("Seller added successfully.");
     }
 
-    public void case2(InputHandler uI) {
+    public void case2() {
         do {
-            input = uI.getString("Enter username: (Enter -1 to return main menu)");
+            input = UserInput.getString("Enter username: (Enter -1 to return main menu)");
             if (input.equals("-1")) return;
             message = buyerManager.isExistBuyer(input);
             if (message != null) {
@@ -52,36 +54,36 @@ public class ManagerFacade {
             }
         } while (message != null);
         String username = input;
-        String password = uI.getString("Enter password: (Enter -1 to return main menu)");
+        String password = UserInput.getString("Enter password: (Enter -1 to return main menu)");
         if (password.equals("-1")) return;
         System.out.println("Enter your full address: ");
-        String street= uI.getString("Street: (Enter -1 to return main menu)");
+        String street= UserInput.getString("Street: (Enter -1 to return main menu)");
         if (street.equals("-1")) return;
-        String houseNum = uI.getString("House number: (Enter -1 to return main menu)");
+        String houseNum = UserInput.getString("House number: (Enter -1 to return main menu)");
         if (houseNum.equals("-1")) return;
-        String city = uI.getString("City: (Enter -1 to return main menu)");
+        String city = UserInput.getString("City: (Enter -1 to return main menu)");
         if (input.equals("-1")) return;
-        String state = uI.getString("State: (Enter -1 to return main menu)");
+        String state = UserInput.getString("State: (Enter -1 to return main menu)");
         if (state.equals("-1")) return;
-        Address address = Factory.createAddress(street, houseNum, city, state);
-        buyerManager.addBuyer(Factory.createBuyer(username, password, address));
+        Address address = UserFactory.createAddress(street, houseNum, city, state);
+        buyerManager.addBuyer(UserFactory.createBuyer(username, password, address));
         System.out.println("Buyer added successfully.");
     }
 
-    public void case3 (InputHandler uI) {
+    public void case3 () {
         double productPrice;
         if (sellerManager.getNumberOfSellers() == 0) {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
-        int sellerIndex = chooseSeller(uI);
+        int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
-        do input = uI.getString("Enter product name to add: (Enter -1 to return main menu)");
+        do input = UserInput.getString("Enter product name to add: (Enter -1 to return main menu)");
         while (input.isEmpty());
         if (input.equals("-1")) return;
         String productName = input;
         do {
-            productPrice = uI.getDouble("Enter product price: (Enter -1 to return main menu)");
+            productPrice = UserInput.getDouble("Enter product price: (Enter -1 to return main menu)");
             if (productPrice == -1) return;
             message = productManager.validPrice(productPrice);
             if (message != null) {
@@ -91,7 +93,7 @@ public class ManagerFacade {
         System.out.println(Categories.categoriesByNames());
         int categoryIndex;
         do {
-            categoryIndex = uI.getInt("Choose category: (Enter -1 to return main menu)\n");
+            categoryIndex = UserInput.getInt("Choose category: (Enter -1 to return main menu)\n");
             if (categoryIndex == -1) return;
             message = productManager.validCategoryIndex(categoryIndex);
             if (message != null) {
@@ -100,11 +102,11 @@ public class ManagerFacade {
         } while (message != null);
         double specialPackagePrice = 0;
         do {
-            input = uI.getString("This product have special package? YES / NO : (Enter -1 to return main menu) ");
+            input = UserInput.getString("This product have special package? YES / NO : (Enter -1 to return main menu) ");
             if (input.equals("-1")) return;
             if (input.equalsIgnoreCase("yes")) {
                 do {
-                    specialPackagePrice = uI.getDouble("Enter price for special package: (Enter -1 to return main menu)");
+                    specialPackagePrice = UserInput.getDouble("Enter price for special package: (Enter -1 to return main menu)");
                     if (input.equals("-1")) return;
                     message = productManager.validPrice(specialPackagePrice);
                     if (message != null) {
@@ -121,7 +123,7 @@ public class ManagerFacade {
         System.out.println("Product added successfully.");
     }
 
-    public void case4 (InputHandler uI) {
+    public void case4 () {
         if (buyerManager.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
@@ -130,9 +132,9 @@ public class ManagerFacade {
             System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
             return;
         }
-        int buyerIndex = chooseBuyer(uI);
+        int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        int sellerIndex = chooseSeller(uI);
+        int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
         if (sellerManager.getSellers()[sellerIndex].getNumOfProducts() == 0) {
             System.out.println("This seller haven't products yet, cannot be proceed. return to Menu.");
@@ -141,7 +143,7 @@ public class ManagerFacade {
         System.out.println(sellerManager.getSellers()[sellerIndex].toString());
         int productIndex;
         do {
-            productIndex = uI.getInt("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
+            productIndex = UserInput.getInt("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
             if (input.equals("-1")) return;
             message = validProductIndex(sellerIndex, productIndex);
             if (message != null) {
@@ -152,13 +154,13 @@ public class ManagerFacade {
         System.out.println("Product added successfully to cart.");
     }
 
-    public void case5 (InputHandler uI) {
+    public void case5 () {
         if (buyerManager.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
         System.out.println("Please choose buyer from list to process checkout: (Enter -1 to return main menu)");
-        int buyerIndex = chooseBuyer(uI);
+        int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
         System.out.println(buyerManager.pay(buyerIndex));
     }
@@ -175,13 +177,13 @@ public class ManagerFacade {
         System.out.println(productsByCategory());
     }
 
-    public void case9 (InputHandler uI) {
+    public void case9 () {
         int choice;
         if (buyerManager.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
         }
-        int buyerIndex = chooseBuyer(uI);
+        int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
         if (buyerManager.getBuyers()[buyerIndex].getHistoryCartsNum() == 0) {
             System.out.println("\nHistory cart's are empty for this buyer, cannot proceed. return to main menu.");
@@ -190,7 +192,7 @@ public class ManagerFacade {
         System.out.println(buyerManager.getBuyers()[buyerIndex].toString());
         System.out.println("Please choose cart number from history carts:");
         do {
-            choice = uI.getInt("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
+            choice = UserInput.getInt("If you have products in your current cart - they will be replaced. (Enter -1 to return main menu)");
             if (choice == -1) return;
             message = isValidHistoryCartIndex(choice, buyerIndex);
             if (message != null) {
@@ -208,18 +210,18 @@ public class ManagerFacade {
         int buyerIndex = buyerManager.getNumberOfBuyers();
 
         // Adding 5 sellers with real names and realistic passwords
-        sellerManager.addSeller(Factory.createSeller("Jack", "J@ck2024!"));
-        sellerManager.addSeller(Factory.createSeller("Dor", "DorPass@123"));
-        sellerManager.addSeller(Factory.createSeller("Tal", "Tal2024Secure"));
-        sellerManager.addSeller(Factory.createSeller("Maya", "Maya@Home2024"));
-        sellerManager.addSeller(Factory.createSeller("Avi", "AviPassword#45"));
+        sellerManager.addSeller(UserFactory.createSeller("Jack", "J@ck2024!"));
+        sellerManager.addSeller(UserFactory.createSeller("Dor", "DorPass@123"));
+        sellerManager.addSeller(UserFactory.createSeller("Tal", "Tal2024Secure"));
+        sellerManager.addSeller(UserFactory.createSeller("Maya", "Maya@Home2024"));
+        sellerManager.addSeller(UserFactory.createSeller("Avi", "AviPassword#45"));
 
 // Adding 5 buyers with usernames, realistic passwords, and addresses
-        buyerManager.addBuyer(Factory.createBuyer("Jack", "J@ck2024!", Factory.createAddress("Main St", "123", "Los Angeles", "California")));
-        buyerManager.addBuyer(Factory.createBuyer("Dor", "DorPass@123", Factory.createAddress("Oak Rd", "456", "San Francisco", "California")));
-        buyerManager.addBuyer(Factory.createBuyer("Tal", "Tal2024Secure", Factory.createAddress("Pine Ave", "789", "New York", "New York")));
-        buyerManager.addBuyer(Factory.createBuyer("Maya", "Maya@Home2024", Factory.createAddress("Maple St", "101", "Chicago", "Illinois")));
-        buyerManager.addBuyer(Factory.createBuyer("Avi", "AviPassword#45", Factory.createAddress("Cedar Blvd", "202", "Houston", "Texas")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Jack", "J@ck2024!", UserFactory.createAddress("Main St", "123", "Los Angeles", "California")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Dor", "DorPass@123", UserFactory.createAddress("Oak Rd", "456", "San Francisco", "California")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Tal", "Tal2024Secure", UserFactory.createAddress("Pine Ave", "789", "New York", "New York")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Maya", "Maya@Home2024", UserFactory.createAddress("Maple St", "101", "Chicago", "Illinois")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Avi", "AviPassword#45", UserFactory.createAddress("Cedar Blvd", "202", "Houston", "Texas")));
 
 // Adding products to sellers
 
@@ -284,10 +286,10 @@ public class ManagerFacade {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public void case101(InputHandler uI) {
+    public void case101() {
         if (productManager.getNumberOfProducts() != 0) {
             Map<String, Integer> map = productManager.productsToLinkedMap();
-            input = uI.getString("Please enter a string: (Enter -1 to return main menu)").toLowerCase();
+            input = UserInput.getString("Please enter a string: (Enter -1 to return main menu)").toLowerCase();
             if (input.equals("-1")) return;
             System.out.printf("the number of times that " + input + " appears in the OG ARRAY is %d\n" , map.get(input) == null ? 0 : map.get(input));
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
@@ -320,11 +322,11 @@ public class ManagerFacade {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public int chooseSeller (InputHandler uI) {
+    public int chooseSeller () {
         System.out.println(sellerManager.sellersNames());
         String input;
         while (true) {
-            input = uI.getString("Please choose seller from the list above: (Enter -1 to return main menu)");
+            input = UserInput.getString("Please choose seller from the list above: (Enter -1 to return main menu)");
             if (input.equals("-1")) return -1;
             String message = sellerManager.chooseValidSeller(input);
             if (message != null) {
@@ -336,11 +338,11 @@ public class ManagerFacade {
         return Integer.parseInt(input) - 1;
     }
 
-    public int chooseBuyer (InputHandler uI) {
+    public int chooseBuyer () {
         System.out.println(buyerManager.buyersNames());
         String input;
         while (true) {
-            input = uI.getString("Please choose buyer from the list above: (Enter -1 to return main menu)");
+            input = UserInput.getString("Please choose buyer from the list above: (Enter -1 to return main menu)");
             if (input.equals("-1")) return -1;
             String message = buyerManager.chooseValidBuyer(input);
             if (message != null) {
@@ -385,9 +387,9 @@ public class ManagerFacade {
         Product p1;
         if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
         {
-            p1 = Factory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
+            p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
         } else {
-            p1 = Factory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
+            p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
         }
         buyerManager.addProductToBuyer(p1, buyerIndex);
     }
@@ -395,9 +397,9 @@ public class ManagerFacade {
     public void makeProductToSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice) {
         Product p1;
         if (specialPackagePrice == 0) {
-            p1 = Factory.createProduct(productName, productPrice, c);
+            p1 = ProductFactory.createProduct(productName, productPrice, c);
         } else {
-            p1 = Factory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+            p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
         }
         sellerManager.addProductToSeller(p1, sellerIndex);
         productManager.addToCategoryArray(p1);
