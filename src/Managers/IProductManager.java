@@ -1,5 +1,6 @@
 package Managers;
 
+import Models.Categories;
 import Models.Product;
 import java.util.*;
 
@@ -25,5 +26,5 @@ public interface IProductManager {
 
     int getNumberOfProducts();
 
-    Object getCategoriesArrays();
+    Categories getCategoriesArrays();
 }

@@ -14,7 +14,7 @@ public interface ISellerManager {
 
     String sellersNames();
 
-    String chooseValidSeller(String indexInput);
+    String chooseValidSeller(int indexInput);
 
     void addProductToSeller(Product p, int sellerIndex);
 

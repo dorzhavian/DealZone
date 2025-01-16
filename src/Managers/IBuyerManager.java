@@ -6,7 +6,7 @@ public interface IBuyerManager {
 
     String isExistBuyer (String name);
 
-    String chooseValidBuyer(String indexInput);
+    String chooseValidBuyer(int indexInput);
 
     void addBuyer(Buyer buyer);
 

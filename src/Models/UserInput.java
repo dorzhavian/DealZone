@@ -1,4 +1,7 @@
 package Models;
+
+import Enums.ExceptionsMessages;
+
 import java.util.Scanner;
 
 public class UserInput {
@@ -6,48 +9,67 @@ public class UserInput {
 
     public static String getString(String message) {
         String input;
-        System.out.println(message);
-        do input = sc.nextLine();
-        while (input.isEmpty());
+        do {
+            System.out.println(message + " (Enter -1 to return to the main menu) ");
+            input = sc.nextLine().trim();
+            if (input.equals("-1")) return null;
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter again!");
+            }
+        } while (input.isEmpty());
         return input;
     }
 
     public static int getInt(String message) {
-        int choice = 0;
-        boolean error = true;
-        System.out.println(message);
-        do {
+        int choice;
+        while (true) {
+            System.out.println(message + " (Enter -1 to return to the main menu) ");
             try {
-                error = true;
                 choice = Integer.parseInt(sc.next());
+                if (choice == -1) return -1;
+                else {
+                    sc.nextLine();
+                    return choice;
+                }
             } catch (Exception e) {
-                System.out.println("\nInvalid input, please enter a digit!");
-                error = false;
+                System.out.println(ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage());
+                sc.nextLine();
             }
-        } while (!error);
-        sc.nextLine();
-        return choice;
+        }
     }
 
-    public static double getDouble(String message){
-        double choice = 0;
-        boolean error;
-        System.out.println(message);
-        do {
+    public static double getDouble(String message) {
+        double choice;
+        while (true) {
+            System.out.println(message + " (Enter -1 to return to the main menu) ");
             try {
-                error = true;
                 choice = Double.parseDouble(sc.next());
+                if (choice == -1) return -1;
+                else {
+                    sc.nextLine();
+                    return choice;
+                }
             } catch (Exception e) {
-                System.out.println("\nInvalid input, please enter a digit!");
-                error = false;
+                System.out.println(ExceptionsMessages.INVALID_NUMBER_CHOICE.getExceptionMessage());
+                sc.nextLine();
             }
-        } while (!error);
-        sc.nextLine();
-        return choice;
+        }
     }
 
-    public static void close()
-    {
+    public static boolean getYesNo(String message) {
+        String input;
+        while (true) {
+            System.out.println(message + " (Enter -1 to return to the main menu) ");
+            input = sc.next().trim().toLowerCase();
+            sc.nextLine();
+            if (input.equals("-1")) return false;
+            if (input.equalsIgnoreCase("yes")) return true;
+            if (input.equalsIgnoreCase("no")) return false;
+            System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+        }
+    }
+
+    public static void close() {
         sc.close();
     }
 }

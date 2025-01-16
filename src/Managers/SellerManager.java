@@ -71,9 +71,8 @@ public class SellerManager implements ISellerManager{
         return sb.toString();
     }
 
-    public String chooseValidSeller(String indexInput) {
+    public String chooseValidSeller(int index) {
         try {
-            int index = Integer.parseInt(indexInput);
             if (index > numberOfSellers || index <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_SELLER_INDEX.getExceptionMessage());
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();

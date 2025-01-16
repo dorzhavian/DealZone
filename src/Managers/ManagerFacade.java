@@ -13,7 +13,6 @@ public class ManagerFacade {
     private final IProductManager productManager;
     private static ManagerFacade instance;
 
-    private static String input;
     private static String message;
 
     public static ManagerFacade getInstance() {       // SINGLETON !!!!!!!
@@ -29,128 +28,133 @@ public class ManagerFacade {
     }
 
     public void case1() {
+        String username, password;
         do {
-            input = UserInput.getString("Enter username: (Enter -1 to return main menu)");
-            if (input.equals("-1")) return;
-            message = sellerManager.isExistSeller(input);
-            if (message != null) {
-                System.out.println(message);
-            }
+            username = UserInput.getString("Enter username:");
+            if (username == null) return;
+            message = sellerManager.isExistSeller(username);
+            if (message != null) System.out.println(message);
         } while (message != null);
-        String username = input;
-        input = UserInput.getString("Enter password: (Enter -1 to return main menu)");
-        if (input.equals("-1")) return;
-        sellerManager.addSeller(UserFactory.createSeller(username, input));
+        password = UserInput.getString("Enter password:");
+        if (password == null) return;
+        sellerManager.addSeller(UserFactory.createSeller(username, password));
         System.out.println("Seller added successfully.");
     }
 
     public void case2() {
+        String username, password, houseNum, city, state;
         do {
-            input = UserInput.getString("Enter username: (Enter -1 to return main menu)");
-            if (input.equals("-1")) return;
-            message = buyerManager.isExistBuyer(input);
-            if (message != null) {
-                System.out.println(message);
-            }
+            username = UserInput.getString("Enter username:");
+            if (username == null) return;
+            message = buyerManager.isExistBuyer(username);
+            if (message != null) System.out.println(message);
         } while (message != null);
-        String username = input;
-        String password = UserInput.getString("Enter password: (Enter -1 to return main menu)");
-        if (password.equals("-1")) return;
-        System.out.println("Enter your full address: ");
-        String street= UserInput.getString("Street: (Enter -1 to return main menu)");
-        if (street.equals("-1")) return;
-        String houseNum = UserInput.getString("House number: (Enter -1 to return main menu)");
-        if (houseNum.equals("-1")) return;
-        String city = UserInput.getString("City: (Enter -1 to return main menu)");
-        if (input.equals("-1")) return;
-        String state = UserInput.getString("State: (Enter -1 to return main menu)");
-        if (state.equals("-1")) return;
+
+        password = UserInput.getString("Enter password:");
+        if (password == null ) return;
+
+        System.out.println("Enter your full address:");
+        String street = UserInput.getString("Street:");
+        if (street == null) return;
+
+        houseNum = UserInput.getString("House number:");
+        if (houseNum == null) return;
+
+        city = UserInput.getString("City:");
+        if (city == null) return;
+
+        state = UserInput.getString("State:");
+        if (state == null) return;
+
         Address address = UserFactory.createAddress(street, houseNum, city, state);
         buyerManager.addBuyer(UserFactory.createBuyer(username, password, address));
         System.out.println("Buyer added successfully.");
     }
 
-    public void case3 () {
-        double productPrice;
+    public void case3() {
+        String productName;
+        double productPrice,specialPackagePrice = 0;
+        int categoryIndex;
+
         if (sellerManager.getNumberOfSellers() == 0) {
-            System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
+            System.out.println("Haven't sellers yet, cannot proceed. Returning to Menu.");
             return;
         }
+
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
-        do input = UserInput.getString("Enter product name to add: (Enter -1 to return main menu)");
-        while (input.isEmpty());
-        if (input.equals("-1")) return;
-        String productName = input;
+
+        productName = UserInput.getString("Enter product name:");
+        if (productName == null) return;
+
         do {
-            productPrice = UserInput.getDouble("Enter product price: (Enter -1 to return main menu)");
+            productPrice = UserInput.getDouble("Enter product price:");
             if (productPrice == -1) return;
             message = productManager.validPrice(productPrice);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
+
         System.out.println(Categories.categoriesByNames());
-        int categoryIndex;
+
         do {
-            categoryIndex = UserInput.getInt("Choose category: (Enter -1 to return main menu)\n");
+            categoryIndex = UserInput.getInt("Choose category:");
             if (categoryIndex == -1) return;
             message = productManager.validCategoryIndex(categoryIndex);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
-        double specialPackagePrice = 0;
-        do {
-            input = UserInput.getString("This product have special package? YES / NO : (Enter -1 to return main menu) ");
-            if (input.equals("-1")) return;
-            if (input.equalsIgnoreCase("yes")) {
-                do {
-                    specialPackagePrice = UserInput.getDouble("Enter price for special package: (Enter -1 to return main menu)");
-                    if (input.equals("-1")) return;
-                    message = productManager.validPrice(specialPackagePrice);
-                    if (message != null) {
-                        System.out.println(message);
-                    }
-                } while (message != null);
-                break;
-            }
-            if (!input.equalsIgnoreCase("no")) {
-                System.out.println("Please enter YES / NO only !");
-            }
-        } while (!input.equalsIgnoreCase("no"));
+
+        if (UserInput.getYesNo("Does this product have a special package?")) {
+            do {
+                specialPackagePrice = UserInput.getDouble("Enter price for special package: ");
+                if (specialPackagePrice == -1) return;
+                message = productManager.validPrice(specialPackagePrice);
+                if (message != null) {
+                    System.out.println(message);
+                }
+            } while (message != null);
+        }
         makeProductToSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice);
         System.out.println("Product added successfully.");
     }
 
-    public void case4 () {
+    public void case4() {
         if (buyerManager.getNumberOfBuyers() == 0) {
-            System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
+            System.out.println("Haven't buyers yet, cannot proceed. Returning to Menu.");
             return;
         }
         if (sellerManager.getNumberOfSellers() == 0) {
-            System.out.println("Haven't sellers yet, cannot be proceed. return to Menu.");
+            System.out.println("Haven't sellers yet, cannot proceed. Returning to Menu.");
             return;
         }
+
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
+
         int sellerIndex = chooseSeller();
         if (sellerIndex == -1) return;
+
         if (sellerManager.getSellers()[sellerIndex].getNumOfProducts() == 0) {
-            System.out.println("This seller haven't products yet, cannot be proceed. return to Menu.");
+            System.out.println("This seller has no products yet, cannot proceed. Returning to Menu.");
             return;
         }
+
         System.out.println(sellerManager.getSellers()[sellerIndex].toString());
+
         int productIndex;
         do {
-            productIndex = UserInput.getInt("Enter product's number for adding to your cart: (Enter -1 to return main menu)");
-            if (input.equals("-1")) return;
+            productIndex = UserInput.getInt("Enter product's number to add to your cart: ");
+            if (productIndex == -1) return;
             message = validProductIndex(sellerIndex, productIndex);
             if (message != null) {
                 System.out.println(message);
             }
         } while (message != null);
-        makeProductToBuyer(buyerIndex,sellerIndex,productIndex - 1);
+
+        makeProductToBuyer(buyerIndex, sellerIndex, productIndex - 1);
         System.out.println("Product added successfully to cart.");
     }
 
@@ -199,8 +203,7 @@ public class ManagerFacade {
                 System.out.println(message);
             }
         } while (message != null);
-        int historyCartIndex = Integer.parseInt(input);
-        buyerManager.replaceCarts(historyCartIndex - 1, buyerIndex);
+        buyerManager.replaceCarts(choice - 1, buyerIndex);
         System.out.println("Your current cart update successfully.");
     }
 
@@ -287,11 +290,12 @@ public class ManagerFacade {
     }
 
     public void case101() {
+        String input;
         if (productManager.getNumberOfProducts() != 0) {
             Map<String, Integer> map = productManager.productsToLinkedMap();
-            input = UserInput.getString("Please enter a string: (Enter -1 to return main menu)").toLowerCase();
-            if (input.equals("-1")) return;
-            System.out.printf("the number of times that " + input + " appears in the OG ARRAY is %d\n" , map.get(input) == null ? 0 : map.get(input));
+            input = UserInput.getString("Please enter a string: (Enter -1 to return main menu)");
+            if (input == null) return;
+            System.out.printf("the number of times that " + input.toLowerCase() + " appears in the OG ARRAY is %d\n" , map.get(input.toLowerCase()) == null ? 0 : map.get(input));
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
@@ -322,36 +326,28 @@ public class ManagerFacade {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public int chooseSeller () {
+    public int chooseSeller() {
         System.out.println(sellerManager.sellersNames());
-        String input;
-        while (true) {
-            input = UserInput.getString("Please choose seller from the list above: (Enter -1 to return main menu)");
-            if (input.equals("-1")) return -1;
-            String message = sellerManager.chooseValidSeller(input);
-            if (message != null) {
-                System.out.println(message);
-            } else {
-                break;
-            }
-        }
-        return Integer.parseInt(input) - 1;
+        int sellerIndex;
+        do {
+            sellerIndex = UserInput.getInt("Please choose seller from the list above:");
+            if (sellerIndex == -1) return -1;
+            message = sellerManager.chooseValidSeller(sellerIndex);
+            if (message != null) System.out.println(message);
+        } while (message != null);
+        return sellerIndex - 1;
     }
 
-    public int chooseBuyer () {
+    public int chooseBuyer() {
         System.out.println(buyerManager.buyersNames());
-        String input;
-        while (true) {
-            input = UserInput.getString("Please choose buyer from the list above: (Enter -1 to return main menu)");
-            if (input.equals("-1")) return -1;
-            String message = buyerManager.chooseValidBuyer(input);
-            if (message != null) {
-                System.out.println(message);
-            } else {
-                break;
-            }
-        }
-        return Integer.parseInt(input) - 1;
+        int buyerIndex;
+        do {
+            buyerIndex = UserInput.getInt("Please choose buyer from the list above:");
+            if (buyerIndex == -1) return -1;
+            message = buyerManager.chooseValidBuyer(buyerIndex);
+            if (message != null) System.out.println(message);
+        } while (message != null);
+        return buyerIndex - 1;
     }
 
     public String validProductIndex(int sellerIndex, int productIndexInput) {

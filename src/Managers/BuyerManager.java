@@ -40,9 +40,8 @@ public class BuyerManager implements IBuyerManager {
         return null;
     }
 
-    public String chooseValidBuyer(String indexInput) {
+    public String chooseValidBuyer(int index) {
         try {
-            int index = Integer.parseInt(indexInput);
             if (index > numberOfBuyers || index <= 0) throw new IndexOutOfBoundsException(ExceptionsMessages.INVALID_BUYER_INDEX.getExceptionMessage());
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
