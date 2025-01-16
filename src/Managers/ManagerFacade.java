@@ -216,58 +216,58 @@ public class ManagerFacade {
         sellerManager.addSeller(UserFactory.createSeller("Maya", "Maya@Home2024"));
         sellerManager.addSeller(UserFactory.createSeller("Avi", "AviPassword#45"));
 
-// Adding 5 buyers with usernames, realistic passwords, and addresses
+        // Adding 5 buyers with usernames, realistic passwords, and addresses
         buyerManager.addBuyer(UserFactory.createBuyer("Jack", "J@ck2024!", UserFactory.createAddress("Main St", "123", "Los Angeles", "California")));
         buyerManager.addBuyer(UserFactory.createBuyer("Dor", "DorPass@123", UserFactory.createAddress("Oak Rd", "456", "San Francisco", "California")));
         buyerManager.addBuyer(UserFactory.createBuyer("Tal", "Tal2024Secure", UserFactory.createAddress("Pine Ave", "789", "New York", "New York")));
         buyerManager.addBuyer(UserFactory.createBuyer("Maya", "Maya@Home2024", UserFactory.createAddress("Maple St", "101", "Chicago", "Illinois")));
         buyerManager.addBuyer(UserFactory.createBuyer("Avi", "AviPassword#45", UserFactory.createAddress("Cedar Blvd", "202", "Houston", "Texas")));
 
-// Adding products to sellers
+        // Adding products to sellers
 
-// Seller 0 products
+        // Seller 0 products
         makeProductToSeller(sellerIndex, "TV", 325.00, Category.ELECTRONIC, 15.00);
         makeProductToSeller(sellerIndex, "Shirt", 50.00, Category.CLOTHES, 0);
 
-// Seller 1 products
+        // Seller 1 products
         makeProductToSeller(sellerIndex + 1, "Laptop", 950.00, Category.ELECTRONIC, 50.00);
         makeProductToSeller(sellerIndex + 1, "Jacket", 75.00, Category.CLOTHES, 0);
         makeProductToSeller(sellerIndex + 1, "Desk Lamp", 45.00, Category.OFFICE, 5.00);
 
-// Seller 2 products
+        // Seller 2 products
         makeProductToSeller(sellerIndex + 2, "TV", 330.00, Category.ELECTRONIC, 18.00);
         makeProductToSeller(sellerIndex + 2, "Hat", 60.00, Category.CLOTHES, 0);
 
-// Seller 3 products
+        // Seller 3 products
         makeProductToSeller(sellerIndex + 3, "Headphones", 120.00, Category.ELECTRONIC, 0);
         makeProductToSeller(sellerIndex + 3, "Sweater", 80.00, Category.CLOTHES, 15.00);
         makeProductToSeller(sellerIndex + 3, "desk lamP", 130.00, Category.OFFICE, 0);
 
-// Seller 4 products
+        // Seller 4 products
         makeProductToSeller(sellerIndex + 4, "Smartwatch", 220.00, Category.ELECTRONIC, 30.00);
         makeProductToSeller(sellerIndex + 4, "hAt", 25.00, Category.CLOTHES, 5.00);
         makeProductToSeller(sellerIndex + 4, "Office Organizer", 40.00, Category.OFFICE, 0);
         makeProductToSeller(sellerIndex + 4, "Board Game", 28.00, Category.CHILDREN, 10.00);
 
-// Adding products to carts
+        // Adding products to carts
 
-// Buyer 0
+        // Buyer 0
         makeProductToBuyer(buyerIndex, sellerIndex, 0);  // Buyer 0 buys TV from Seller 0
         makeProductToBuyer(buyerIndex, sellerIndex + 1, 1);  // Buyer 0 buys Jacket from Seller 1
 
-// Buyer 1
+        // Buyer 1
         makeProductToBuyer(buyerIndex + 1, sellerIndex + 2, 0);  // Buyer 1 buys TV from Seller 2
         makeProductToBuyer(buyerIndex + 1, sellerIndex + 3, 1);  // Buyer 1 buys Sweater from Seller 3
 
-// Buyer 2
+        // Buyer 2
         makeProductToBuyer(buyerIndex + 2, sellerIndex + 4, 0);  // Buyer 2 buys Smartwatch from Seller 4
         makeProductToBuyer(buyerIndex + 2, sellerIndex, 1);  // Buyer 2 buys Shirt from Seller 0
 
-// Buyer 3
+        // Buyer 3
         makeProductToBuyer(buyerIndex + 3, sellerIndex + 1, 2);  // Buyer 3 buys Desk Lamp from Seller 1
         makeProductToBuyer(buyerIndex + 3, sellerIndex + 4, 1);  // Buyer 3 buys Hat from Seller 4
 
-// Buyer 4
+        // Buyer 4
         makeProductToBuyer(buyerIndex + 4, sellerIndex + 3, 0);  // Buyer 4 buys Headphones from Seller 3
         makeProductToBuyer(buyerIndex + 4, sellerIndex + 2, 1);  // Buyer 4 buys Hat from Seller 2
 
