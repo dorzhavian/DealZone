@@ -1,12 +1,6 @@
 package Managers;
-
-import Comparators.CompareBuyersByName;
-import Enums.ExceptionsMessages;
-import Exceptions.EmptyCartPayException;
 import Models.Buyer;
 import Models.Product;
-
-import java.util.Arrays;
 
 public interface IBuyerManager {
 
@@ -26,4 +20,7 @@ public interface IBuyerManager {
 
     void replaceCarts(int historyCartIndex, int buyerIndex);
 
+    int getNumberOfBuyers();
+
+    Buyer[] getBuyers();
 }

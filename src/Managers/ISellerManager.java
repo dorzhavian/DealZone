@@ -18,4 +18,7 @@ public interface ISellerManager {
 
     void addProductToSeller(Product p, int sellerIndex);
 
+    int getNumberOfSellers();
+
+    Seller[] getSellers();
 }

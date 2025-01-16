@@ -1,10 +1,6 @@
 package Managers;
 
-import Enums.Category;
-import Enums.ExceptionsMessages;
 import Models.Product;
-import Models.ProductSpecialPackage;
-
 import java.util.*;
 
 public interface IProductManager {
@@ -26,4 +22,8 @@ public interface IProductManager {
     Set<Product> productsToTree();
 
     Set<String> productsNameToLinkedSet();
+
+    int getNumberOfProducts();
+
+    Object getCategoriesArrays();
 }

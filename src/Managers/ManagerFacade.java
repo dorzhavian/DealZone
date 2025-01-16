@@ -6,9 +6,9 @@ import Models.*;
 import java.util.*;
 
 public class ManagerFacade {
-    private final SellerManager sellerManager;
-    private final BuyerManager buyerManager;
-    private final ProductManager productManager;
+    private final ISellerManager sellerManager;
+    private final IBuyerManager buyerManager;
+    private final IProductManager productManager;
     private static ManagerFacade instance;
 
     private static String input;
@@ -176,7 +176,7 @@ public class ManagerFacade {
     }
 
     public void case9 (InputHandler uI) {
-        int choice = 0;
+        int choice;
         if (buyerManager.getNumberOfBuyers() == 0) {
             System.out.println("Haven't buyers yet, cannot be proceed. return to Menu.");
             return;
