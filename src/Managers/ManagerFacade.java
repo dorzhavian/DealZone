@@ -107,7 +107,7 @@ public class ManagerFacade {
             }
         } while (message != null);
 
-        if (UserInput.getYesNo("Does this product have a special package?")) {
+        if (UserInput.getYesNo("Does this product have a special package? (Y/y) ")) {
             do {
                 specialPackagePrice = UserInput.getDouble("Enter price for special package: ");
                 if (specialPackagePrice == -1) return;

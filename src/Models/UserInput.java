@@ -58,18 +58,19 @@ public class UserInput {
 
     public static boolean getYesNo(String message) {
         String input;
-        while (true) {
+        do {
             System.out.println(message + " (Enter -1 to return to the main menu) ");
             input = sc.next().trim().toLowerCase();
             sc.nextLine();
             if (input.equals("-1")) return false;
             if (input.equalsIgnoreCase("yes")) return true;
-            if (input.equalsIgnoreCase("no")) return false;
-            System.out.println("Invalid input. Please enter 'yes' or 'no'.");
-        }
+            System.out.println("Input cannot be empty. Please enter again!");
+        } while (input.isEmpty());
+        return false;
     }
 
     public static void close() {
         sc.close();
     }
 }
+
