@@ -12,9 +12,9 @@ public class ManagerFacade {
     private final ISellerManager sellerManager;
     private final IBuyerManager buyerManager;
     private final ProductManager productManager;
-    private ActionServer actionServer;
-    private Action1 action1;
-    private Action2 action2;
+    private final ActionServer  actionServer;
+    private final Action1 action1;
+    private final Action2 action2;
     private static ManagerFacade instance;
 
     private static String message;
@@ -307,7 +307,6 @@ public class ManagerFacade {
     }
 
     public void case102(){
-        String input;
         if(productManager.getNumberOfProducts() != 0) {
             List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
