@@ -10,7 +10,7 @@ import java.util.*;
 public class ManagerFacade {
     private final ISellerManager sellerManager;
     private final IBuyerManager buyerManager;
-    private final IProductManager productManager;
+    private final ProductManager productManager;
     private static ManagerFacade instance;
 
     private static String message;
@@ -300,19 +300,37 @@ public class ManagerFacade {
     }
 
     public void case102(){
+        String input;
         if(productManager.getNumberOfProducts() != 0) {
-            List<String> setList = new ArrayList<>(productManager.productsNameToLinkedSet());
-            List<String> doubleNames = new ArrayList<>();
-            ListIterator<String> iterator = setList.listIterator();
+            productManager.setSetList(new ArrayList<>(productManager.productsNameToLinkedSet()));
+            ListIterator<String> iterator = productManager.getSetList().listIterator();
             while(iterator.hasNext()){
                 String key = iterator.next();
-                doubleNames.add(key);
-                doubleNames.add(key);
+                productManager.getDoubleNames().add(key);
+                productManager.getDoubleNames().add(key);
             }
-            ListIterator<String> doubleIterator = doubleNames.listIterator(doubleNames.size());
+            ListIterator<String> doubleIterator = productManager.getDoubleNames().listIterator(productManager.getDoubleNames().size());
             while(doubleIterator.hasPrevious()){
                 System.out.println(doubleIterator.previous());
             }
+
+            if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
+                return;
+            System.out.println("\n My custom name ArrayList iterator: ");
+            Iterator<String> myIterator = productManager.myIterator();
+            while(myIterator.hasNext())
+                System.out.println(myIterator.next());
+
+            System.out.println("\n My custom name ArrayList List iterator (Start --> End): ");
+            ListIterator<String> myListIterator = productManager.myListIterator();
+            while(myListIterator.hasNext()){
+                System.out.println(myListIterator.next());
+            }
+            System.out.println("\n My custom name ArrayList List iterator (End --> Start): ");
+            while(myListIterator.hasPrevious()){
+                System.out.println(myListIterator.previous());
+            }
+
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 

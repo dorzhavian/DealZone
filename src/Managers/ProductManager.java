@@ -13,6 +13,8 @@ public class ProductManager implements IProductManager {
     private Product[] allProducts;
     private int numberOfProducts;
     private final Categories categoriesArrays;
+    private  List<String> setList = new ArrayList<>();
+    private  List<String> doubleNames = new ArrayList<>();
     private static ProductManager instance;
 
     public static ProductManager getInstance() {                          // SINGLETON !!!!!!!
@@ -24,6 +26,22 @@ public class ProductManager implements IProductManager {
     public ProductManager() {
         categoriesArrays = new Categories();
         allProducts = new Product[0];
+    }
+
+    public List<String> getDoubleNames() {
+        return doubleNames;
+    }
+
+    public void setDoubleNames(List<String> doubleNames) {
+        this.doubleNames = doubleNames;
+    }
+
+    public List<String> getSetList() {
+        return setList;
+    }
+
+    public void setSetList(List<String> setList) {
+        this.setList = setList;
     }
 
     public Categories getCategoriesArrays() {
@@ -133,5 +151,78 @@ public class ProductManager implements IProductManager {
         for (int i = 0; i < numberOfProducts; i++)
             set.add(allProducts[i].getProductName().toLowerCase());
         return set;
+    }
+
+    public ListIterator<String> myListIterator() {return new ConcreteListIterator(0);}
+
+    public ListIterator<String> myListIterator(int index) {return new ConcreteListIterator(index);}
+    // function that uses Iterator class
+    public Iterator<String> myIterator(){
+        return new ConcreteIterator();
+    }
+
+    // New iterator class
+
+    private class ConcreteIterator implements Iterator<String>{
+        int cur = 0;
+
+        @Override
+        public boolean hasNext() {
+
+            return cur < doubleNames.size();
+      }
+
+        @Override
+        public String next() {
+            if (!hasNext())
+                throw new NoSuchElementException();
+            String name = doubleNames.get(cur);
+            cur++;
+         return name;
+        }
+    }
+
+    private class ConcreteListIterator extends ConcreteIterator implements ListIterator<String>{
+        public ConcreteListIterator(int index){
+            cur = index;
+        }
+
+
+        @Override
+        public boolean hasPrevious() {
+            return cur > 0;
+        }
+
+        @Override
+        public String previous() {
+            if (!hasPrevious())
+                throw new NoSuchElementException();
+            return doubleNames.get(--cur);
+        }
+
+        @Override
+        public int nextIndex() {
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            return 0;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(String s) {
+
+        }
+
+        @Override
+        public void add(String s) {
+
+        }
     }
 }

@@ -63,7 +63,7 @@ public class UserInput {
             input = sc.next().trim().toLowerCase();
             sc.nextLine();
             if (input.equals("-1")) return false;
-            if (input.equalsIgnoreCase("yes")) return true;
+            if (input.equalsIgnoreCase("y")) return true;
             System.out.println("Input cannot be empty. Please enter again!");
         } while (input.isEmpty());
         return false;
