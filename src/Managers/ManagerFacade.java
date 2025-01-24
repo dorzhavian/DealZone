@@ -4,6 +4,7 @@ import Enums.ExceptionsMessages;
 import Factories.ProductFactory;
 import Factories.UserFactory;
 import Models.*;
+import Actions.*;
 
 import java.util.*;
 
@@ -11,6 +12,9 @@ public class ManagerFacade {
     private final ISellerManager sellerManager;
     private final IBuyerManager buyerManager;
     private final ProductManager productManager;
+    private ActionServer actionServer;
+    private Action1 action1;
+    private Action2 action2;
     private static ManagerFacade instance;
 
     private static String message;
@@ -25,6 +29,9 @@ public class ManagerFacade {
         sellerManager = SellerManager.getInstance();
         buyerManager = BuyerManager.getInstance();
         productManager = ProductManager.getInstance();
+        actionServer = new ActionServer();
+        action1 = new Action1();
+        action2 = new Action2();
     }
 
     public void case1() {
@@ -302,34 +309,45 @@ public class ManagerFacade {
     public void case102(){
         String input;
         if(productManager.getNumberOfProducts() != 0) {
-            productManager.setSetList(new ArrayList<>(productManager.productsNameToLinkedSet()));
-            ListIterator<String> iterator = productManager.getSetList().listIterator();
+            List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
+            List<String> doubleNames = new ArrayList<>();
+            ListIterator<String> iterator = productNameList.listIterator();
             while(iterator.hasNext()){
                 String key = iterator.next();
-                productManager.getDoubleNames().add(key);
-                productManager.getDoubleNames().add(key);
+                doubleNames.add(key);
+                doubleNames.add(key);
             }
-            ListIterator<String> doubleIterator = productManager.getDoubleNames().listIterator(productManager.getDoubleNames().size());
+            ListIterator<String> doubleIterator = doubleNames.listIterator(doubleNames.size());
             while(doubleIterator.hasPrevious()){
                 System.out.println(doubleIterator.previous());
             }
 
             if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
                 return;
-            System.out.println("\n My custom name ArrayList iterator: ");
+            productManager.setSetList(productNameList);
+            productManager.setDoubleNames(doubleNames);
+            actionServer.attach(action1);
+            actionServer.attach(action2);
+            System.out.println("\nMy custom name ArrayList iterator: ");
             Iterator<String> myIterator = productManager.myIterator();
             while(myIterator.hasNext())
                 System.out.println(myIterator.next());
-
-            System.out.println("\n My custom name ArrayList List iterator (Start --> End): ");
+            actionServer.setMsg("My Iterator ended!");
+            actionServer.myNotify();
+            System.out.println("\nMy custom name ArrayList List iterator (Start --> End): ");
             ListIterator<String> myListIterator = productManager.myListIterator();
             while(myListIterator.hasNext()){
                 System.out.println(myListIterator.next());
             }
-            System.out.println("\n My custom name ArrayList List iterator (End --> Start): ");
+            actionServer.setMsg("My ListIterator ended!");
+            actionServer.myNotify();
+            System.out.println("\nMy custom name ArrayList List iterator (End --> Start): ");
             while(myListIterator.hasPrevious()){
                 System.out.println(myListIterator.previous());
             }
+            actionServer.setMsg("My ListIterator ended!");
+            actionServer.myNotify();
+
 
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }

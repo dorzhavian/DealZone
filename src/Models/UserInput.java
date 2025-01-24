@@ -64,7 +64,8 @@ public class UserInput {
             sc.nextLine();
             if (input.equals("-1")) return false;
             if (input.equalsIgnoreCase("y")) return true;
-            System.out.println("Input cannot be empty. Please enter again!");
+            if(input.isEmpty())
+                System.out.println("Input cannot be empty. Please enter again!");
         } while (input.isEmpty());
         return false;
     }
