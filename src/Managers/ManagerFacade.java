@@ -307,6 +307,8 @@ public class ManagerFacade {
     }
 
     public void case102(){
+        //TASK 1:
+
         if(productManager.getNumberOfProducts() != 0) {
             List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
@@ -320,6 +322,8 @@ public class ManagerFacade {
             while(doubleIterator.hasPrevious()){
                 System.out.println(doubleIterator.previous());
             }
+
+            // TASK2 :
 
             if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
                 return;
