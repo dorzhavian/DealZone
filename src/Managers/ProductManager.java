@@ -31,6 +31,10 @@ public class ProductManager implements IProductManager {
         this.doubleNames = doubleNames;
     }
 
+    public List<String> getDoubleNames() {
+        return doubleNames;
+    }
+
     public Categories getCategoriesArrays() {
         return categoriesArrays;
     }
@@ -143,6 +147,7 @@ public class ProductManager implements IProductManager {
     public ListIterator<String> myListIterator() {return new ConcreteListIterator(0);}
 
     public ListIterator<String> myListIterator(int index) {return new ConcreteListIterator(index);}
+
     // function that uses Iterator class
     public Iterator<String> myIterator(){
         return new ConcreteIterator();

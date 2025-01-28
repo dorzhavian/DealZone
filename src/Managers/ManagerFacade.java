@@ -327,7 +327,6 @@ public class ManagerFacade {
 
             if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
                 return;
-
             productManager.setDoubleNames(doubleNames);
             actionServer.attach(action1);
             actionServer.attach(action2);
@@ -337,6 +336,7 @@ public class ManagerFacade {
                 System.out.println(myIterator.next());
             actionServer.setMsg("My Iterator ended!");
             actionServer.myNotify();
+
             System.out.println("\nMy custom name ArrayList List iterator (Start --> End): ");
             ListIterator<String> myListIterator = productManager.myListIterator();
             while(myListIterator.hasNext()){
@@ -344,13 +344,14 @@ public class ManagerFacade {
             }
             actionServer.setMsg("My ListIterator ended!");
             actionServer.myNotify();
+
             System.out.println("\nMy custom name ArrayList List iterator (End --> Start): ");
-            while(myListIterator.hasPrevious()){
-                System.out.println(myListIterator.previous());
+            ListIterator<String> myListIterator2 = productManager.myListIterator(productManager.getDoubleNames().size());
+            while(myListIterator2.hasPrevious()){
+                System.out.println(myListIterator2.previous());
             }
             actionServer.setMsg("My ListIterator ended!");
             actionServer.myNotify();
-
 
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
