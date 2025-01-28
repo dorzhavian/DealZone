@@ -13,7 +13,6 @@ public class ProductManager implements IProductManager {
     private Product[] allProducts;
     private int numberOfProducts;
     private final Categories categoriesArrays;
-    private  List<String> setList = new ArrayList<>();
     private  List<String> doubleNames = new ArrayList<>();
     private static ProductManager instance;
 
@@ -28,20 +27,8 @@ public class ProductManager implements IProductManager {
         allProducts = new Product[0];
     }
 
-    public List<String> getDoubleNames() {
-        return doubleNames;
-    }
-
     public void setDoubleNames(List<String> doubleNames) {
         this.doubleNames = doubleNames;
-    }
-
-    public List<String> getSetList() {
-        return setList;
-    }
-
-    public void setSetList(List<String> setList) {
-        this.setList = setList;
     }
 
     public Categories getCategoriesArrays() {
