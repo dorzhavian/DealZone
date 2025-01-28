@@ -327,7 +327,7 @@ public class ManagerFacade {
 
             if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
                 return;
-            productManager.setSetList(productNameList);
+
             productManager.setDoubleNames(doubleNames);
             actionServer.attach(action1);
             actionServer.attach(action2);
