@@ -28,10 +28,6 @@ public class ProductManager implements IProductManager {
         doubleNames = new ArrayList<>();
     }
 
-    public void setDoubleNames(List<String> doubleNames) {
-        this.doubleNames = doubleNames;
-    }
-
 
     public List<String> getDoubleNames() {
         return doubleNames;

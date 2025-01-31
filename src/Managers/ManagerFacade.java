@@ -5,6 +5,7 @@ import Factories.ProductFactory;
 import Factories.UserFactory;
 import Models.*;
 import Actions.*;
+import Adapters.*;
 
 import java.util.*;
 
@@ -317,14 +318,14 @@ public class ManagerFacade {
 
             List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
-            ListIterator<String> iterator = productNameList.listIterator();
-            while(iterator.hasNext()){
+            MyListIterator<String> iterator =new ListIteratorAdapter<>(productNameList.listIterator());
+            while(iterator.myHasNext()){
                 String key = iterator.next();
                 doubleNames.add(key);
                 doubleNames.add(key);
             }
-            ListIterator<String> doubleIterator = doubleNames.listIterator(doubleNames.size());
-            while(doubleIterator.hasPrevious()){
+            MyListIterator<String> doubleIterator = new ListIteratorAdapter<>(doubleNames.listIterator(doubleNames.size()));
+            while(doubleIterator.myHasPrevious()){
                 System.out.println(doubleIterator.previous());
             }
         }else System.out.println("No products yet!");
