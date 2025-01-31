@@ -13,7 +13,6 @@ public class ProductManager implements IProductManager {
     private Product[] allProducts;
     private int numberOfProducts;
     private final Categories categoriesArrays;
-    private  List<String> setList = new ArrayList<>();
     private  List<String> doubleNames = new ArrayList<>();
     private static ProductManager instance;
 
@@ -28,20 +27,12 @@ public class ProductManager implements IProductManager {
         allProducts = new Product[0];
     }
 
-    public List<String> getDoubleNames() {
-        return doubleNames;
-    }
-
     public void setDoubleNames(List<String> doubleNames) {
         this.doubleNames = doubleNames;
     }
 
-    public List<String> getSetList() {
-        return setList;
-    }
-
-    public void setSetList(List<String> setList) {
-        this.setList = setList;
+    public List<String> getDoubleNames() {
+        return doubleNames;
     }
 
     public Categories getCategoriesArrays() {
@@ -156,6 +147,7 @@ public class ProductManager implements IProductManager {
     public ListIterator<String> myListIterator() {return new ConcreteListIterator(0);}
 
     public ListIterator<String> myListIterator(int index) {return new ConcreteListIterator(index);}
+
     // function that uses Iterator class
     public Iterator<String> myIterator(){
         return new ConcreteIterator();
