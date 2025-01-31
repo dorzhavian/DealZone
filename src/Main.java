@@ -71,6 +71,12 @@ public class Main {
                     //managerFacade.case103();
                     menuCommand.execute(103);
                     break;
+                case 104:
+                    menuCommand.execute(104);
+                    break;
+                case 105:
+                    menuCommand.execute(105);
+                    break;
                 default:
                     System.out.println("\nPlease enter a valid choice in range 0-10 / 99 - 103!");
                     break;

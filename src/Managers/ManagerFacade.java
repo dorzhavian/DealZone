@@ -18,6 +18,7 @@ public class ManagerFacade {
     private static ManagerFacade instance;
 
     private static String message;
+    private Stack<ProductManager.Memento>  stackProductNameList;
 
     public static ManagerFacade getInstance() {       // SINGLETON !!!!!!!
         if (instance == null)
@@ -32,6 +33,7 @@ public class ManagerFacade {
         actionServer = new ActionServer();
         action1 = new Action1();
         action2 = new Action2();
+        stackProductNameList = new Stack<>();
     }
 
     public void case1() {
@@ -310,6 +312,9 @@ public class ManagerFacade {
         //TASK 1:
 
         if(productManager.getNumberOfProducts() != 0) {
+            System.out.println("Task 1: ");
+
+
             List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
             ListIterator<String> iterator = productNameList.listIterator();
@@ -322,12 +327,16 @@ public class ManagerFacade {
             while(doubleIterator.hasPrevious()){
                 System.out.println(doubleIterator.previous());
             }
+        }else System.out.println("No products yet!");
+
+
 
             // TASK2 :
-
+        if(!productManager.getDoubleNames().isEmpty())
+        {
+            System.out.println("Task 2: ");
             if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
                 return;
-            productManager.setDoubleNames(doubleNames);
             actionServer.attach(action1);
             actionServer.attach(action2);
             System.out.println("\nMy custom name ArrayList iterator: ");
@@ -353,7 +362,7 @@ public class ManagerFacade {
             actionServer.setMsg("My ListIterator ended!");
             actionServer.myNotify();
 
-        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+        } else System.out.println("Product double names list is empty!");
     }
 
     public void case103() {
@@ -364,6 +373,21 @@ public class ManagerFacade {
                 System.out.println(productsIterator.next().toString().toUpperCase());
             }
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
+    }
+
+    public void case104()
+    {
+        stackProductNameList.push(productManager.createMemento());
+        System.out.println("Memento created, the name list saved.");
+    }
+
+    public void case105()
+    {
+        if(!stackProductNameList.isEmpty())
+        {
+            productManager.setMemento(stackProductNameList.pop());
+            System.out.println("Last save of the name list has been restored");
+        }
     }
 
     public int chooseSeller() {
@@ -439,7 +463,8 @@ public class ManagerFacade {
         }
         sellerManager.addProductToSeller(p1, sellerIndex);
         productManager.addToCategoryArray(p1);
-        productManager.addProductName(p1);
+        productManager.addProductToProductArray(p1);
+        productManager.addProductNameToDoubleNameList(p1.getProductName().toLowerCase());
     }
 
 }

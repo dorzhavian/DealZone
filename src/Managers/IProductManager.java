@@ -10,7 +10,7 @@ public interface IProductManager {
 
     String validCategoryIndex(int categoryInput);
 
-    void addProductName(Product p);
+    void addProductToProductArray(Product p);
 
     void printProductsName();
 

@@ -13,7 +13,7 @@ public class ProductManager implements IProductManager {
     private Product[] allProducts;
     private int numberOfProducts;
     private final Categories categoriesArrays;
-    private  List<String> doubleNames = new ArrayList<>();
+    private  List<String> doubleNames;
     private static ProductManager instance;
 
     public static ProductManager getInstance() {                          // SINGLETON !!!!!!!
@@ -25,11 +25,13 @@ public class ProductManager implements IProductManager {
     public ProductManager() {
         categoriesArrays = new Categories();
         allProducts = new Product[0];
+        doubleNames = new ArrayList<>();
     }
 
     public void setDoubleNames(List<String> doubleNames) {
         this.doubleNames = doubleNames;
     }
+
 
     public List<String> getDoubleNames() {
         return doubleNames;
@@ -67,7 +69,7 @@ public class ProductManager implements IProductManager {
         return null;
     }
 
-    public void addProductName(Product p){
+    public void addProductToProductArray(Product p){
         if (allProducts.length == numberOfProducts) {
             if (allProducts.length == 0) {
                 allProducts = Arrays.copyOf(allProducts, 1);
@@ -77,6 +79,12 @@ public class ProductManager implements IProductManager {
         }
         allProducts[numberOfProducts++] = p;
 
+    }
+
+    public void addProductNameToDoubleNameList(String name)
+    {
+        doubleNames.add(name);
+        doubleNames.add(name);
     }
 
     public void printProductsName() {
@@ -216,5 +224,25 @@ public class ProductManager implements IProductManager {
         public void add(String s) {
 
         }
+    }
+
+    public static class Memento
+    {
+        private final List<String> names;
+
+        private Memento(List<String> doubleNames)
+        {
+            this.names = new ArrayList<>(doubleNames);
+        }
+    }
+
+    public Memento createMemento()
+    {
+        return new Memento(doubleNames);
+    }
+
+    public void setMemento(Memento m)
+    {
+        this.doubleNames = m.names;
     }
 }

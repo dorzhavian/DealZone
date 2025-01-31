@@ -34,6 +34,16 @@ public class MenuCommand implements Command{
                 mFacade.case103();
                 break;
 
+            case 104:
+                mFacade.case104();
+                break;
+
+            case 105:
+                mFacade.case105();
+                break;
+
+
+
             default:
                 break;
         }
