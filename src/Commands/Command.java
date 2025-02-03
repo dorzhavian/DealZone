@@ -1,6 +1,6 @@
 package Commands;
 
 public interface Command {
-    void execute(int choice);
+    void execute();
     //void undo();
 }

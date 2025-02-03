@@ -1,15 +1,18 @@
 //DOR_ZHAVIAN_211337845_&_ASAF_BANANI_211961933
 
-import Commands.MenuCommand;
 import Managers.ManagerFacade;
-import Commands.Command;
+import Commands.*;
 import Models.*;
 
 public class Main {
 
     public static void main(String[] args) {
         ManagerFacade managerFacade = ManagerFacade.getInstance();
-        Command menuCommand = new MenuCommand(managerFacade);
+        Command c99 = new Command99(managerFacade);
+        Command c100 = new Command100(managerFacade);
+        Command c101 = new Command101(managerFacade);
+        Command c102 = new Command102(managerFacade);
+        Command c103 = new Command103(managerFacade);
         int choice;
         Menu.start();
         do {
@@ -53,29 +56,29 @@ public class Main {
                     break;
                 case 99:
                     //managerFacade.case99();
-                    menuCommand.execute(99);
+                    c99.execute();
                     break;
                 case 100:
                     //managerFacade.case100();
-                    menuCommand.execute(100);
+                    c100.execute();
                     break;
                 case 101:
                     //managerFacade.case101();
-                    menuCommand.execute(101);
+                    c101.execute();
                     break;
                 case 102:
                     //managerFacade.case102();
-                    menuCommand.execute(102);
+                    c102.execute();
                     break;
                 case 103:
                     //managerFacade.case103();
-                    menuCommand.execute(103);
+                    c103.execute();
                     break;
                 case 104:
-                    menuCommand.execute(104);
+                    managerFacade.case104();
                     break;
                 case 105:
-                    menuCommand.execute(105);
+                    managerFacade.case105();
                     break;
                 default:
                     System.out.println("\nPlease enter a valid choice in range 0-10 / 99 - 103!");
