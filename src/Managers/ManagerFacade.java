@@ -318,13 +318,13 @@ public class ManagerFacade {
 
             List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
-            MyListIterator<String> iterator =new ListIteratorAdapter<>(productNameList.listIterator());
+            Target<String> iterator =new ListIteratorAdapter<>(productNameList.listIterator());
             while(iterator.myHasNext()){
                 String key = iterator.next();
                 doubleNames.add(key);
                 doubleNames.add(key);
             }
-            MyListIterator<String> doubleIterator = new ListIteratorAdapter<>(doubleNames.listIterator(doubleNames.size()));
+            Target<String> doubleIterator = new ListIteratorAdapter<>(doubleNames.listIterator(doubleNames.size()));
             while(doubleIterator.myHasPrevious()){
                 System.out.println(doubleIterator.previous());
             }

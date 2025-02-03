@@ -1,7 +1,7 @@
 package Adapters;
 import java.util.ListIterator;
 
-public class ListIteratorAdapter<E> implements MyListIterator<E> {
+public class ListIteratorAdapter<E> implements Target<E> {
     private final ListIterator<E> listIterator;
 
     public ListIteratorAdapter(ListIterator<E> listIterator) {

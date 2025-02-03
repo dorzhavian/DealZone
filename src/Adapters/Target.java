@@ -1,6 +1,6 @@
 package Adapters;
 
-public interface MyListIterator<E> {
+public interface Target<E> {
     boolean myHasNext();
     boolean myHasPrevious();
     E next();
