@@ -310,12 +310,10 @@ public class ManagerFacade {
     }
 
     public void case102(){
-        //TASK 1:
 
+        //TASK 1:
         if(productManager.getNumberOfProducts() != 0) {
             System.out.println("Task 1: ");
-
-
             List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
             List<String> doubleNames = new ArrayList<>();
             Target<String> iterator =new ListIteratorAdapter<>(productNameList.listIterator());
@@ -330,12 +328,10 @@ public class ManagerFacade {
             }
         }else System.out.println("No products yet!");
 
-
-
-            // TASK2 :
+        // TASK2 :
+        System.out.println("Task 2+3: ");
         if(!productManager.getDoubleNames().isEmpty())
         {
-            System.out.println("Task 2: ");
             if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
                 return;
             actionServer.attach(action1);

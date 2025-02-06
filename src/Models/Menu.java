@@ -15,11 +15,13 @@ public class Menu {
         System.out.println("8) Product's by category");
         System.out.println("9) Replace current cart with cart from history");
         System.out.println("10) Use factory for automatic shop create");
-        System.out.println("99) Question 15");
-        System.out.println("100) Question 16");
-        System.out.println("101) Question 17 ");
-        System.out.println("102) Question 18 ");
-        System.out.println("103) Question 19 ");
+        System.out.println("99) Question 15 task 2");
+        System.out.println("100) Question 16 task 2");
+        System.out.println("101) Question 17 task 2");
+        System.out.println("102) Question 18 task 2");
+        System.out.println("103) Question 19 task 2");
+        System.out.println("104) Question 19 task 3");
+        System.out.println("105) Question 19 task 3");
     }
 
     public static void start() {
