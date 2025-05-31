@@ -57,7 +57,7 @@ public class SellerManager implements ISellerManager{
         StringBuilder sb = new StringBuilder("\nSellers info:\n--------------\n");
         Arrays.sort(sellers, 0, numberOfSellers, comparatorSeller);
         for (int i = 0; i < numberOfSellers; i++) {
-            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(":");
+            sb.append(i + 1).append(") ").append(sellers[i].getUserName()).append(": (ID: ").append(sellers[i].getId()).append(")");
             sb.append(sellers[i].toString()).append("\n");
         }
         return sb.toString();

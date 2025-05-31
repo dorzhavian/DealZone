@@ -50,7 +50,7 @@ public class Buyer extends User {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Buyer details:\n").append("   Name: ").append(userName).append("\n")
+        sb.append("Buyer details:\n").append("   ID: ").append(this.getId()).append("\n").append("   Name: ").append(userName).append("\n")
                 .append("   Address: ").append(address.toString()).append("\n\n");
         if (currentCart.getNumOfProducts() == 0) {
             sb.append("Cart is empty\n");
