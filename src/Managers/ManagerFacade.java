@@ -6,6 +6,7 @@ import Factories.UserFactory;
 import Models.*;
 import Actions.*;
 import Adapters.*;
+import java.sql.*;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class ManagerFacade {
     private final Action1 action1;
     private final Action2 action2;
     private static ManagerFacade instance;
-
+    private Connection conn;
     private static String message;
     private Stack<ProductManager.Memento>  stackProductNameList;
 
@@ -35,6 +36,30 @@ public class ManagerFacade {
         action1 = new Action1();
         action2 = new Action2();
         stackProductNameList = new Stack<>();
+
+        try {
+            conn = DatabaseConnection.getConnection();
+            System.out.println("\n-------Database connection established successfully-------");
+            loadFromDatabase();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to connect to DB", e);
+        }
+    }
+
+    private void loadFromDatabase() {
+        sellerManager.loadSellersFromDB(conn);
+        //productManager.
+    }
+
+    public void closeConnection() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+                System.out.println("Database connection closed.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to close DB connection: " + e.getMessage());
+        }
     }
 
     public void case1() {
@@ -230,11 +255,11 @@ public class ManagerFacade {
         sellerManager.addSeller(UserFactory.createSeller("Avi", "AviPassword#45"));
 
         // Adding 5 buyers with usernames, realistic passwords, and addresses
-        buyerManager.addBuyer(UserFactory.createBuyer("Jack", "J@ck2024!", UserFactory.createAddress("Main St", "123", "Los Angeles", "California")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Dor", "DorPass@123", UserFactory.createAddress("Oak Rd", "456", "San Francisco", "California")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Tal", "Tal2024Secure", UserFactory.createAddress("Pine Ave", "789", "New York", "New York")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Maya", "Maya@Home2024", UserFactory.createAddress("Maple St", "101", "Chicago", "Illinois")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Avi", "AviPassword#45", UserFactory.createAddress("Cedar Blvd", "202", "Houston", "Texas")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Asaf", "J@ck2024!", UserFactory.createAddress("Main St", "123", "Los Angeles", "California")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Yakov", "DorPass@123", UserFactory.createAddress("Oak Rd", "456", "San Francisco", "California")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Miki", "Tal2024Secure", UserFactory.createAddress("Pine Ave", "789", "New York", "New York")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Ami", "Maya@Home2024", UserFactory.createAddress("Maple St", "101", "Chicago", "Illinois")));
+        buyerManager.addBuyer(UserFactory.createBuyer("Kobe", "AviPassword#45", UserFactory.createAddress("Cedar Blvd", "202", "Houston", "Texas")));
 
         // Adding products to sellers
 

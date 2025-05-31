@@ -2,8 +2,10 @@ package Managers;
 
 import Comparators.CompareSellersByProductsNumber;
 import Enums.ExceptionsMessages;
+import Factories.UserFactory;
 import Models.*;
 
+import java.sql.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -12,6 +14,8 @@ public class SellerManager implements ISellerManager{
     private int numberOfSellers;
     private final Comparator<Seller> comparatorSeller;
     private static SellerManager instance;
+    private Statement st = null;
+    private ResultSet rs = null;
 
     public static SellerManager getInstance() {                          // SINGLETON !!!!!!!
         if (instance == null)
@@ -30,6 +34,37 @@ public class SellerManager implements ISellerManager{
 
     public Seller[] getSellers() {
         return sellers;
+    }
+
+    @Override
+    public void loadSellersFromDB(Connection conn) {
+        String sql = "SELECT u.user_id, u.username, u.password, s.num_of_products " +
+                "FROM \"users\" u " +
+                "JOIN \"sellers\" s ON u.user_id = s.user_id";
+
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                int id = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                int numOfProducts = rs.getInt("num_of_products");
+
+                addSeller(UserFactory.createSellerFromDB(id, username, password, numOfProducts));
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while loading sellers from DB: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
     }
 
     public String isExistSeller (String name) {

@@ -55,23 +55,18 @@ public class Main {
                     managerFacade.hardcoded();
                     break;
                 case 99:
-                    //managerFacade.case99();
                     c99.execute();
                     break;
                 case 100:
-                    //managerFacade.case100();
                     c100.execute();
                     break;
                 case 101:
-                    //managerFacade.case101();
                     c101.execute();
                     break;
                 case 102:
-                    //managerFacade.case102();
                     c102.execute();
                     break;
                 case 103:
-                    //managerFacade.case103();
                     c103.execute();
                     break;
                 case 104:
@@ -85,6 +80,7 @@ public class Main {
                     break;
             }
         } while (choice != 0);
+        managerFacade.closeConnection();
         UserInput.close();
     }
 }

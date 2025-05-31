@@ -14,6 +14,10 @@ public class UserFactory {
             return new Seller(username, password);
     }
 
+    public static Seller createSellerFromDB (int id, String username, String password, int numOfProducts) {
+        return new Seller(id, username, password, numOfProducts);
+    }
+
     public static Address createAddress (String street, String houseName, String city, String state) {
             return new Address(street, houseName, city, state);
     }

@@ -23,4 +23,5 @@ public interface IBuyerManager {
     int getNumberOfBuyers();
 
     Buyer[] getBuyers();
+
 }

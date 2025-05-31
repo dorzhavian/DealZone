@@ -17,6 +17,13 @@ public class Buyer extends User {
         historyCart = new Cart[0];
     }
 
+    public Buyer(int id, String userName, String password, Address address, int numOfHistoryCart) {
+        super(id, userName, password);
+        this.address = address;
+        this.currentCart = new Cart();
+        this.historyCart = new Cart[numOfHistoryCart];
+    }
+
     public int getHistoryCartsNum() {
         return historyCartsNum;
     }

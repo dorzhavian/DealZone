@@ -2,7 +2,7 @@ package Managers;
 
 import Models.Product;
 import Models.Seller;
-
+import java.sql.*;
 
 public interface ISellerManager {
 
@@ -21,4 +21,6 @@ public interface ISellerManager {
     int getNumberOfSellers();
 
     Seller[] getSellers();
+
+    void loadSellersFromDB(Connection conn);
 }
