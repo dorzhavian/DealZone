@@ -12,13 +12,13 @@ public abstract class User {
         this.password = password;
     }
 
-    public User(int id, String userName, String password) {
-        this.id = id;
+    public User(int userID, String userName, String password) {
+        this.id = userID;
         this.userName = userName;
         this.password = password;
 
-        if (id > idGenerator) {
-            setIdGenerator(id);
+        if (userID > idGenerator) {
+            setIdGenerator(userID);
         }
     }
 

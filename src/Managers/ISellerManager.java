@@ -23,4 +23,6 @@ public interface ISellerManager {
     Seller[] getSellers();
 
     void loadSellersFromDB(Connection conn);
+
+    int findSellerIndexByID (int id);
 }

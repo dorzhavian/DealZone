@@ -10,6 +10,11 @@ public class ProductSpecialPackage extends Product{
         this.specialPackagePrice = specialPackagePrice;
     }
 
+    public ProductSpecialPackage(int id, String productName, double productPrice, Category category, double specialPackagePrice) {
+        super(id, productName, productPrice, category);
+        this.specialPackagePrice = specialPackagePrice;
+    }
+
     public ProductSpecialPackage(Product other, double specialPackagePrice) {
         super(other);
         this.specialPackagePrice = specialPackagePrice;

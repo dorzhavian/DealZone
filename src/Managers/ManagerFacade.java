@@ -19,6 +19,8 @@ public class ManagerFacade {
     private final Action2 action2;
     private static ManagerFacade instance;
     private Connection conn;
+    private Statement st = null;
+    private ResultSet rs = null;
     private static String message;
     private Stack<ProductManager.Memento>  stackProductNameList;
 
@@ -46,9 +48,68 @@ public class ManagerFacade {
         }
     }
 
+    public void loadProductsFromDB(Connection conn) {
+        String sql = "SELECT * FROM products WHERE product_id NOT IN (SELECT product_id FROM special_package_products)";
+        int sellerIndex, productID, sellerID;
+        double productPrice, specialPrice;
+        String productName;
+        Category category;
+
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                productName = rs.getString("name");
+                productPrice = rs.getDouble("price");
+                sellerID = rs.getInt("seller_id");
+                category = Category.valueOf(rs.getString("category"));
+
+                sellerIndex = sellerManager.findSellerIndexByID(sellerID);
+
+                makeProductToSeller(sellerIndex, productName, productPrice, category, 0, productID);
+
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error while loading sellers from DB: " + e.getMessage());
+        }
+
+        sql = "SELECT products.product_id, products.name, products.price, products.seller_id, products.category, special_package_products.special_package_price FROM products JOIN special_package_products ON special_package_products.product_id = products.product_id";
+
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                productName = rs.getString("name");
+                productPrice = rs.getDouble("price");
+                sellerID = rs.getInt("seller_id");
+                category = Category.valueOf(rs.getString("category"));
+                specialPrice = rs.getInt("special_package_price");
+
+                sellerIndex = sellerManager.findSellerIndexByID(sellerID);
+
+                makeProductToSeller(sellerIndex, productName, productPrice, category, specialPrice, productID);
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while loading sellers from DB: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+    }
+
     private void loadFromDatabase() {
         sellerManager.loadSellersFromDB(conn);
-        //productManager.
+        loadProductsFromDB(conn);
     }
 
     public void closeConnection() {
@@ -152,7 +213,7 @@ public class ManagerFacade {
                 }
             } while (message != null);
         }
-        makeProductToSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice);
+        makeProductToSeller(sellerIndex, productName, productPrice, Category.values()[categoryIndex - 1], specialPackagePrice, -1);
         System.out.println("Product added successfully.");
     }
 
@@ -264,28 +325,28 @@ public class ManagerFacade {
         // Adding products to sellers
 
         // Seller 0 products
-        makeProductToSeller(sellerIndex, "TV", 325.00, Category.ELECTRONIC, 15.00);
-        makeProductToSeller(sellerIndex, "Shirt", 50.00, Category.CLOTHES, 0);
+        makeProductToSeller(sellerIndex, "TV", 325.00, Category.ELECTRONIC, 15.00, -1);
+        makeProductToSeller(sellerIndex, "Shirt", 50.00, Category.CLOTHES, 0, -1);
 
         // Seller 1 products
-        makeProductToSeller(sellerIndex + 1, "Laptop", 950.00, Category.ELECTRONIC, 50.00);
-        makeProductToSeller(sellerIndex + 1, "Jacket", 75.00, Category.CLOTHES, 0);
-        makeProductToSeller(sellerIndex + 1, "Desk Lamp", 45.00, Category.OFFICE, 5.00);
+        makeProductToSeller(sellerIndex + 1, "Laptop", 950.00, Category.ELECTRONIC, 50.00, -1);
+        makeProductToSeller(sellerIndex + 1, "Jacket", 75.00, Category.CLOTHES, 0, -1);
+        makeProductToSeller(sellerIndex + 1, "Desk Lamp", 45.00, Category.OFFICE, 5.00, -1);
 
         // Seller 2 products
-        makeProductToSeller(sellerIndex + 2, "TV", 330.00, Category.ELECTRONIC, 18.00);
-        makeProductToSeller(sellerIndex + 2, "Hat", 60.00, Category.CLOTHES, 0);
+        makeProductToSeller(sellerIndex + 2, "TV", 330.00, Category.ELECTRONIC, 18.00, -1);
+        makeProductToSeller(sellerIndex + 2, "Hat", 60.00, Category.CLOTHES, 0, -1);
 
         // Seller 3 products
-        makeProductToSeller(sellerIndex + 3, "Headphones", 120.00, Category.ELECTRONIC, 0);
-        makeProductToSeller(sellerIndex + 3, "Sweater", 80.00, Category.CLOTHES, 15.00);
-        makeProductToSeller(sellerIndex + 3, "desk lamP", 130.00, Category.OFFICE, 0);
+        makeProductToSeller(sellerIndex + 3, "Headphones", 120.00, Category.ELECTRONIC, 0, -1);
+        makeProductToSeller(sellerIndex + 3, "Sweater", 80.00, Category.CLOTHES, 15.00, -1);
+        makeProductToSeller(sellerIndex + 3, "desk lamP", 130.00, Category.OFFICE, 0, -1);
 
         // Seller 4 products
-        makeProductToSeller(sellerIndex + 4, "Smartwatch", 220.00, Category.ELECTRONIC, 30.00);
-        makeProductToSeller(sellerIndex + 4, "hAt", 25.00, Category.CLOTHES, 5.00);
-        makeProductToSeller(sellerIndex + 4, "Office Organizer", 40.00, Category.OFFICE, 0);
-        makeProductToSeller(sellerIndex + 4, "Board Game", 28.00, Category.CHILDREN, 10.00);
+        makeProductToSeller(sellerIndex + 4, "Smartwatch", 220.00, Category.ELECTRONIC, 30.00, -1);
+        makeProductToSeller(sellerIndex + 4, "hAt", 25.00, Category.CLOTHES, 5.00, -1);
+        makeProductToSeller(sellerIndex + 4, "Office Organizer", 40.00, Category.OFFICE, 0, -1);
+        makeProductToSeller(sellerIndex + 4, "Board Game", 28.00, Category.CHILDREN, 10.00, -1);
 
         // Adding products to carts
 
@@ -476,12 +537,21 @@ public class ManagerFacade {
         buyerManager.addProductToBuyer(p1, buyerIndex);
     }
 
-    public void makeProductToSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice) {
+    public void makeProductToSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice, int indexFromDB) {
         Product p1;
-        if (specialPackagePrice == 0) {
-            p1 = ProductFactory.createProduct(productName, productPrice, c);
+        if(indexFromDB > -1)
+        {
+            if (specialPackagePrice == 0) {
+                p1 = ProductFactory.createProductFromDB(indexFromDB,productName, productPrice, c);
+            } else {
+                p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+            }
         } else {
-            p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+            if (specialPackagePrice == 0) {
+                p1 = ProductFactory.createProduct(productName, productPrice, c);
+            } else {
+                p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+            }
         }
         sellerManager.addProductToSeller(p1, sellerIndex);
         productManager.addToCategoryArray(p1);

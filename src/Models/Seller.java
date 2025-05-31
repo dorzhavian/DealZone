@@ -13,9 +13,8 @@ public class Seller extends User {
         numOfProducts = 0;
     }
 
-    public Seller(int id, String userName, String password, int numOfProducts) {
+    public Seller(int id, String userName, String password) {
         super(id, userName, password);
-        this.numOfProducts = numOfProducts;
         products = new Product[numOfProducts];
     }
 

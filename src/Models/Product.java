@@ -9,6 +9,10 @@ public class Product {
     protected int id;
     private final Category category;
 
+    public static void setIdGenerator(int idGenerator) {
+        Product.idGenerator = idGenerator;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -18,6 +22,16 @@ public class Product {
         this.productPrice = productPrice;
         this.id = ++idGenerator;
         this.category = category;
+    }
+
+    public Product(int productID, String productName, double productPrice, Category category) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.category = category;
+
+        if (productID > idGenerator) {
+            setIdGenerator(productID);
+        }
     }
 
     public Product(Product other) {

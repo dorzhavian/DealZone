@@ -14,8 +14,8 @@ public class UserFactory {
             return new Seller(username, password);
     }
 
-    public static Seller createSellerFromDB (int id, String username, String password, int numOfProducts) {
-        return new Seller(id, username, password, numOfProducts);
+    public static Seller createSellerFromDB (int id, String username, String password) {
+        return new Seller(id, username, password);
     }
 
     public static Address createAddress (String street, String houseName, String city, String state) {

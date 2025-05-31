@@ -38,9 +38,7 @@ public class SellerManager implements ISellerManager{
 
     @Override
     public void loadSellersFromDB(Connection conn) {
-        String sql = "SELECT u.user_id, u.username, u.password, s.num_of_products " +
-                "FROM \"users\" u " +
-                "JOIN \"sellers\" s ON u.user_id = s.user_id";
+        String sql = "select * from (SELECT users.user_id, users.username,  users.password FROM users JOIN sellers ON users.user_id = sellers.user_id) us";
 
         try {
             st = conn.createStatement();
@@ -50,9 +48,8 @@ public class SellerManager implements ISellerManager{
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                int numOfProducts = rs.getInt("num_of_products");
 
-                addSeller(UserFactory.createSellerFromDB(id, username, password, numOfProducts));
+                addSeller(UserFactory.createSellerFromDB(id, username, password));
 
             }
         } catch (SQLException e) {
@@ -121,4 +118,13 @@ public class SellerManager implements ISellerManager{
         sellers[sellerIndex].addProduct(p);
     }
 
+    public int findSellerIndexByID (int id) {
+        int i;
+        for (i = 0; i < numberOfSellers; i++)
+        {
+            if (sellers[i].getId() == id)
+                break;
+        }
+        return i;
+    }
 }

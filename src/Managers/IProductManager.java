@@ -2,6 +2,8 @@ package Managers;
 
 import Models.Categories;
 import Models.Product;
+
+import java.sql.Connection;
 import java.util.*;
 
 public interface IProductManager {
@@ -16,7 +18,7 @@ public interface IProductManager {
 
     void addToCategoryArray(Product p);
 
-    boolean isSpecialPackageProduct (Product p);
+    boolean isSpecialPackageProduct(Product p);
 
     Map<String, Integer> productsToLinkedMap();
 
