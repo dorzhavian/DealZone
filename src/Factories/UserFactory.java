@@ -10,6 +10,10 @@ public class UserFactory {
             return new Buyer(username, password, address);
     }
 
+    public static Buyer createBuyerFromDB (int id, String username, String password, Address address, int numOfHistoryCarts) {
+        return new Buyer(id, username, password, address, numOfHistoryCarts);
+    }
+
     public static Seller createSeller (String username, String password) {
             return new Seller(username, password);
     }

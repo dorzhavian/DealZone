@@ -2,6 +2,8 @@ package Managers;
 import Models.Buyer;
 import Models.Product;
 
+import java.sql.Connection;
+
 public interface IBuyerManager {
 
     String isExistBuyer (String name);
@@ -24,4 +26,7 @@ public interface IBuyerManager {
 
     Buyer[] getBuyers();
 
-}
+    void loadBuyersFromDB(Connection conn);
+
+    int findBuyerIndexByID (int id);
+    }

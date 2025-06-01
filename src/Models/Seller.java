@@ -26,6 +26,16 @@ public class Seller extends User {
         return products;
     }
 
+    public int productIndexInSellerArr(int productID)
+    {
+        int i;
+        for (i = 0; i < numOfProducts; i++) {
+            if(products[i].getId() == productID)
+                break;
+        }
+        return i;
+    }
+
     public void addProduct (Product p1) {
         if (products.length == numOfProducts) {
             if (products.length == 0) {

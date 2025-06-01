@@ -48,7 +48,7 @@ public class ManagerFacade {
         }
     }
 
-    public void loadProductsFromDB(Connection conn) {
+    private void loadProductsFromDB(Connection conn) {
         String sql = "SELECT * FROM products WHERE product_id NOT IN (SELECT product_id FROM special_package_products)";
         int sellerIndex, productID, sellerID;
         double productPrice, specialPrice;
@@ -107,9 +107,42 @@ public class ManagerFacade {
         }
     }
 
+    private void loadCartsFromDB(Connection conn) {
+        String sql = "SELECT carts.buyer_id, cart_items.quantity, seller_id , cart_items.product_id FROM carts JOIN cart_items ON carts.buyer_id = cart_items.buyer_id and carts.cart_number = cart_items.cart_number JOIN products ON cart_items.product_id = products.product_id WHERE carts.is_active = true;";
+
+        int buyerIndex, productIndex, quantity, sellerIndex;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                buyerIndex = buyerManager.findBuyerIndexByID(rs.getInt("buyer_id"));
+                quantity = rs.getInt("quantity");
+                sellerIndex = sellerManager.findSellerIndexByID(rs.getInt("seller_id"));
+                productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
+
+                for(int i = 0; i < quantity; i++)
+                    makeProductToBuyer(buyerIndex, sellerIndex, productIndex);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error while loading sellers from DB: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+
+    }
+
     private void loadFromDatabase() {
         sellerManager.loadSellersFromDB(conn);
         loadProductsFromDB(conn);
+        buyerManager.loadBuyersFromDB(conn);
+        loadCartsFromDB(conn);
     }
 
     public void closeConnection() {
@@ -544,7 +577,7 @@ public class ManagerFacade {
             if (specialPackagePrice == 0) {
                 p1 = ProductFactory.createProductFromDB(indexFromDB,productName, productPrice, c);
             } else {
-                p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
+                p1 = ProductFactory.createProductSpecialPackageFromDB(indexFromDB, productName, productPrice, c, specialPackagePrice);
             }
         } else {
             if (specialPackagePrice == 0) {

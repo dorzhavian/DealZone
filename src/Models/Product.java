@@ -17,6 +17,10 @@ public class Product {
         return productName;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Product(String productName, double productPrice, Category category) {
         this.productName = productName;
         this.productPrice = productPrice;
@@ -28,7 +32,7 @@ public class Product {
         this.productName = productName;
         this.productPrice = productPrice;
         this.category = category;
-
+        this.id = productID;
         if (productID > idGenerator) {
             setIdGenerator(productID);
         }

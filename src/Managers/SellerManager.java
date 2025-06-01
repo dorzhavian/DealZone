@@ -38,7 +38,7 @@ public class SellerManager implements ISellerManager{
 
     @Override
     public void loadSellersFromDB(Connection conn) {
-        String sql = "select * from (SELECT users.user_id, users.username,  users.password FROM users JOIN sellers ON users.user_id = sellers.user_id) us";
+        String sql = "select * from (SELECT users.user_id, users.username,  users.password FROM users JOIN sellers ON users.user_id = sellers.user_id)";
 
         try {
             st = conn.createStatement();

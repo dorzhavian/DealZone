@@ -3,8 +3,10 @@ package Managers;
 import Comparators.CompareBuyersByName;
 import Enums.ExceptionsMessages;
 import Exceptions.EmptyCartPayException;
+import Factories.UserFactory;
 import Models.*;
 
+import java.sql.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -13,6 +15,8 @@ public class BuyerManager implements IBuyerManager {
     private int numberOfBuyers;
     private final Comparator<Buyer> comparatorBuyer;
     private static BuyerManager instance;
+    private Statement st = null;
+    private ResultSet rs = null;
 
     public static BuyerManager getInstance() {                          // SINGLETON !!!!!!!
         if (instance == null)
@@ -31,6 +35,40 @@ public class BuyerManager implements IBuyerManager {
 
     public Buyer[] getBuyers() {
         return buyers;
+    }
+
+    public void loadBuyersFromDB(Connection conn) {
+        String sql = "SELECT users.user_id, username,  password, num_of_history_cart, street, house_num, city, state FROM users JOIN buyers ON users.user_id = buyers.user_id";
+        int id, numOfHistoryCart;
+        String username, password, street, houseNum, city, state;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                id = rs.getInt("user_id");
+                username = rs.getString("username");
+                password = rs.getString("password");
+                numOfHistoryCart = rs.getInt("num_of_history_cart");
+                street = rs.getString("street");
+                houseNum = rs.getString("house_num");
+                city = rs.getString("city");
+                state = rs.getString("state");
+
+                addBuyer(UserFactory.createBuyerFromDB(id, username, password, UserFactory.createAddress(street, houseNum, city, state),numOfHistoryCart));
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while loading buyers from DB: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+
     }
 
     public String isExistBuyer (String name) {
@@ -108,6 +146,16 @@ public class BuyerManager implements IBuyerManager {
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
         buyers[buyerIndex].setCurrentCart(buyers[buyerIndex].getHistoryCart()[historyCartIndex]);
+    }
+
+    public int findBuyerIndexByID (int id) {
+        int i;
+        for (i = 0; i < numberOfBuyers; i++)
+        {
+            if (buyers[i].getId() == id)
+                break;
+        }
+        return i;
     }
 
 }
