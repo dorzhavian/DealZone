@@ -38,6 +38,54 @@ public class ProductManager implements IProductManager {
         return categoriesArrays;
     }
 
+    @Override
+    public void addProductToDB(Product p1, int sellerID,double specialPackagePrice, Connection conn) {
+        String sqlProduct = "INSERT INTO products (product_id, name, price, seller_id, category) VALUES (?,?,?,?,?)";
+        PreparedStatement stmtProduct = null;
+        try {
+            stmtProduct = conn.prepareStatement(sqlProduct);
+
+            stmtProduct.setInt(1, p1.getId());
+            stmtProduct.setString(2,p1.getProductName());
+            stmtProduct.setDouble(3,p1.getProductPrice());
+            stmtProduct.setInt(4,sellerID);
+            stmtProduct.setString(5, p1.getCategory().toString());
+
+            stmtProduct.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while adding product: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtProduct != null) stmtProduct.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing statement: " + e.getMessage());
+            }
+        }
+
+        if(specialPackagePrice > 0)
+        {
+            String sqlSpecialPackageProduct = "INSERT INTO special_package_products (product_id, special_package_price) VALUES (?,?)";
+            PreparedStatement stmtSpecialProductPrice = null;
+
+            try {
+                stmtSpecialProductPrice = conn.prepareStatement(sqlSpecialPackageProduct);
+                stmtSpecialProductPrice.setInt(1, p1.getId());
+                stmtSpecialProductPrice.setDouble(2, specialPackagePrice);
+
+                stmtSpecialProductPrice.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println("Error while add special package product to DB: " + e.getMessage());
+            } finally {
+                try {
+                    if (stmtSpecialProductPrice != null) stmtSpecialProductPrice.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing statement: " + e.getMessage());
+                }
+            }
+        }
+    }
+
     public int getNumberOfProducts() {
         return numberOfProducts;
     }

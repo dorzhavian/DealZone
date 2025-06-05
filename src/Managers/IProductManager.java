@@ -29,4 +29,6 @@ public interface IProductManager {
     int getNumberOfProducts();
 
     Categories getCategoriesArrays();
+
+    void addProductToDB(Product p1, int sellerID, double specialPackagePrice, Connection conn);
 }

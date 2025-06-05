@@ -82,6 +82,47 @@ public class SellerManager implements ISellerManager{
         sellers[numberOfSellers++] = seller;
     }
 
+    public void addSellerToDB (Seller seller, Connection conn) {
+        String sqlInsertSeller = "INSERT INTO sellers (user_id, num_of_products) VALUES (?, 0)";
+        PreparedStatement stmtSeller = null;
+        seller.addUserToDB(conn);
+        try {
+
+            stmtSeller = conn.prepareStatement(sqlInsertSeller);
+            stmtSeller.setInt(1,seller.getId());
+            stmtSeller.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while writing sellers to DB: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtSeller != null) stmtSeller.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void updateProductsNumForSellerDB(int sellerIndex, Connection conn) {
+        String sql = "UPDATE sellers SET num_of_products = num_of_products + 1 WHERE user_id = ?";
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, sellers[sellerIndex].getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error while incrementing seller's product count: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing statement: " + e.getMessage());
+            }
+        }
+    }
+
     public String sellersInfo() {
         if (numberOfSellers == 0) {
             return "\nHaven't sellers yet, cannot be proceed. return to Menu.";

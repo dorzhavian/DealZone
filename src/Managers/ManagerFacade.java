@@ -229,6 +229,7 @@ public class ManagerFacade {
 
     public void case1() {
         String username, password;
+
         do {
             username = UserInput.getString("Enter username:");
             if (username == null) return;
@@ -237,7 +238,9 @@ public class ManagerFacade {
         } while (message != null);
         password = UserInput.getString("Enter password:");
         if (password == null) return;
-        sellerManager.addSeller(UserFactory.createSeller(username, password));
+        Seller seller = UserFactory.createSeller(username, password);
+        sellerManager.addSeller(seller);
+        sellerManager.addSellerToDB(seller, conn);
         System.out.println("Seller added successfully.");
     }
 
@@ -267,7 +270,9 @@ public class ManagerFacade {
         if (state == null) return;
 
         Address address = UserFactory.createAddress(street, houseNum, city, state);
-        buyerManager.addBuyer(UserFactory.createBuyer(username, password, address));
+        Buyer buyer = UserFactory.createBuyer(username, password, address);
+        buyerManager.addBuyer(buyer);
+        buyerManager.addBuyerToDB(buyer, conn);
         System.out.println("Buyer added successfully.");
     }
 
@@ -477,8 +482,7 @@ public class ManagerFacade {
         System.out.println("Hardcoded added successfully!");
     }
 
-    public void case99()
-    {
+    public void case99() {
         productManager.printProductsName();
     }
 
@@ -562,14 +566,12 @@ public class ManagerFacade {
         } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
     }
 
-    public void case104()
-    {
+    public void case104() {
         stackProductNameList.push(productManager.createMemento());
         System.out.println("Memento created, the name list saved.");
     }
 
-    public void case105()
-    {
+    public void case105() {
         if(!stackProductNameList.isEmpty())
         {
             productManager.setMemento(stackProductNameList.pop());
@@ -656,7 +658,10 @@ public class ManagerFacade {
             } else {
                 p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
             }
+            productManager.addProductToDB(p1, sellerManager.getSellers()[sellerIndex].getId(), specialPackagePrice, conn);
+            sellerManager.updateProductsNumForSellerDB(sellerIndex, conn);
         }
+
         sellerManager.addProductToSeller(p1, sellerIndex);
         productManager.addToCategoryArray(p1);
         productManager.addProductToProductArray(p1);

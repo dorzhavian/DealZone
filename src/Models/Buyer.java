@@ -30,6 +30,10 @@ public class Buyer extends User {
         return historyCartsNum;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public Cart[] getHistoryCart() {
         return historyCart;
     }
@@ -42,12 +46,11 @@ public class Buyer extends User {
         return currentCart;
     }
 
-    public void insertHistoryCartFromDB(Cart cart, int index, Date date)
-    {
+    public void insertHistoryCartFromDB(Cart cart, int index, Date date) {
         this.historyCart[index - 1] = new Cart(cart, date);
     }
 
-    public void payAndMakeHistoryCart(){
+    public void payAndMakeHistoryCart() {
         Cart hCart = new Cart(currentCart);
         if (historyCart.length == historyCartsNum) {
             if (historyCart.length == 0) {

@@ -29,4 +29,6 @@ public interface IBuyerManager {
     void loadBuyersFromDB(Connection conn);
 
     int findBuyerIndexByID (int id);
-    }
+
+    void addBuyerToDB(Buyer buyer, Connection conn);
+}

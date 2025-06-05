@@ -157,4 +157,32 @@ public class BuyerManager implements IBuyerManager {
         return i;
     }
 
+    @Override
+    public void addBuyerToDB(Buyer buyer, Connection conn) {
+        String sqlInsertBuyer = "INSERT INTO buyers (user_id, num_of_history_cart, street, house_num, city, state) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmtBuyer = null;
+
+        buyer.addUserToDB(conn);
+
+        try {
+            stmtBuyer = conn.prepareStatement(sqlInsertBuyer);
+            stmtBuyer.setInt(1,buyer.getId());
+            stmtBuyer.setInt(2,buyer.getHistoryCartsNum());
+            stmtBuyer.setString(3,buyer.getAddress().getStreet());
+            stmtBuyer.setString(4,buyer.getAddress().getHouseNum());
+            stmtBuyer.setString(5,buyer.getAddress().getCity());
+            stmtBuyer.setString(6,buyer.getAddress().getState());
+            stmtBuyer.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while writing buyer to DB: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtBuyer != null) stmtBuyer.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+    }
+
 }

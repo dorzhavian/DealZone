@@ -25,4 +25,8 @@ public interface ISellerManager {
     void loadSellersFromDB(Connection conn);
 
     int findSellerIndexByID (int id);
+
+    void addSellerToDB (Seller seller, Connection conn);
+
+    void updateProductsNumForSellerDB(int sellerIndex, Connection conn);
 }
