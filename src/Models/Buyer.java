@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class Buyer extends User {
 
@@ -22,6 +23,7 @@ public class Buyer extends User {
         this.address = address;
         this.currentCart = new Cart();
         this.historyCart = new Cart[numOfHistoryCart];
+        this.historyCartsNum = numOfHistoryCart;
     }
 
     public int getHistoryCartsNum() {
@@ -38,6 +40,11 @@ public class Buyer extends User {
 
     public Cart getCurrentCart() {
         return currentCart;
+    }
+
+    public void insertHistoryCartFromDB(Cart cart, int index, Date date)
+    {
+        this.historyCart[index - 1] = new Cart(cart, date);
     }
 
     public void payAndMakeHistoryCart(){

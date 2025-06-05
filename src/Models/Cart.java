@@ -7,7 +7,7 @@ public class Cart {
     private static final int SIZE_INCREASE = 2;
     private Product[] products;
     private int numOfProducts;
-    private final Date date;
+    private Date date;
     private Double totalPrice;
 
     public Date getDate() {
@@ -21,6 +21,13 @@ public class Cart {
     public Cart(Cart other) {    // copy constructor cart
         products = other.products;
         date = new Date();
+        totalPrice = other.totalPrice;
+        numOfProducts = other.numOfProducts;
+    }
+
+    public Cart(Cart other, Date dateFromDB) {    // copy constructor cart for cart from DB
+        products = other.products;
+        date = dateFromDB;
         totalPrice = other.totalPrice;
         numOfProducts = other.numOfProducts;
     }

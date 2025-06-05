@@ -68,7 +68,6 @@ public class BuyerManager implements IBuyerManager {
                 System.err.println("Error closing DB resources: " + e.getMessage());
             }
         }
-
     }
 
     public String isExistBuyer (String name) {

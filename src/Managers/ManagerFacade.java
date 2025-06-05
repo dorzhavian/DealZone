@@ -9,6 +9,7 @@ import Adapters.*;
 import java.sql.*;
 
 import java.util.*;
+import java.util.Date;
 
 public class ManagerFacade {
     private final ISellerManager sellerManager;
@@ -20,6 +21,7 @@ public class ManagerFacade {
     private static ManagerFacade instance;
     private Connection conn;
     private Statement st = null;
+    private PreparedStatement prepStmt = null;
     private ResultSet rs = null;
     private static String message;
     private Stack<ProductManager.Memento>  stackProductNameList;
@@ -45,6 +47,67 @@ public class ManagerFacade {
             loadFromDatabase();
         } catch (SQLException e) {
             throw new RuntimeException("Failed to connect to DB", e);
+        }
+    }
+
+    private void loadHistoryCartsFromDB(Connection conn) {
+        String sql;
+        Product p1;
+        Timestamp timestamp = null;
+        int productIndex, quantity, sellerIndex;
+
+        try
+        {
+            for (int i = 0; i < buyerManager.getNumberOfBuyers(); i++)
+            {
+                for (int j = 1; j < buyerManager.getBuyers()[i].getHistoryCartsNum() + 1; j++)
+                {
+                    sql = "SELECT carts.cart_number, carts.paid_at, cart_items.quantity, seller_id , cart_items.product_id " +
+                            "FROM carts " +
+                            "JOIN cart_items ON carts.buyer_id = cart_items.buyer_id AND carts.cart_number = cart_items.cart_number " +
+                            "JOIN products ON cart_items.product_id = products.product_id " +
+                            "WHERE carts.is_active = false AND carts.buyer_id = ? AND carts.cart_number = ?";
+                    prepStmt = conn.prepareStatement(sql);
+                    prepStmt.setInt(1, buyerManager.getBuyers()[i].getId());
+                    prepStmt.setInt(2, j);
+                    rs = prepStmt.executeQuery();
+
+                    Cart cart = new Cart();
+
+                    while (rs.next()) {
+
+                        quantity = rs.getInt("quantity");
+                        timestamp = rs.getTimestamp("paid_at");
+                        sellerIndex = sellerManager.findSellerIndexByID(rs.getInt("seller_id"));
+                        productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
+
+                        if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
+                        {
+                            p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
+                        } else {
+                            p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
+                        }
+
+                        for (int k = 0; k < quantity; k++) {
+                            cart.addProductToCart(p1);
+                        }
+                    }
+
+                    if(timestamp != null) {
+                        Date date = new Date(timestamp.getTime());
+                        buyerManager.getBuyers()[i].insertHistoryCartFromDB(cart, j, date);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while loading history Carts from DB: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (prepStmt != null) prepStmt.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
         }
     }
 
@@ -74,6 +137,13 @@ public class ManagerFacade {
 
         } catch (SQLException e) {
             System.err.println("Error while loading sellers from DB: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
         }
 
         sql = "SELECT products.product_id, products.name, products.price, products.seller_id, products.category, special_package_products.special_package_price FROM products JOIN special_package_products ON special_package_products.product_id = products.product_id";
@@ -88,7 +158,7 @@ public class ManagerFacade {
                 productPrice = rs.getDouble("price");
                 sellerID = rs.getInt("seller_id");
                 category = Category.valueOf(rs.getString("category"));
-                specialPrice = rs.getInt("special_package_price");
+                specialPrice = rs.getDouble("special_package_price");
 
                 sellerIndex = sellerManager.findSellerIndexByID(sellerID);
 
@@ -96,7 +166,7 @@ public class ManagerFacade {
 
             }
         } catch (SQLException e) {
-            System.err.println("Error while loading sellers from DB: " + e.getMessage());
+            System.err.println("Error while loading products from DB: " + e.getMessage());
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -143,6 +213,7 @@ public class ManagerFacade {
         loadProductsFromDB(conn);
         buyerManager.loadBuyersFromDB(conn);
         loadCartsFromDB(conn);
+        loadHistoryCartsFromDB(conn);
     }
 
     public void closeConnection() {
