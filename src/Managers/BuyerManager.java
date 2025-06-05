@@ -160,7 +160,10 @@ public class BuyerManager implements IBuyerManager {
     @Override
     public void addBuyerToDB(Buyer buyer, Connection conn) {
         String sqlInsertBuyer = "INSERT INTO buyers (user_id, num_of_history_cart, street, house_num, city, state) VALUES (?, ?, ?, ?, ?, ?)";
+        String sqlInsertCartForBuyer = "INSERT INTO carts (buyer_id, cart_number, is_active, paid_at, total_price, num_of_products) VALUES (?,?,true,null,0,0)";
+
         PreparedStatement stmtBuyer = null;
+        PreparedStatement stmtCartForBuyer = null;
 
         buyer.addUserToDB(conn);
 
@@ -174,11 +177,17 @@ public class BuyerManager implements IBuyerManager {
             stmtBuyer.setString(6,buyer.getAddress().getState());
             stmtBuyer.executeUpdate();
 
+            stmtCartForBuyer = conn.prepareStatement(sqlInsertCartForBuyer);
+            stmtCartForBuyer.setInt(1, buyer.getId());
+            stmtCartForBuyer.setInt(2,buyer.getHistoryCartsNum() + 1);
+            stmtCartForBuyer.executeUpdate();
+
         } catch (SQLException e) {
             System.err.println("Error while writing buyer to DB: " + e.getMessage());
         } finally {
             try {
                 if (stmtBuyer != null) stmtBuyer.close();
+                if (stmtCartForBuyer != null) stmtCartForBuyer.close();
             } catch (SQLException e) {
                 System.err.println("Error closing DB resources: " + e.getMessage());
             }
