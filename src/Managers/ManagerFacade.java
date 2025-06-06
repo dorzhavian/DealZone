@@ -372,7 +372,7 @@ public class ManagerFacade {
         System.out.println("Please choose buyer from list to process checkout: (Enter -1 to return main menu)");
         int buyerIndex = chooseBuyer();
         if (buyerIndex == -1) return;
-        System.out.println(buyerManager.pay(buyerIndex));
+        System.out.println(buyerManager.pay(buyerIndex, conn));
     }
 
     public void case6(){

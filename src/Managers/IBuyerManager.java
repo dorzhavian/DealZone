@@ -18,7 +18,9 @@ public interface IBuyerManager {
 
     void addProductToBuyer(Product p, int buyerIndex);
 
-    String pay(int buyerIndex);
+    String pay(int buyerIndex, Connection conn);
+
+    void updateCartPurchaseToDB(Buyer buyer, Connection conn);
 
     void replaceCarts(int historyCartIndex, int buyerIndex);
 

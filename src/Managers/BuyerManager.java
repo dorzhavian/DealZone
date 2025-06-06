@@ -124,13 +124,15 @@ public class BuyerManager implements IBuyerManager {
         buyers[buyerIndex].getCurrentCart().addProductToCart(p);
     }
 
-    public String pay(int buyerIndex) {
+    public String pay(int buyerIndex, Connection conn) {
         try {
             if (buyers[buyerIndex].getCurrentCart().getNumOfProducts() == 0) throw new EmptyCartPayException(buyers[buyerIndex].getUserName());
         } catch (EmptyCartPayException e) {
             return e.getMessage();
         }
         buyers[buyerIndex].payAndMakeHistoryCart();
+        updateCartPurchaseToDB(buyers[buyerIndex], conn);
+        insertNewCartToDB(buyers[buyerIndex], conn);
         return """
                  ____   _ __   ____  __ _____ _   _ _____                              \s
                 |  _ \\ / \\\\ \\ / /  \\/  | ____| \\ | |_   _|                             \s
@@ -141,6 +143,53 @@ public class BuyerManager implements IBuyerManager {
                             \\___ \\| | | | |   \\___ \\___ \\|  _| \\___ \\| |_  | | | | |   \s
                              ___) | |_| | |___ ___) |__) | |___ ___) |  _| | |_| | |___\s
                             |____/ \\___/ \\____|____/____/|_____|____/|_|    \\___/|_____|""";
+    }
+
+    private void insertNewCartToDB(Buyer buyer, Connection conn) {
+        String sqlInsertCartForBuyer = "INSERT INTO carts (buyer_id, cart_number, is_active, paid_at, total_price, num_of_products) VALUES (?,?,true,null,0,0)";
+
+        PreparedStatement stmtCartForBuyer = null;
+
+        try {
+            stmtCartForBuyer = conn.prepareStatement(sqlInsertCartForBuyer);
+            stmtCartForBuyer.setInt(1, buyer.getId());
+            stmtCartForBuyer.setInt(2,buyer.getHistoryCartsNum() + 1);
+            stmtCartForBuyer.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while writing buyer to DB: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtCartForBuyer != null) stmtCartForBuyer.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+    }
+
+    public void updateCartPurchaseToDB(Buyer buyer, Connection conn) {
+        Timestamp date = new Timestamp(buyer.getHistoryCart()[buyer.getHistoryCartsNum() - 1].getDate().getTime());
+        String sqlUpdateLastCart = "UPDATE carts SET paid_at = ?, is_active = false WHERE buyer_id = ? AND cart_number = ?";
+
+        PreparedStatement stmtCartUpdate = null;
+
+        try {
+            stmtCartUpdate = conn.prepareStatement(sqlUpdateLastCart);
+            stmtCartUpdate.setTimestamp(1, date);
+            stmtCartUpdate.setInt(2, buyer.getId());
+            stmtCartUpdate.setInt(3, buyer.getHistoryCartsNum());
+
+            stmtCartUpdate.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while updating cart to DB: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtCartUpdate != null) stmtCartUpdate.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
     }
 
     public void replaceCarts(int historyCartIndex, int buyerIndex) {
