@@ -192,7 +192,7 @@ public class ManagerFacade {
                 productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
 
                 for(int i = 0; i < quantity; i++)
-                    makeProductToBuyer(buyerIndex, sellerIndex, productIndex);
+                    makeProductToBuyer(buyerIndex, sellerIndex, productIndex, true);
             }
 
         } catch (SQLException e) {
@@ -359,7 +359,8 @@ public class ManagerFacade {
             }
         } while (message != null);
 
-        makeProductToBuyer(buyerIndex, sellerIndex, productIndex - 1);
+        makeProductToBuyer(buyerIndex, sellerIndex, productIndex - 1, false);
+
         System.out.println("Product added successfully to cart.");
     }
 
@@ -460,24 +461,24 @@ public class ManagerFacade {
         // Adding products to carts
 
         // Buyer 0
-        makeProductToBuyer(buyerIndex, sellerIndex, 0);  // Buyer 0 buys TV from Seller 0
-        makeProductToBuyer(buyerIndex, sellerIndex + 1, 1);  // Buyer 0 buys Jacket from Seller 1
+        makeProductToBuyer(buyerIndex, sellerIndex, 0, false);  // Buyer 0 buys TV from Seller 0
+        makeProductToBuyer(buyerIndex, sellerIndex + 1, 1, false);  // Buyer 0 buys Jacket from Seller 1
 
         // Buyer 1
-        makeProductToBuyer(buyerIndex + 1, sellerIndex + 2, 0);  // Buyer 1 buys TV from Seller 2
-        makeProductToBuyer(buyerIndex + 1, sellerIndex + 3, 1);  // Buyer 1 buys Sweater from Seller 3
+        makeProductToBuyer(buyerIndex + 1, sellerIndex + 2, 0,false);  // Buyer 1 buys TV from Seller 2
+        makeProductToBuyer(buyerIndex + 1, sellerIndex + 3, 1, false);  // Buyer 1 buys Sweater from Seller 3
 
         // Buyer 2
-        makeProductToBuyer(buyerIndex + 2, sellerIndex + 4, 0);  // Buyer 2 buys Smartwatch from Seller 4
-        makeProductToBuyer(buyerIndex + 2, sellerIndex, 1);  // Buyer 2 buys Shirt from Seller 0
+        makeProductToBuyer(buyerIndex + 2, sellerIndex + 4, 0, false);  // Buyer 2 buys Smartwatch from Seller 4
+        makeProductToBuyer(buyerIndex + 2, sellerIndex, 1, false);  // Buyer 2 buys Shirt from Seller 0
 
         // Buyer 3
-        makeProductToBuyer(buyerIndex + 3, sellerIndex + 1, 2);  // Buyer 3 buys Desk Lamp from Seller 1
-        makeProductToBuyer(buyerIndex + 3, sellerIndex + 4, 1);  // Buyer 3 buys Hat from Seller 4
+        makeProductToBuyer(buyerIndex + 3, sellerIndex + 1, 2, false);  // Buyer 3 buys Desk Lamp from Seller 1
+        makeProductToBuyer(buyerIndex + 3, sellerIndex + 4, 1, false);  // Buyer 3 buys Hat from Seller 4
 
         // Buyer 4
-        makeProductToBuyer(buyerIndex + 4, sellerIndex + 3, 0);  // Buyer 4 buys Headphones from Seller 3
-        makeProductToBuyer(buyerIndex + 4, sellerIndex + 2, 1);  // Buyer 4 buys Hat from Seller 2
+        makeProductToBuyer(buyerIndex + 4, sellerIndex + 3, 0, false);  // Buyer 4 buys Headphones from Seller 3
+        makeProductToBuyer(buyerIndex + 4, sellerIndex + 2, 1, false);  // Buyer 4 buys Hat from Seller 2
 
         System.out.println("Hardcoded added successfully!");
     }
@@ -632,18 +633,37 @@ public class ManagerFacade {
         return productManager.getCategoriesArrays().toString();
     }
 
-    public void makeProductToBuyer(int buyerIndex, int sellerIndex, int productIndex) {
+    public void makeProductToBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean fromDB) {
         Product p1;
-        if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
+        double specialPackagePrice = 0;
+        if(fromDB)
         {
-            p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
-        } else {
-            p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
+            if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
+            {
+                p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
+            } else {
+                p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
+            }
+        }
+        else
+        {
+            if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
+            {
+                p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
+                specialPackagePrice = ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice();
+            } else {
+                p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
+            }
+            buyerManager.insertCartItemToDB(buyerManager.getBuyers()[buyerIndex], sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], conn);
+            buyerManager.updateCartAfterInsertToDB(buyerManager.getBuyers()[buyerIndex], sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], specialPackagePrice, conn);
         }
         buyerManager.addProductToBuyer(p1, buyerIndex);
+
     }
 
-    public void makeProductToSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice, int indexFromDB) {
+
+
+    public void  makeProductToSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice, int indexFromDB) {
         Product p1;
         if(indexFromDB > -1)
         {

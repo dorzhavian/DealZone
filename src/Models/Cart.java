@@ -54,6 +54,10 @@ public class Cart {
         }
     }
 
+    public Product[] getProducts() {
+        return products;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

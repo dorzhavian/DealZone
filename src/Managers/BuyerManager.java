@@ -194,4 +194,82 @@ public class BuyerManager implements IBuyerManager {
         }
     }
 
+    @Override
+    public void insertCartItemToDB(Buyer buyer, Product product, Connection conn) {
+
+        boolean existingProduct = false;
+        for(int i = 0; i < buyer.getCurrentCart().getNumOfProducts(); i++)
+        {
+            if(buyer.getCurrentCart().getProducts()[i].getId() == product.getId())
+            {
+                existingProduct = true;
+                break;
+            }
+        }
+        if (existingProduct)
+        {
+            String sqlInsertCartItem = "UPDATE cart_items SET quantity = quantity + 1 WHERE buyer_id = ? AND cart_number = ? AND product_id = ?";
+            PreparedStatement stmtUpdateCartItem = null;
+            try {
+                stmtUpdateCartItem = conn.prepareStatement(sqlInsertCartItem);
+                stmtUpdateCartItem.setInt(1,buyer.getId());
+                stmtUpdateCartItem.setInt(2,buyer.getHistoryCartsNum() + 1);
+                stmtUpdateCartItem.setInt(3, product.getId());
+
+                stmtUpdateCartItem.executeUpdate();
+
+            } catch (SQLException e) {
+                System.err.println("Error while updating cart item to DB: " + e.getMessage());
+            } finally {
+                try {
+                    if (stmtUpdateCartItem != null) stmtUpdateCartItem.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing DB resources: " + e.getMessage());
+                }
+            }
+            return;
+        }
+        String sqlInsertCartItem = "INSERT INTO cart_items (buyer_id, cart_number, product_id, price, quantity) VALUES (?, ?, ?, 1)";
+        PreparedStatement stmtCartItem = null;
+        try {
+            stmtCartItem = conn.prepareStatement(sqlInsertCartItem);
+            stmtCartItem.setInt(1,buyer.getId());
+            stmtCartItem.setInt(2,buyer.getHistoryCartsNum() + 1);
+            stmtCartItem.setInt(3,product.getId());
+
+            stmtCartItem.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while writing cart item to DB: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtCartItem != null) stmtCartItem.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void updateCartAfterInsertToDB(Buyer buyer, Product product, double specialPackagePrice, Connection conn) {
+        String sqlUpdateCart = "UPDATE carts SET total_price = total_price + ?, num_of_products = num_of_products + 1 ";
+        PreparedStatement stmtUpdateCart = null;
+        try {
+            stmtUpdateCart = conn.prepareStatement(sqlUpdateCart);
+            stmtUpdateCart.setDouble(1,product.getProductPrice() + specialPackagePrice);
+
+            stmtUpdateCart.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error while updating current cart to DB: " + e.getMessage());
+        } finally {
+            try {
+                if (stmtUpdateCart != null) stmtUpdateCart.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing DB resources: " + e.getMessage());
+            }
+        }
+    }
+
+
 }

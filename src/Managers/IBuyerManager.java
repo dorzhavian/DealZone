@@ -31,4 +31,8 @@ public interface IBuyerManager {
     int findBuyerIndexByID (int id);
 
     void addBuyerToDB(Buyer buyer, Connection conn);
+
+    void insertCartItemToDB(Buyer buyer, Product product, Connection conn);
+
+    void updateCartAfterInsertToDB(Buyer buyer, Product product, double specialPackagePrice, Connection conn);
 }
