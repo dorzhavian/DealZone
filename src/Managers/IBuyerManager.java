@@ -36,5 +36,14 @@ public interface IBuyerManager {
 
     void insertCartItemToDB(Buyer buyer, Product product, Connection conn);
 
+    void insertNewCartToDB(Buyer buyer, Connection conn);
+
     void updateCartAfterInsertToDB(Buyer buyer, Product product, double specialPackagePrice, Connection conn);
-}
+
+    void deleteAllCartFromDB(int buyerIndex, Connection conn);
+
+    void updateCartFromHistory(int buyerIndex, Connection conn);
+
+    boolean checkIfProductInCartInDB(Buyer buyer, Product p, Connection conn);
+
+    }

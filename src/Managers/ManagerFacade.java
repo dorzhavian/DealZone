@@ -409,7 +409,11 @@ public class ManagerFacade {
                 System.out.println(message);
             }
         } while (message != null);
+
+        buyerManager.deleteAllCartFromDB(buyerIndex , conn);
         buyerManager.replaceCarts(choice - 1, buyerIndex);
+        buyerManager.updateCartFromHistory(buyerIndex, conn);
+
         System.out.println("Your current cart update successfully.");
     }
 
@@ -660,8 +664,6 @@ public class ManagerFacade {
         buyerManager.addProductToBuyer(p1, buyerIndex);
 
     }
-
-
 
     public void  makeProductToSeller(int sellerIndex, String productName, double productPrice, Category c, double specialPackagePrice, int indexFromDB) {
         Product p1;

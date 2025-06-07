@@ -18,6 +18,10 @@ public class Cart {
         return numOfProducts;
     }
 
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
     public Cart(Cart other) {    // copy constructor cart
         products = other.products;
         date = new Date();
