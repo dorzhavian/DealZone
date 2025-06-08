@@ -38,31 +38,24 @@ public class SellerManager implements ISellerManager{
 
     @Override
     public void loadSellersFromDB(Connection conn) {
-        String sql = "select * from (SELECT users.user_id, users.username,  users.password FROM users JOIN sellers ON users.user_id = sellers.user_id)";
+        String sql = "SELECT users.user_id, users.username, users.password FROM users JOIN sellers ON users.user_id = sellers.user_id";
 
-        try {
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-
+        try (
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)
+        ) {
             while (rs.next()) {
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
 
                 addSeller(UserFactory.createSellerFromDB(id, username, password));
-
             }
         } catch (SQLException e) {
             System.err.println("Error while loading sellers from DB: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (st != null) st.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing DB resources: " + e.getMessage());
-            }
         }
     }
+
 
     public String isExistSeller (String name) {
         for (int i = 0; i < numberOfSellers; i++) {
@@ -82,46 +75,31 @@ public class SellerManager implements ISellerManager{
         sellers[numberOfSellers++] = seller;
     }
 
-    public void addSellerToDB (Seller seller, Connection conn) {
+    @Override
+    public void addSellerToDB(Seller seller, Connection conn) {
         String sqlInsertSeller = "INSERT INTO sellers (user_id, num_of_products) VALUES (?, 0)";
-        PreparedStatement stmtSeller = null;
-        seller.addUserToDB(conn);
-        try {
+        seller.addUserToDB(conn, "SELLER");
 
-            stmtSeller = conn.prepareStatement(sqlInsertSeller);
-            stmtSeller.setInt(1,seller.getId());
+        try (PreparedStatement stmtSeller = conn.prepareStatement(sqlInsertSeller)) {
+            stmtSeller.setInt(1, seller.getId());
             stmtSeller.executeUpdate();
-
         } catch (SQLException e) {
             System.err.println("Error while writing sellers to DB: " + e.getMessage());
-        } finally {
-            try {
-                if (stmtSeller != null) stmtSeller.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing DB resources: " + e.getMessage());
-            }
         }
     }
 
     @Override
     public void updateProductsNumForSellerDB(int sellerIndex, Connection conn) {
         String sql = "UPDATE sellers SET num_of_products = num_of_products + 1 WHERE user_id = ?";
-        PreparedStatement stmt = null;
 
-        try {
-            stmt = conn.prepareStatement(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, sellers[sellerIndex].getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error while incrementing seller's product count: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing statement: " + e.getMessage());
-            }
         }
     }
+
 
     public String sellersInfo() {
         if (numberOfSellers == 0) {

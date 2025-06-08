@@ -53,160 +53,131 @@ public class ManagerFacade {
     private void loadHistoryCartsFromDB(Connection conn) {
         String sql;
         Product p1;
-        Timestamp timestamp = null;
-        int productIndex, quantity, sellerIndex;
+        Timestamp timestamp;
 
-        try
-        {
-            for (int i = 0; i < buyerManager.getNumberOfBuyers(); i++)
-            {
-                for (int j = 1; j < buyerManager.getBuyers()[i].getHistoryCartsNum() + 1; j++)
-                {
-                    sql = "SELECT carts.cart_number, carts.paid_at, cart_items.quantity, seller_id , cart_items.product_id " +
+        try {
+            for (int i = 0; i < buyerManager.getNumberOfBuyers(); i++) {
+                for (int j = 1; j <= buyerManager.getBuyers()[i].getHistoryCartsNum(); j++) {
+                    sql = "SELECT carts.cart_number, carts.paid_at, cart_items.quantity, seller_id, cart_items.product_id " +
                             "FROM carts " +
                             "JOIN cart_items ON carts.buyer_id = cart_items.buyer_id AND carts.cart_number = cart_items.cart_number " +
                             "JOIN products ON cart_items.product_id = products.product_id " +
                             "WHERE carts.is_active = false AND carts.buyer_id = ? AND carts.cart_number = ?";
-                    prepStmt = conn.prepareStatement(sql);
-                    prepStmt.setInt(1, buyerManager.getBuyers()[i].getId());
-                    prepStmt.setInt(2, j);
-                    rs = prepStmt.executeQuery();
 
-                    Cart cart = new Cart();
+                    try (
+                            PreparedStatement prepStmt = conn.prepareStatement(sql)
+                    ) {
+                        prepStmt.setInt(1, buyerManager.getBuyers()[i].getId());
+                        prepStmt.setInt(2, j);
 
-                    while (rs.next()) {
+                        try (ResultSet rs = prepStmt.executeQuery()) {
+                            Cart cart = new Cart();
+                            timestamp = null;
 
-                        quantity = rs.getInt("quantity");
-                        timestamp = rs.getTimestamp("paid_at");
-                        sellerIndex = sellerManager.findSellerIndexByID(rs.getInt("seller_id"));
-                        productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
+                            while (rs.next()) {
+                                int quantity = rs.getInt("quantity");
+                                timestamp = rs.getTimestamp("paid_at");
+                                int sellerIndex = sellerManager.findSellerIndexByID(rs.getInt("seller_id"));
+                                int productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
+                                Product sellerProduct = sellerManager.getSellers()[sellerIndex].getProducts()[productIndex];
 
-                        if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
-                        {
-                            p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
-                        } else {
-                            p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
+                                if (productManager.isSpecialPackageProduct(sellerProduct)) {
+                                    double specialPrice = ((ProductSpecialPackage) sellerProduct).getSpecialPackagePrice();
+                                    p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerProduct, specialPrice);
+                                } else {
+                                    p1 = ProductFactory.createProductForBuyer(sellerProduct);
+                                }
+
+                                for (int k = 0; k < quantity; k++) {
+                                    cart.addProductToCart(p1);
+                                }
+                            }
+
+                            if (timestamp != null) {
+                                Date date = new Date(timestamp.getTime());
+                                buyerManager.getBuyers()[i].insertHistoryCartFromDB(cart, j, date);
+                            }
                         }
-
-                        for (int k = 0; k < quantity; k++) {
-                            cart.addProductToCart(p1);
-                        }
-                    }
-
-                    if(timestamp != null) {
-                        Date date = new Date(timestamp.getTime());
-                        buyerManager.getBuyers()[i].insertHistoryCartFromDB(cart, j, date);
                     }
                 }
             }
         } catch (SQLException e) {
             System.err.println("Error while loading history Carts from DB: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (prepStmt != null) prepStmt.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing DB resources: " + e.getMessage());
-            }
         }
     }
 
     private void loadProductsFromDB(Connection conn) {
-        String sql = "SELECT * FROM products WHERE product_id NOT IN (SELECT product_id FROM special_package_products)";
-        int sellerIndex, productID, sellerID;
-        double productPrice, specialPrice;
-        String productName;
-        Category category;
+        String sqlRegularProducts = "SELECT * FROM products WHERE product_id NOT IN (SELECT product_id FROM special_package_products)";
+        String sqlSpecialProducts = "SELECT products.product_id, products.name, products.price, products.seller_id, products.category, special_package_products.special_package_price " +
+                "FROM products JOIN special_package_products ON special_package_products.product_id = products.product_id";
 
-        try {
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-
+        try (
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sqlRegularProducts)
+        ) {
             while (rs.next()) {
-                productID = rs.getInt("product_id");
-                productName = rs.getString("name");
-                productPrice = rs.getDouble("price");
-                sellerID = rs.getInt("seller_id");
-                category = Category.valueOf(rs.getString("category"));
+                int productID = rs.getInt("product_id");
+                String productName = rs.getString("name");
+                double productPrice = rs.getDouble("price");
+                int sellerID = rs.getInt("seller_id");
+                Category category = Category.valueOf(rs.getString("category"));
 
-                sellerIndex = sellerManager.findSellerIndexByID(sellerID);
+                int sellerIndex = sellerManager.findSellerIndexByID(sellerID);
 
                 makeProductToSeller(sellerIndex, productName, productPrice, category, 0, productID);
-
             }
-
         } catch (SQLException e) {
-            System.err.println("Error while loading sellers from DB: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (st != null) st.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing DB resources: " + e.getMessage());
-            }
+            System.err.println("Error while loading regular products from DB: " + e.getMessage());
         }
 
-        sql = "SELECT products.product_id, products.name, products.price, products.seller_id, products.category, special_package_products.special_package_price FROM products JOIN special_package_products ON special_package_products.product_id = products.product_id";
-
-        try {
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-
+        try (
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sqlSpecialProducts)
+        ) {
             while (rs.next()) {
-                productID = rs.getInt("product_id");
-                productName = rs.getString("name");
-                productPrice = rs.getDouble("price");
-                sellerID = rs.getInt("seller_id");
-                category = Category.valueOf(rs.getString("category"));
-                specialPrice = rs.getDouble("special_package_price");
+                int productID = rs.getInt("product_id");
+                String productName = rs.getString("name");
+                double productPrice = rs.getDouble("price");
+                int sellerID = rs.getInt("seller_id");
+                Category category = Category.valueOf(rs.getString("category"));
+                double specialPrice = rs.getDouble("special_package_price");
 
-                sellerIndex = sellerManager.findSellerIndexByID(sellerID);
+                int sellerIndex = sellerManager.findSellerIndexByID(sellerID);
 
                 makeProductToSeller(sellerIndex, productName, productPrice, category, specialPrice, productID);
-
             }
         } catch (SQLException e) {
-            System.err.println("Error while loading products from DB: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (st != null) st.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing DB resources: " + e.getMessage());
-            }
+            System.err.println("Error while loading special package products from DB: " + e.getMessage());
         }
     }
+
 
     private void loadCartsFromDB(Connection conn) {
-        String sql = "SELECT carts.buyer_id, cart_items.quantity, seller_id , cart_items.product_id FROM carts JOIN cart_items ON carts.buyer_id = cart_items.buyer_id and carts.cart_number = cart_items.cart_number JOIN products ON cart_items.product_id = products.product_id WHERE carts.is_active = true;";
+        String sql = "SELECT carts.buyer_id, cart_items.quantity, seller_id, cart_items.product_id " +
+                "FROM carts " +
+                "JOIN cart_items ON carts.buyer_id = cart_items.buyer_id AND carts.cart_number = cart_items.cart_number " +
+                "JOIN products ON cart_items.product_id = products.product_id " +
+                "WHERE carts.is_active = true";
 
-        int buyerIndex, productIndex, quantity, sellerIndex;
-        try {
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-
+        try (
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)
+        ) {
             while (rs.next()) {
-                buyerIndex = buyerManager.findBuyerIndexByID(rs.getInt("buyer_id"));
-                quantity = rs.getInt("quantity");
-                sellerIndex = sellerManager.findSellerIndexByID(rs.getInt("seller_id"));
-                productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
+                int buyerIndex = buyerManager.findBuyerIndexByID(rs.getInt("buyer_id"));
+                int quantity = rs.getInt("quantity");
+                int sellerIndex = sellerManager.findSellerIndexByID(rs.getInt("seller_id"));
+                int productIndex = sellerManager.getSellers()[sellerIndex].productIndexInSellerArr(rs.getInt("product_id"));
 
-                for(int i = 0; i < quantity; i++)
+                for (int i = 0; i < quantity; i++) {
                     makeProductToBuyer(buyerIndex, sellerIndex, productIndex, true);
+                }
             }
-
         } catch (SQLException e) {
-            System.err.println("Error while loading sellers from DB: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (st != null) st.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing DB resources: " + e.getMessage());
-            }
+            System.err.println("Error while loading carts from DB: " + e.getMessage());
         }
-
     }
+
 
     private void loadFromDatabase() {
         sellerManager.loadSellersFromDB(conn);
@@ -412,7 +383,7 @@ public class ManagerFacade {
 
         buyerManager.deleteAllCartFromDB(buyerIndex , conn);
         buyerManager.replaceCarts(choice - 1, buyerIndex);
-        buyerManager.updateCartFromHistory(buyerIndex, conn);
+        buyerManager.updateCartFromHistoryToDB(buyerIndex, conn);
 
         System.out.println("Your current cart update successfully.");
     }

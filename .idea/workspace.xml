@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Factory class added.">
+    <list default="true" id="58fe4c5a-68b3-4096-91b2-92f970fe7c52" name="Changes" comment="Case 9 of replace current cart update to DB with DELETE &amp; UPDATE on SQL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/BuyerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/BuyerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/IBuyerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/IBuyerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/ManagerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/ManagerFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/ProductManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/SellerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/SellerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -40,7 +44,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/dorzhavian/Buy-Sell.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/dorzhavian/DealZone.git&quot;,
     &quot;accountId&quot;: &quot;102f21ab-586f-4a40-83b4-d76fe703298f&quot;
   }
 }</component>
@@ -62,30 +66,33 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/dorzh/OneDrive/Desktop/Java OOP/Class exercises/ParkingLot&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/dorzh/OneDrive/Desktop/DOR/בסיסי נתונים/תרגול JDBC/JDBCtirgul/postgresql-42.7.3.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Factories" />
       <recent name="Managers" />
       <recent name="Comparators" />
       <recent name="Enums" />
       <recent name="Models" />
-      <recent name="Sort" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
       </set>
     </attachedChunks>
   </component>
@@ -136,142 +143,74 @@
       <workItem from="1733833213044" duration="8685000" />
       <workItem from="1733995051236" duration="35000" />
       <workItem from="1733995796897" duration="1802000" />
-    </task>
-    <task id="LOCAL‎-00001" summary="Update README.md">
-      <option name="closed" value="true" />
-      <created>1720082903343</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL‎-00001" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720082903343</updated>
-    </task>
-    <task id="LOCAL‎-00002" summary="Enum category, Categories Object (contains arrays of seller's products by category), Special package option, case 8 - print products by category, ID for product.">
-      <option name="closed" value="true" />
-      <created>1720082943792</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL‎-00002" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720082943792</updated>
-    </task>
-    <task id="LOCAL‎-00003" summary="Manageable interface, User abstract class, Case 9 - replace buyer's cart with one from history carts, Exception for menu input.">
-      <option name="closed" value="true" />
-      <created>1720083449706</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL‎-00003" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720083449706</updated>
-    </task>
-    <task id="LOCAL‎-00004" summary="Special package in buyer's cart change to WITH/WITHOUT">
-      <option name="closed" value="true" />
-      <created>1720084992975</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL‎-00004" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720084992975</updated>
-    </task>
-    <task id="LOCAL‎-00005" summary="Fix interface methods signature, remove useless getters&amp;setters,">
-      <option name="closed" value="true" />
-      <created>1720131107336</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL‎-00005" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720131107336</updated>
-    </task>
-    <task id="LOCAL‎-00006" summary="isExist method moved to User as static">
-      <option name="closed" value="true" />
-      <created>1720134855452</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL‎-00006" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720134855452</updated>
-    </task>
-    <task id="LOCAL‎-00007" summary="Add isNumeric method in manager - check if string contains only digits">
-      <option name="closed" value="true" />
-      <created>1720137563616</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL‎-00007" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720137563616</updated>
-    </task>
-    <task id="LOCAL‎-00008" summary="Add compare classes (by name for buyers, by number of product for sellers) without realization">
-      <option name="closed" value="true" />
-      <created>1720139107089</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL‎-00008" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720139107089</updated>
-    </task>
-    <task id="LOCAL‎-00009" summary="Realization of sorting options when printing seller/buyer working">
-      <option name="closed" value="true" />
-      <created>1720140588940</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL‎-00009" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720140588940</updated>
-    </task>
-    <task id="LOCAL‎-00010" summary="Method isExist moved to class User and deleted from Manageable, exception for username that already exist">
-      <option name="closed" value="true" />
-      <created>1720210827944</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL‎-00010" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720210827944</updated>
-    </task>
-    <task id="LOCAL‎-00011" summary="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added.">
-      <option name="closed" value="true" />
-      <created>1720377105169</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL‎-00011" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720377105169</updated>
-    </task>
-    <task id="LOCAL‎-00012" summary="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added">
-      <option name="closed" value="true" />
-      <created>1720387630085</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL‎-00012" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720387630085</updated>
-    </task>
-    <task id="LOCAL‎-00013" summary="Buyers &amp; Sellers inputs changed to String by using Integer.parseInt for validity - exception uses for non-digit input">
-      <option name="closed" value="true" />
-      <created>1720446538273</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL‎-00013" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720446538273</updated>
-    </task>
-    <task id="LOCAL‎-00014" summary="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes">
-      <option name="closed" value="true" />
-      <created>1720455644684</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL‎-00014" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720455644684</updated>
-    </task>
-    <task id="LOCAL‎-00015" summary="Yes &amp; No exception added, case 4 fixed - nextLine for inputs, check validity &amp; using exceptions.">
-      <option name="closed" value="true" />
-      <created>1720464199142</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL‎-00015" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720464199142</updated>
-    </task>
-    <task id="LOCAL‎-00016" summary="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function.">
-      <option name="closed" value="true" />
-      <created>1720470782479</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL‎-00016" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720470782479</updated>
-    </task>
-    <task id="LOCAL‎-00017" summary="Update README.md">
-      <option name="closed" value="true" />
-      <created>1720473213634</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL‎-00017" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1720473213634</updated>
+      <workItem from="1734104936186" duration="1313000" />
+      <workItem from="1734544704259" duration="1584000" />
+      <workItem from="1734546377043" duration="15000" />
+      <workItem from="1734602943631" duration="4000" />
+      <workItem from="1734603398546" duration="699000" />
+      <workItem from="1734604493937" duration="101000" />
+      <workItem from="1734606994455" duration="12000" />
+      <workItem from="1735212354507" duration="45000" />
+      <workItem from="1735212460305" duration="4000" />
+      <workItem from="1736008684287" duration="17000" />
+      <workItem from="1736009212292" duration="41000" />
+      <workItem from="1736010271262" duration="270000" />
+      <workItem from="1736783206189" duration="7345000" />
+      <workItem from="1736799389325" duration="5635000" />
+      <workItem from="1736805186233" duration="2471000" />
+      <workItem from="1736852439461" duration="1985000" />
+      <workItem from="1736936238589" duration="498000" />
+      <workItem from="1736939986856" duration="9125000" />
+      <workItem from="1736949215769" duration="649000" />
+      <workItem from="1736952620388" duration="870000" />
+      <workItem from="1737022330572" duration="65000" />
+      <workItem from="1737022653155" duration="462000" />
+      <workItem from="1737024643090" duration="899000" />
+      <workItem from="1737027686331" duration="24000" />
+      <workItem from="1737028010908" duration="1005000" />
+      <workItem from="1737029618048" duration="1147000" />
+      <workItem from="1737030988483" duration="360000" />
+      <workItem from="1737031365769" duration="112000" />
+      <workItem from="1737060615954" duration="1000" />
+      <workItem from="1737060873332" duration="6421000" />
+      <workItem from="1737096447062" duration="1526000" />
+      <workItem from="1737143366872" duration="57000" />
+      <workItem from="1737457872540" duration="108000" />
+      <workItem from="1737674470803" duration="594000" />
+      <workItem from="1737679867036" duration="667000" />
+      <workItem from="1738062960367" duration="677000" />
+      <workItem from="1738063653991" duration="243000" />
+      <workItem from="1738063906828" duration="14000" />
+      <workItem from="1738064069977" duration="65000" />
+      <workItem from="1738065235432" duration="818000" />
+      <workItem from="1738066350054" duration="242000" />
+      <workItem from="1738066781822" duration="77000" />
+      <workItem from="1738067975525" duration="1964000" />
+      <workItem from="1738178510958" duration="250000" />
+      <workItem from="1738231482421" duration="204000" />
+      <workItem from="1738321058379" duration="11000" />
+      <workItem from="1738582887443" duration="3646000" />
+      <workItem from="1738660347610" duration="122000" />
+      <workItem from="1738670016577" duration="56000" />
+      <workItem from="1738670144510" duration="233000" />
+      <workItem from="1738841489735" duration="495000" />
+      <workItem from="1738842603555" duration="402000" />
+      <workItem from="1739815374133" duration="40000" />
+      <workItem from="1739820967879" duration="100000" />
+      <workItem from="1739824032529" duration="1627000" />
+      <workItem from="1739865206020" duration="1223000" />
+      <workItem from="1739866984639" duration="2089000" />
+      <workItem from="1739872570362" duration="167000" />
+      <workItem from="1739903125190" duration="265000" />
+      <workItem from="1745056236011" duration="27000" />
+      <workItem from="1747124557125" duration="419000" />
+      <workItem from="1747125008733" duration="112000" />
+      <workItem from="1747313490132" duration="674000" />
+      <workItem from="1748677521589" duration="26532000" />
+      <workItem from="1748771598300" duration="7316000" />
+      <workItem from="1748973630196" duration="21406000" />
+      <workItem from="1749281828752" duration="8655000" />
+      <workItem from="1749377669165" duration="3642000" />
     </task>
     <task id="LOCAL‎-00018" summary="Fix menu choice input.">
       <option name="closed" value="true" />
@@ -425,7 +364,247 @@
       <option name="project" value="LOCAL" />
       <updated>1733864450998</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL‎-00037" summary="Project owners names added.">
+      <option name="closed" value="true" />
+      <created>1733999353309</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL‎-00037" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1733999353309</updated>
+    </task>
+    <task id="LOCAL‎-00038" summary="Fixed print of cases 99-103, if added for non products yet,">
+      <option name="closed" value="true" />
+      <created>1734106243673</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL‎-00038" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1734106243673</updated>
+    </task>
+    <task id="LOCAL‎-00039" summary="productsNameToLinkedSet() added to Manager, case 102 update with using LinkedSet, README2 update.">
+      <option name="closed" value="true" />
+      <created>1734546277819</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL‎-00039" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1734546277819</updated>
+    </task>
+    <task id="LOCAL‎-00040" summary="Print of default in switch case updated.">
+      <option name="closed" value="true" />
+      <created>1734604582628</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL‎-00040" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1734604582628</updated>
+    </task>
+    <task id="LOCAL‎-00041" summary="First commit for task 2 in OOD course (SOLID &amp; Design Pattern)">
+      <option name="closed" value="true" />
+      <created>1736789580722</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL‎-00041" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1736789580722</updated>
+    </task>
+    <task id="LOCAL‎-00042" summary="All remaining cases moved into ManagerFacade, Hardcoded updated">
+      <option name="closed" value="true" />
+      <created>1736805356316</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL‎-00042" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1736805356316</updated>
+    </task>
+    <task id="LOCAL‎-00043" summary="InputHandler interface added, userInput update for general use.">
+      <option name="closed" value="true" />
+      <created>1736807536699</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL‎-00043" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1736807536699</updated>
+    </task>
+    <task id="LOCAL‎-00044" summary="Menu class changed to static">
+      <option name="closed" value="true" />
+      <created>1736854684187</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL‎-00044" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1736854684187</updated>
+    </task>
+    <task id="LOCAL‎-00045" summary="ManagerFacade got split to 3 managers each for (buyers, sellers, products) defined them as a singelton.&#10;added Interfaces to each new manager.">
+      <option name="closed" value="true" />
+      <created>1736949120224</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL‎-00045" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1736949120224</updated>
+    </task>
+    <task id="LOCAL‎-00046" summary="All interfaces updated.">
+      <option name="closed" value="true" />
+      <created>1736953487062</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL‎-00046" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1736953487062</updated>
+    </task>
+    <task id="LOCAL‎-00047" summary="managers Object at ManagerFacade changed to features from type interface">
+      <option name="closed" value="true" />
+      <created>1737023092480</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL‎-00047" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737023092480</updated>
+    </task>
+    <task id="LOCAL‎-00048" summary="UserInput changed to static class, Factory split to UserFactory &amp; ProductFactory">
+      <option name="closed" value="true" />
+      <created>1737030318413</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL‎-00048" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737030318413</updated>
+    </task>
+    <task id="LOCAL‎-00049" summary="Hardcoded function updated">
+      <option name="closed" value="true" />
+      <created>1737030758392</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL‎-00049" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737030758392</updated>
+    </task>
+    <task id="LOCAL‎-00050" summary="input validly check moved to UserInput class">
+      <option name="closed" value="true" />
+      <created>1737066774819</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL‎-00050" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737066774820</updated>
+    </task>
+    <task id="LOCAL‎-00051" summary="YesNo input function update to Y/y">
+      <option name="closed" value="true" />
+      <created>1737097238156</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL‎-00051" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1737097238156</updated>
+    </task>
+    <task id="LOCAL‎-00052" summary="Delete unused line for task2 in case 102">
+      <option name="closed" value="true" />
+      <created>1738066585115</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL‎-00052" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738066585117</updated>
+    </task>
+    <task id="LOCAL‎-00053" summary="Delete unused list in class ProductManager">
+      <option name="closed" value="true" />
+      <created>1738068096896</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL‎-00053" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738068096896</updated>
+    </task>
+    <task id="LOCAL‎-00054" summary="Fixed listIterator from end to start in case 102">
+      <option name="closed" value="true" />
+      <created>1738069944991</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL‎-00054" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738069944991</updated>
+    </task>
+    <task id="LOCAL‎-00055" summary="Split command to 5 different commands">
+      <option name="closed" value="true" />
+      <created>1738584198078</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL‎-00055" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738584198078</updated>
+    </task>
+    <task id="LOCAL‎-00056" summary="Commands constructor fixed">
+      <option name="closed" value="true" />
+      <created>1738584346452</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL‎-00056" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738584346452</updated>
+    </task>
+    <task id="LOCAL‎-00057" summary="Interface name of myListIterator changed to Target">
+      <option name="closed" value="true" />
+      <created>1738587465183</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL‎-00057" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738587465183</updated>
+    </task>
+    <task id="LOCAL‎-00058" summary="last OOD commit">
+      <option name="closed" value="true" />
+      <created>1738843000619</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL‎-00058" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1738843000621</updated>
+    </task>
+    <task id="LOCAL‎-00059" summary="ID for users added.">
+      <option name="closed" value="true" />
+      <created>1748680910423</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL‎-00059" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1748680910426</updated>
+    </task>
+    <task id="LOCAL‎-00060" summary="Connection for localhost DB created. all classes update with new function support DB">
+      <option name="closed" value="true" />
+      <created>1748701110659</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL‎-00060" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1748701110659</updated>
+    </task>
+    <task id="LOCAL‎-00061" summary="Sellers &amp; Products can load from database successfully">
+      <option name="closed" value="true" />
+      <created>1748711046804</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL‎-00061" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1748711046806</updated>
+    </task>
+    <task id="LOCAL‎-00062" summary="Current cart for buyers can update from DB">
+      <option name="closed" value="true" />
+      <created>1748779020470</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL‎-00062" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1748779020471</updated>
+    </task>
+    <task id="LOCAL‎-00063" summary="History carts for buyers can insert from DB">
+      <option name="closed" value="true" />
+      <created>1749118663411</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL‎-00063" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1749118663413</updated>
+    </task>
+    <task id="LOCAL‎-00064" summary="Insert &amp; update DB from inputs in java (Users, products)">
+      <option name="closed" value="true" />
+      <created>1749127228876</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL‎-00064" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1749127228876</updated>
+    </task>
+    <task id="LOCAL‎-00065" summary="Create empty cart to buyer in DB while adding buyer by input">
+      <option name="closed" value="true" />
+      <created>1749128523934</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL‎-00065" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1749128523934</updated>
+    </task>
+    <task id="LOCAL‎-00066" summary="Case 9 of replace current cart update to DB with DELETE &amp; UPDATE on SQL">
+      <option name="closed" value="true" />
+      <created>1749290563684</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL‎-00066" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1749290563684</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,31 +622,35 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Method isExist moved to class User and deleted from Manageable, exception for username that already exist" />
-    <MESSAGE value="Move try&amp;catch to Manager, Merge case 1&amp;2 - modularity, isValid functions for inputs and exception classes added." />
-    <MESSAGE value="Improve sellers &amp; buyers validity check, exceptions for out of range &amp; empty arrays, more functions for Interface Manageable added" />
-    <MESSAGE value="Buyers &amp; Sellers inputs changed to String by using Integer.parseInt for validity - exception uses for non-digit input" />
-    <MESSAGE value="Exceptions added for invalid inputs of : category, price, product name. validity functions added to necessary classes" />
-    <MESSAGE value="Yes &amp; No exception added, case 4 fixed - nextLine for inputs, check validity &amp; using exceptions." />
-    <MESSAGE value="Exception for proceed to payment with empty cart, improve interface Manageable, print current buyer cart function." />
-    <MESSAGE value="Fix menu choice input." />
-    <MESSAGE value="Fix toString() methods at Seller &amp; Buyer classes." />
-    <MESSAGE value="Arrangement classes to packages by usages." />
-    <MESSAGE value="Exception for choose invalid cart to replace &amp; method for validity input added - case 9" />
-    <MESSAGE value="Exception added for non-history cart for buyer in case 9." />
-    <MESSAGE value="Added methods for interface Manageable." />
-    <MESSAGE value="First change of All project - according to the assignment definitions : print just at main, unnecessary exceptions deleted." />
-    <MESSAGE value="Update validName method." />
-    <MESSAGE value="Exceptions messages turn into Enum." />
-    <MESSAGE value="Cosmetics changes at output messages." />
-    <MESSAGE value="Update README.md" />
-    <MESSAGE value="Product with special package changed to object that extend from Product." />
-    <MESSAGE value="Fix Exception while replace carts - negative index" />
-    <MESSAGE value="Buyer Address changed to Object." />
-    <MESSAGE value="Method reboot scanner added." />
-    <MESSAGE value="toString update" />
-    <MESSAGE value="Cosmetic update" />
-    <MESSAGE value="Factory class added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Factory class added." />
+    <MESSAGE value="All remaining cases moved into ManagerFacade, Hardcoded updated" />
+    <MESSAGE value="InputHandler interface added, userInput update for general use." />
+    <MESSAGE value="Menu class changed to static" />
+    <MESSAGE value="ManagerFacade got split to 3 managers each for (buyers, sellers, products) defined them as a singelton.&#10;added Interfaces to each new manager." />
+    <MESSAGE value="All interfaces updated." />
+    <MESSAGE value="managers Object at ManagerFacade changed to features from type interface" />
+    <MESSAGE value="UserInput changed to static class, Factory split to UserFactory &amp; ProductFactory" />
+    <MESSAGE value="Hardcoded function updated" />
+    <MESSAGE value="input validly check moved to UserInput class" />
+    <MESSAGE value="YesNo input function update to Y/y" />
+    <MESSAGE value="Delete unused line for task2 in case 102" />
+    <MESSAGE value="Delete unused list in class ProductManager" />
+    <MESSAGE value="Fixed listIterator from end to start in case 102" />
+    <MESSAGE value="Split command to 5 different commands" />
+    <MESSAGE value="Commands constructor fixed" />
+    <MESSAGE value="Interface name of myListIterator changed to Target" />
+    <MESSAGE value="last OOD commit" />
+    <MESSAGE value="ID for users added." />
+    <MESSAGE value="Connection for localhost DB created. all classes update with new function support DB" />
+    <MESSAGE value="Sellers &amp; Products can load from database successfully" />
+    <MESSAGE value="Current cart for buyers can update from DB" />
+    <MESSAGE value="History carts for buyers can insert from DB" />
+    <MESSAGE value="Insert &amp; update DB from inputs in java (Users, products)" />
+    <MESSAGE value="Create empty cart to buyer in DB while adding buyer by input" />
+    <MESSAGE value="Case 9 of replace current cart update to DB with DELETE &amp; UPDATE on SQL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Case 9 of replace current cart update to DB with DELETE &amp; UPDATE on SQL" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

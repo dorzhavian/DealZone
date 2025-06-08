@@ -42,7 +42,7 @@ public interface IBuyerManager {
 
     void deleteAllCartFromDB(int buyerIndex, Connection conn);
 
-    void updateCartFromHistory(int buyerIndex, Connection conn);
+    void updateCartFromHistoryToDB(int buyerIndex, Connection conn);
 
     boolean checkIfProductInCartInDB(Buyer buyer, Product p, Connection conn);
 
