@@ -146,7 +146,6 @@ public class BuyerManager implements IBuyerManager {
         }
     }
 
-
     @Override
     public void insertNewCartToDB(Buyer buyer, Connection conn) {
         String sqlInsertCartForBuyer = "INSERT INTO carts (buyer_id, cart_number, is_active, paid_at, total_price, num_of_products) VALUES (?, ?, true, null, 0, 0)";
@@ -164,19 +163,19 @@ public class BuyerManager implements IBuyerManager {
     public void updateCartPurchaseToDB(Buyer buyer, Connection conn) {
         Timestamp date = new Timestamp(buyer.getHistoryCart()[buyer.getHistoryCartsNum() - 1].getDate().getTime());
         String sqlUpdateLastCart = "UPDATE carts SET paid_at = ?, is_active = false WHERE buyer_id = ? AND cart_number = ?";
-        String sqlUpdateNumOfHistoryCart = "UPDATE buyers SET num_of_history_cart = num_of_history_cart + 1 WHERE user_id = ?";
+        //String sqlUpdateNumOfHistoryCart = "UPDATE buyers SET num_of_history_cart = num_of_history_cart + 1 WHERE user_id = ?";
 
         try (
                 PreparedStatement stmtCartUpdate = conn.prepareStatement(sqlUpdateLastCart);
-                PreparedStatement stmtNumOfHistoryCartUpdate = conn.prepareStatement(sqlUpdateNumOfHistoryCart)
+                //PreparedStatement stmtNumOfHistoryCartUpdate = conn.prepareStatement(sqlUpdateNumOfHistoryCart)
         ) {
             stmtCartUpdate.setTimestamp(1, date);
             stmtCartUpdate.setInt(2, buyer.getId());
             stmtCartUpdate.setInt(3, buyer.getHistoryCartsNum());
             stmtCartUpdate.executeUpdate();
 
-            stmtNumOfHistoryCartUpdate.setInt(1, buyer.getId());
-            stmtNumOfHistoryCartUpdate.executeUpdate();
+            //stmtNumOfHistoryCartUpdate.setInt(1, buyer.getId());
+            //stmtNumOfHistoryCartUpdate.executeUpdate();
 
         } catch (SQLException e) {
             System.err.println("Error while updating cart to DB: " + e.getMessage());
@@ -306,6 +305,7 @@ public class BuyerManager implements IBuyerManager {
         }
     }
 
+    /*
     @Override
     public void updateCartAfterInsertToDB(Buyer buyer, Product product, double specialPackagePrice, Connection conn) {
         String sqlUpdateCart = "UPDATE carts SET total_price = total_price + ?, num_of_products = num_of_products + 1 WHERE buyer_id = ? AND cart_number = ?";
@@ -319,4 +319,5 @@ public class BuyerManager implements IBuyerManager {
             System.err.println("Error while updating current cart to DB: " + e.getMessage());
         }
     }
+     */
 }

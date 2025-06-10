@@ -88,6 +88,7 @@ public class SellerManager implements ISellerManager{
         }
     }
 
+    /*
     @Override
     public void updateProductsNumForSellerDB(int sellerIndex, Connection conn) {
         String sql = "UPDATE sellers SET num_of_products = num_of_products + 1 WHERE user_id = ?";
@@ -99,6 +100,7 @@ public class SellerManager implements ISellerManager{
             System.err.println("Error while incrementing seller's product count: " + e.getMessage());
         }
     }
+    */
 
 
     public String sellersInfo() {

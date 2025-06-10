@@ -28,5 +28,5 @@ public interface ISellerManager {
 
     void addSellerToDB (Seller seller, Connection conn);
 
-    void updateProductsNumForSellerDB(int sellerIndex, Connection conn);
+    //void updateProductsNumForSellerDB(int sellerIndex, Connection conn);
 }

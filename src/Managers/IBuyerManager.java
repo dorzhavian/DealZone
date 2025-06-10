@@ -38,7 +38,7 @@ public interface IBuyerManager {
 
     void insertNewCartToDB(Buyer buyer, Connection conn);
 
-    void updateCartAfterInsertToDB(Buyer buyer, Product product, double specialPackagePrice, Connection conn);
+    //void updateCartAfterInsertToDB(Buyer buyer, Product product, double specialPackagePrice, Connection conn);
 
     void deleteAllCartFromDB(int buyerIndex, Connection conn);
 

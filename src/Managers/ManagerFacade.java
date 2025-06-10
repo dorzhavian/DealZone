@@ -4,27 +4,19 @@ import Enums.ExceptionsMessages;
 import Factories.ProductFactory;
 import Factories.UserFactory;
 import Models.*;
-import Actions.*;
-import Adapters.*;
 import java.sql.*;
-
-import java.util.*;
 import java.util.Date;
 
 public class ManagerFacade {
     private final ISellerManager sellerManager;
     private final IBuyerManager buyerManager;
     private final ProductManager productManager;
-    private final ActionServer  actionServer;
-    private final Action1 action1;
-    private final Action2 action2;
     private static ManagerFacade instance;
     private Connection conn;
     private Statement st = null;
     private PreparedStatement prepStmt = null;
     private ResultSet rs = null;
     private static String message;
-    private Stack<ProductManager.Memento>  stackProductNameList;
 
     public static ManagerFacade getInstance() {       // SINGLETON !!!!!!!
         if (instance == null)
@@ -36,10 +28,6 @@ public class ManagerFacade {
         sellerManager = SellerManager.getInstance();
         buyerManager = BuyerManager.getInstance();
         productManager = ProductManager.getInstance();
-        actionServer = new ActionServer();
-        action1 = new Action1();
-        action2 = new Action2();
-        stackProductNameList = new Stack<>();
 
         try {
             conn = DatabaseConnection.getConnection();
@@ -388,171 +376,8 @@ public class ManagerFacade {
         System.out.println("Your current cart update successfully.");
     }
 
-    public void hardcoded() {
-
-        int sellerIndex = sellerManager.getNumberOfSellers();
-        int buyerIndex = buyerManager.getNumberOfBuyers();
-
-        // Adding 5 sellers with real names and realistic passwords
-        sellerManager.addSeller(UserFactory.createSeller("Jack", "J@ck2024!"));
-        sellerManager.addSeller(UserFactory.createSeller("Dor", "DorPass@123"));
-        sellerManager.addSeller(UserFactory.createSeller("Tal", "Tal2024Secure"));
-        sellerManager.addSeller(UserFactory.createSeller("Maya", "Maya@Home2024"));
-        sellerManager.addSeller(UserFactory.createSeller("Avi", "AviPassword#45"));
-
-        // Adding 5 buyers with usernames, realistic passwords, and addresses
-        buyerManager.addBuyer(UserFactory.createBuyer("Asaf", "J@ck2024!", UserFactory.createAddress("Main St", "123", "Los Angeles", "California")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Yakov", "DorPass@123", UserFactory.createAddress("Oak Rd", "456", "San Francisco", "California")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Miki", "Tal2024Secure", UserFactory.createAddress("Pine Ave", "789", "New York", "New York")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Ami", "Maya@Home2024", UserFactory.createAddress("Maple St", "101", "Chicago", "Illinois")));
-        buyerManager.addBuyer(UserFactory.createBuyer("Kobe", "AviPassword#45", UserFactory.createAddress("Cedar Blvd", "202", "Houston", "Texas")));
-
-        // Adding products to sellers
-
-        // Seller 0 products
-        makeProductToSeller(sellerIndex, "TV", 325.00, Category.ELECTRONIC, 15.00, -1);
-        makeProductToSeller(sellerIndex, "Shirt", 50.00, Category.CLOTHES, 0, -1);
-
-        // Seller 1 products
-        makeProductToSeller(sellerIndex + 1, "Laptop", 950.00, Category.ELECTRONIC, 50.00, -1);
-        makeProductToSeller(sellerIndex + 1, "Jacket", 75.00, Category.CLOTHES, 0, -1);
-        makeProductToSeller(sellerIndex + 1, "Desk Lamp", 45.00, Category.OFFICE, 5.00, -1);
-
-        // Seller 2 products
-        makeProductToSeller(sellerIndex + 2, "TV", 330.00, Category.ELECTRONIC, 18.00, -1);
-        makeProductToSeller(sellerIndex + 2, "Hat", 60.00, Category.CLOTHES, 0, -1);
-
-        // Seller 3 products
-        makeProductToSeller(sellerIndex + 3, "Headphones", 120.00, Category.ELECTRONIC, 0, -1);
-        makeProductToSeller(sellerIndex + 3, "Sweater", 80.00, Category.CLOTHES, 15.00, -1);
-        makeProductToSeller(sellerIndex + 3, "desk lamP", 130.00, Category.OFFICE, 0, -1);
-
-        // Seller 4 products
-        makeProductToSeller(sellerIndex + 4, "Smartwatch", 220.00, Category.ELECTRONIC, 30.00, -1);
-        makeProductToSeller(sellerIndex + 4, "hAt", 25.00, Category.CLOTHES, 5.00, -1);
-        makeProductToSeller(sellerIndex + 4, "Office Organizer", 40.00, Category.OFFICE, 0, -1);
-        makeProductToSeller(sellerIndex + 4, "Board Game", 28.00, Category.CHILDREN, 10.00, -1);
-
-        // Adding products to carts
-
-        // Buyer 0
-        makeProductToBuyer(buyerIndex, sellerIndex, 0, false);  // Buyer 0 buys TV from Seller 0
-        makeProductToBuyer(buyerIndex, sellerIndex + 1, 1, false);  // Buyer 0 buys Jacket from Seller 1
-
-        // Buyer 1
-        makeProductToBuyer(buyerIndex + 1, sellerIndex + 2, 0,false);  // Buyer 1 buys TV from Seller 2
-        makeProductToBuyer(buyerIndex + 1, sellerIndex + 3, 1, false);  // Buyer 1 buys Sweater from Seller 3
-
-        // Buyer 2
-        makeProductToBuyer(buyerIndex + 2, sellerIndex + 4, 0, false);  // Buyer 2 buys Smartwatch from Seller 4
-        makeProductToBuyer(buyerIndex + 2, sellerIndex, 1, false);  // Buyer 2 buys Shirt from Seller 0
-
-        // Buyer 3
-        makeProductToBuyer(buyerIndex + 3, sellerIndex + 1, 2, false);  // Buyer 3 buys Desk Lamp from Seller 1
-        makeProductToBuyer(buyerIndex + 3, sellerIndex + 4, 1, false);  // Buyer 3 buys Hat from Seller 4
-
-        // Buyer 4
-        makeProductToBuyer(buyerIndex + 4, sellerIndex + 3, 0, false);  // Buyer 4 buys Headphones from Seller 3
-        makeProductToBuyer(buyerIndex + 4, sellerIndex + 2, 1, false);  // Buyer 4 buys Hat from Seller 2
-
-        System.out.println("Hardcoded added successfully!");
-    }
-
-    public void case99() {
+    public void case10() {
         productManager.printProductsName();
-    }
-
-    public void case100(){
-        if(productManager.getNumberOfProducts() != 0){
-            Map<String,Integer> map = productManager.productsToLinkedMap();
-            map.forEach((key, value) -> System.out.println(key + ".........." + value));
-        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
-    }
-
-    public void case101() {
-        String input;
-        if (productManager.getNumberOfProducts() != 0) {
-            Map<String, Integer> map = productManager.productsToLinkedMap();
-            input = UserInput.getString("Please enter a string: (Enter -1 to return main menu)");
-            if (input == null) return;
-            System.out.printf("the number of times that " + input.toLowerCase() + " appears in the OG ARRAY is %d\n" , map.get(input.toLowerCase()) == null ? 0 : map.get(input));
-        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
-    }
-
-    public void case102(){
-
-        //TASK 1:
-        if(productManager.getNumberOfProducts() != 0) {
-            System.out.println("Task 1: ");
-            List<String> productNameList = new ArrayList<>(productManager.productsNameToLinkedSet());
-            List<String> doubleNames = new ArrayList<>();
-            Target<String> iterator =new ListIteratorAdapter<>(productNameList.listIterator());
-            while(iterator.myHasNext()){
-                String key = iterator.next();
-                doubleNames.add(key);
-                doubleNames.add(key);
-            }
-            Target<String> doubleIterator = new ListIteratorAdapter<>(doubleNames.listIterator(doubleNames.size()));
-            while(doubleIterator.myHasPrevious()){
-                System.out.println(doubleIterator.previous());
-            }
-        }else System.out.println("No products yet!");
-
-        // TASK2 :
-        System.out.println("Task 2+3: ");
-        if(!productManager.getDoubleNames().isEmpty())
-        {
-            if (!UserInput.getYesNo("Do you want to see the output of my self-implemented iterators (Y/y or any other key to skip):"))
-                return;
-            actionServer.attach(action1);
-            actionServer.attach(action2);
-            System.out.println("\nMy custom name ArrayList iterator: ");
-            Iterator<String> myIterator = productManager.myIterator();
-            while(myIterator.hasNext())
-                System.out.println(myIterator.next());
-            actionServer.setMsg("My Iterator ended!");
-            actionServer.myNotify();
-
-            System.out.println("\nMy custom name ArrayList List iterator (Start --> End): ");
-            ListIterator<String> myListIterator = productManager.myListIterator();
-            while(myListIterator.hasNext()){
-                System.out.println(myListIterator.next());
-            }
-            actionServer.setMsg("My ListIterator ended!");
-            actionServer.myNotify();
-
-            System.out.println("\nMy custom name ArrayList List iterator (End --> Start): ");
-            ListIterator<String> myListIterator2 = productManager.myListIterator(productManager.getDoubleNames().size());
-            while(myListIterator2.hasPrevious()){
-                System.out.println(myListIterator2.previous());
-            }
-            actionServer.setMsg("My ListIterator ended!");
-            actionServer.myNotify();
-
-        } else System.out.println("Product double names list is empty!");
-    }
-
-    public void case103() {
-        if (productManager.getNumberOfProducts() != 0) {
-            Set<?> productsSet = productManager.productsToTree();
-            Iterator<?> productsIterator = productsSet.iterator();
-            while (productsIterator.hasNext()) {
-                System.out.println(productsIterator.next().toString().toUpperCase());
-            }
-        } else System.out.println("No products yet! cannot be proceed. Return to main menu. ");
-    }
-
-    public void case104() {
-        stackProductNameList.push(productManager.createMemento());
-        System.out.println("Memento created, the name list saved.");
-    }
-
-    public void case105() {
-        if(!stackProductNameList.isEmpty())
-        {
-            productManager.setMemento(stackProductNameList.pop());
-            System.out.println("Last save of the name list has been restored");
-        }
     }
 
     public int chooseSeller() {
@@ -610,7 +435,7 @@ public class ManagerFacade {
 
     public void makeProductToBuyer(int buyerIndex, int sellerIndex, int productIndex, boolean fromDB) {
         Product p1;
-        double specialPackagePrice = 0;
+        //double specialPackagePrice = 0;
         if(fromDB)
         {
             if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
@@ -625,12 +450,12 @@ public class ManagerFacade {
             if (productManager.isSpecialPackageProduct(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]))
             {
                 p1 = ProductFactory.createProductSpecialPackageForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice());
-                specialPackagePrice = ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice();
+                //specialPackagePrice = ((ProductSpecialPackage) sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]).getSpecialPackagePrice();
             } else {
                 p1 = ProductFactory.createProductForBuyer(sellerManager.getSellers()[sellerIndex].getProducts()[productIndex]);
             }
             buyerManager.insertCartItemToDB(buyerManager.getBuyers()[buyerIndex], sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], conn);
-            buyerManager.updateCartAfterInsertToDB(buyerManager.getBuyers()[buyerIndex], sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], specialPackagePrice, conn);
+            //buyerManager.updateCartAfterInsertToDB(buyerManager.getBuyers()[buyerIndex], sellerManager.getSellers()[sellerIndex].getProducts()[productIndex], specialPackagePrice, conn);
         }
         buyerManager.addProductToBuyer(p1, buyerIndex);
 
@@ -652,7 +477,7 @@ public class ManagerFacade {
                 p1 = ProductFactory.createProductSpecialPackage(productName, productPrice, c, specialPackagePrice);
             }
             productManager.addProductToDB(p1, sellerManager.getSellers()[sellerIndex].getId(), specialPackagePrice, conn);
-            sellerManager.updateProductsNumForSellerDB(sellerIndex, conn);
+            //sellerManager.updateProductsNumForSellerDB(sellerIndex, conn);
         }
 
         sellerManager.addProductToSeller(p1, sellerIndex);

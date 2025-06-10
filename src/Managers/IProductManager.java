@@ -20,14 +20,6 @@ public interface IProductManager {
 
     boolean isSpecialPackageProduct(Product p);
 
-    Map<String, Integer> productsToLinkedMap();
-
-    Set<Product> productsToTree();
-
-    Set<String> productsNameToLinkedSet();
-
-    int getNumberOfProducts();
-
     Categories getCategoriesArrays();
 
     void addProductToDB(Product p1, int sellerID, double specialPackagePrice, Connection conn);
