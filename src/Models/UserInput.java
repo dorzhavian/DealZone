@@ -9,14 +9,18 @@ public class UserInput {
 
     public static String getString(String message) {
         String input;
+        int inputLength;
         do {
             System.out.println(message + " (Enter -1 to return to the main menu) ");
             input = sc.nextLine().trim();
+            inputLength = input.length();
             if (input.equals("-1")) return null;
             if (input.isEmpty()) {
                 System.out.println("Input cannot be empty. Please enter again!");
             }
-        } while (input.isEmpty());
+            if(inputLength >= 50)
+                System.out.println("Input max length must be under 50 characters. Please enter again!");
+        } while (input.isEmpty() || inputLength >= 50);
         return input;
     }
 
